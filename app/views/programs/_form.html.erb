@@ -1,0 +1,6 @@
+<%= simple_form_for [@contract, @program] do |f| %>
+  <%= f.input :proteins_target %>
+  <%= f.input :fats_target %>
+  <%= f.input :carbs_target %>
+  <%= f.button :submit, class: 'main-btn ' %>
+<% end %>
