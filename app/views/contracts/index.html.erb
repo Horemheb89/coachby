@@ -6,5 +6,6 @@
       <li>  coach : <%= contract.coach.first_name %></li>
       <li>  athlete : <%= contract.athlete.first_name %></li>
       <%= link_to "add program", new_contract_program_path(contract) %>
+      <%= link_to "View athlete", contract_path(contract) %>
     </ul>
   <% end %>
