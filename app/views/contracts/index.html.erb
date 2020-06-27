@@ -1,10 +1,19 @@
-<h1> index contract  </h1>
+<h1>Athletes</h1>
+<p>Manage your <%= @contracts.count %> contract(s).</p>
 
 
-  <% @contracts.each do |contract| %>
-    <ul>
-      <li>  coach : <%= contract.coach.first_name %></li>
-      <li>  athlete : <%= contract.athlete.first_name %></li>
-      <%= link_to "add program", new_contract_program_path(contract) %>
-    </ul>
-  <% end %>
+<!-- List of all contracts -->
+<% @contracts.each do |contract| %>
+  <ul>
+    <div>
+      <%= link_to contract_path(contract) do %>
+        <p><%= contract.athlete.first_name %></p>
+      <% end %>
+    </div>
+  </ul>
+<% end %>
+
+<!-- Create a new contract -->
+<h3>Getting Started</h3>
+<p>Need to add a new contract? Congratulations!</p>
+<%= link_to "ADD ATHLETE", new_contract_path %>

@@ -15,7 +15,8 @@ class ContractsController < ApplicationController
   end
 
   def index
-    @contracts = Contract.all
+    @user = current_user
+    @contracts = Contract.where(coach_id: @user.id)
   end
 
   def show
