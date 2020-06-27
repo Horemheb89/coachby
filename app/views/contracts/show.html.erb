@@ -1,1 +1,11 @@
+<%  if current_user = @contract.coach %>
+  <h1 class="greeting"> Hello, <%= @contract.coach.first_name.capitalize %> ! </h1>
+  <h2 class="sub-greeting"> You are viewing <%= @contract.athlete.first_name.capitalize %>'s profile </h2>
+<%  else %>
+  <h1 class="greeting"> Hello, <%= @contract.athlete.first_name.capitalize %> ! </h1>
+  <h2 class="sub-greeting"> Your coach is <%= @contract.coach.first_name.capitalize %>'s profile </h2>
+<%  end %>
+
+
+
 
