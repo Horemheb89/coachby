@@ -6,9 +6,9 @@
 <div class="container">
 
   <%= simple_form_for @contract do |f| %>
-<!--     <%= f.input :athlete_id %>
- -->    <%= f.input :coach_id %>
-    <%= f.button :submit, class: 'main-btn ' %>
+    <%= f.input :athlete_id, :collection => User.where(:is_coach => false) %>
+<!--     <%= f.input :coach_id %>
+ -->    <%= f.button :submit, class: 'main-btn ' %>
   <% end %>
 
 </div>
