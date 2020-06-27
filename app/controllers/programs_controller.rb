@@ -8,7 +8,10 @@ class ProgramsController < ApplicationController
   def create
     @contract = Contract.find(params[:contract_id])
     @program = Program.new(program_params)
-    @program.save
+    @program.contract = @contract
+    if @program.save
+      redirect_to contract_program_path(@contract,@program)
+    end
   end
 
   def show
