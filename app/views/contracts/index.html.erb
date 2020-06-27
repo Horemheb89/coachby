@@ -1,7 +1,9 @@
 <h1> index contract  </h1>
 
 
-
-<% @contracts.each do |contract| %>
-  <%= contract.coach %>
-<% end %>
+  <% @contracts.each do |contract| %>
+    <ul>
+      <li>  coach : <%= contract.coach.first_name %></li>
+      <li>  athlete : <%= contract.athlete.first_name %></li>
+    </ul>
+  <% end %>

@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Contract.destroy_all
+
+
+puts "5 coach"
 
 5.times do
   User.create!(email: Faker::Internet.email,
@@ -16,7 +20,10 @@ User.destroy_all
                   first_name: Faker::Name.first_name)
 end
 
-5.times do
+puts "10 coach"
+
+
+10.times do
   User.create!(email: Faker::Internet.email,
                   password: "123456",
                   is_coach: false,
