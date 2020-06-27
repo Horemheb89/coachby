@@ -1,0 +1,7 @@
+
+
+<%= simple_form_for [@contract, @program, @meal] do |f| %>
+  <%= f.input :type, :collection => %w[Petit-dejeuner dejeuner gouter diner] %>
+  <%= f.input :date, as: :date, html5: true %>
+  <%= f.button :submit, class: 'main-btn ' %>
+<% end %>

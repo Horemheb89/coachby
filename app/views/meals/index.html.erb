@@ -1,0 +1,19 @@
+
+<h1> index meal </h1>
+
+<% @meals.each do |meal| %>
+  <h1> <%=  meal.type %> </h1>
+  <% raise %>
+<% end %>
+
+
+
+
+
+
+
+
+<%= link_to "add meal", new_contract_program_meal_path(@contract, @program) %>
+
+
+

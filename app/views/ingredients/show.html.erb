@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Ingredients#show</h1>
+  <p>Find me in app/views/ingredients/show.html.erb</p>
+
+  <h2>Ingredient: <%= @ingredient.name %></h2>
+
+  <div class="container-grap">
+    <div class="graph">
+      <div class="bar">
+        <%= bar_chart @macros %>
+      </div>
+      <div class="pie">
+        <%= pie_chart  @macros;  %>
+      </div>
+    </div>
+  </div>
+</div>
