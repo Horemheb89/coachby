@@ -15,6 +15,7 @@ class ProgramsController < ApplicationController
   end
 
   def show
+    @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:id])
   end
 

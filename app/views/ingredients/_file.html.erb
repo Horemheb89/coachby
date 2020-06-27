@@ -1,0 +1,9 @@
+<%= simple_form_for @ingredient do |f| %>
+  <%= f.input :name %>
+  <%= f.input :quantity %>
+  <%= f.input :unit %>
+  <%= f.input :protein %>
+  <%= f.input :lipid %>
+  <%= f.input :carbs %>
+  <%= f.button :submit, class: 'main-btn ' %>
+<% end %>
