@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :programs, through: :contracts
+  validates :first_name, :last_name, :email, presence: true
 end
