@@ -1,4 +1,6 @@
 class ContractsController < ApplicationController
+  before_action :set_contract, only: [:show]
+  skip_before_action :authenticate_user!, only: [:show]
 
   def new
     @contract = Contract.new
@@ -17,5 +19,6 @@ class ContractsController < ApplicationController
   def params_contract
     params.require(:contract).permit(:user_id)
   end
+
 
 end
