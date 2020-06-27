@@ -3,9 +3,12 @@ class ContractsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   def new
+    @contract = Contract.new
   end
 
   def create
+    @contract = Contract.new(params_contract)
+    @contract.save
   end
 
   def show
@@ -13,7 +16,9 @@ class ContractsController < ApplicationController
 
   private
 
-  def set_contract
-    @contract = Contract.find(params[:id])
+  def params_contract
+    params.require(:contract).permit(:user_id)
   end
+
+
 end
