@@ -8,7 +8,10 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(params_contract)
-    @contract.save
+    @contract.coach = current_user
+    if @contract.save
+      redirect_to contracts_path
+    end
   end
 
   def index
@@ -21,7 +24,7 @@ class ContractsController < ApplicationController
   private
 
   def params_contract
-    params.require(:contract).permit(:coach_id, :athlete_id)
+    params.require(:contract).permit(:athlete_id)
   end
 
 end
