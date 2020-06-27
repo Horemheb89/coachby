@@ -11,14 +11,17 @@ class ContractsController < ApplicationController
     @contract.save
   end
 
+  def index
+    @contracts = Contract.all
+  end
+
   def show
   end
 
   private
 
   def params_contract
-    params.require(:contract).permit(:user_id)
+    params.require(:contract).permit(:coach_id, :athlete_id)
   end
-
 
 end
