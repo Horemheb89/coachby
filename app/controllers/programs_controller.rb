@@ -25,3 +25,5 @@ class ProgramsController < ApplicationController
     params.require(:program).permit(:proteins_target, :fats_target, :carbs_target, :contract_id)
   end
 end
+
+

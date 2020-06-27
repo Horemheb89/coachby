@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_085455) do
+ActiveRecord::Schema.define(version: 2020_06_27_101404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contracts", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_contracts_on_user_id"
+    t.bigint "coach_id"
+    t.bigint "athlete_id"
+    t.index ["athlete_id"], name: "index_contracts_on_athlete_id"
+    t.index ["coach_id"], name: "index_contracts_on_coach_id"
   end
 
   create_table "doses", force: :cascade do |t|
@@ -74,7 +76,6 @@ ActiveRecord::Schema.define(version: 2020_06_27_085455) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "contracts", "users"
   add_foreign_key "doses", "ingredients"
   add_foreign_key "doses", "meals"
   add_foreign_key "meals", "programs"
