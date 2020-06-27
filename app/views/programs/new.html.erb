@@ -1,0 +1,13 @@
+<h1>Programs#create</h1>
+<p>Find me in app/views/programs/create.html.erb</p>
+
+<div class="container">
+
+  <%= simple_form_for [@contract, @program] do |f| %>
+    <%= f.input :proteins_target %>
+    <%= f.input :fats_target %>
+    <%= f.input :carbs_target %>
+    <%= f.button :submit, class: 'main-btn ' %>
+  <% end %>
+
+</div>

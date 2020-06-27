@@ -10,16 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_095113) do
+ActiveRecord::Schema.define(version: 2020_06_27_105931) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contracts", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_contracts_on_user_id"
+    t.bigint "coach_id"
+    t.bigint "athlete_id"
+    t.index ["athlete_id"], name: "index_contracts_on_athlete_id"
+    t.index ["coach_id"], name: "index_contracts_on_coach_id"
+  end
+
+  create_table "doses", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "meal_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ingredient_id"], name: "index_doses_on_ingredient_id"
+    t.index ["meal_id"], name: "index_doses_on_meal_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.integer "proteins"
+    t.integer "fats"
+    t.integer "carbs"
+    t.string "category"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "meals", force: :cascade do |t|
+    t.string "type"
+    t.datetime "date"
+    t.bigint "program_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["program_id"], name: "index_meals_on_program_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -40,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_095113) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "coach"
+    t.boolean "is_coach"
     t.string "first_name"
     t.string "last_name"
     t.float "weight"
@@ -50,5 +82,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_095113) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "contracts", "users"
+  add_foreign_key "doses", "ingredients"
+  add_foreign_key "doses", "meals"
+  add_foreign_key "meals", "programs"
 end
