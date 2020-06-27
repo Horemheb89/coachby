@@ -10,7 +10,7 @@ class ContractsController < ApplicationController
     @contract = Contract.new(params_contract)
     @contract.coach = current_user
     if @contract.save
-      redirect_to contracts_path
+      redirect_to contract_path(@contract)
     end
   end
 
@@ -23,8 +23,11 @@ class ContractsController < ApplicationController
 
   private
 
+  def set_contract
+    @contract = Contract.find(params[:id])
+  end
+
   def params_contract
     params.require(:contract).permit(:athlete_id)
   end
-
 end
