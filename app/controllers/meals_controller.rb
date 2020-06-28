@@ -46,8 +46,8 @@ class MealsController < ApplicationController
   def calorie(meal)
     total_cal = 0
     meal.doses.each do |dose|
-      total_cal += (dose.ingredient.protein) * 4
-      total_cal += (dose.ingredient.lipid) * 8
+      total_cal += (dose.ingredient.proteins) * 4
+      total_cal += (dose.ingredient.fats) * 8
       total_cal += (dose.ingredient.carbs) * 4
     end
     total_cal
@@ -58,9 +58,9 @@ class MealsController < ApplicationController
     lipid = 0
     carbs = 0
     meal.doses.each do |dose|
-      protein += dose.ingredient.protein
-      lipid += dose.ingredient.lipid
-      carbs += dose.ingredient.carbs
+      protein += (dose.ingredient.proteins * dose.quantity)/100
+      lipid += (dose.ingredient.fats * dose.quantity)/100
+      carbs += (dose.ingredient.carbs * dose.quantity)/100
     end
       macros = ["Protein", protein], ["Lipid", lipid], ["Carbs", carbs]
   end

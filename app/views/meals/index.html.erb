@@ -2,7 +2,7 @@
 <h1> index meal </h1>
 
 <% @meals.each do |meal| %>
-  <h1> <%=  meal.name %> </h1>
+  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal)  %> </h1>
   <table>
         <thead>
             <tr>
