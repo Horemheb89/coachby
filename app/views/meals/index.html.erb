@@ -3,10 +3,14 @@
 
 <% @meals.each do |meal| %>
   <h1> <%=  meal.name %> </h1>
+    <%= link_to "add portion", new_meal_dose_path(meal) %>
 <% end %>
 
 
 <%= link_to "add meal", new_program_meal_path(@program) %>
+
+
+
 
 
 
