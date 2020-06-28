@@ -30,3 +30,36 @@ puts "10 coach"
                   last_name: Faker::Name.last_name ,
                   first_name: Faker::Name.first_name )
 end
+
+
+
+Ingredient.destroy_all
+
+require 'roo'
+require 'roo-xls'
+
+path = 'db/table.xls'
+xlsx = Roo::Spreadsheet.open path
+
+tab = []
+
+xlsx.each(category: 'alim_ssssgrp_nom_fr',
+                name: 'alim_nom_fr',
+                proteins: 'Protéines (g/100g)',
+                fats: 'Glucides (g/100g)',
+                carbs: 'Glucides (g/100g)') do |a|
+                # fibre: 'Fibres alimentaires (g/100g)',
+                # sel: 'Sel chlorure de sodium (g/100g)')
+  tab << a
+end
+
+tab.each do |item|
+  puts item[:name]
+  Ingredient.create!(name: item[:name],
+    category: item[:category],
+    proteins: item[:proteins],
+    fats: item[:fats],
+    carbs: item[:carbs])
+end
+
+

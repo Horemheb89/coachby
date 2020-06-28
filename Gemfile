@@ -23,6 +23,14 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 gem 'chartkick'
+gem 'openfoodfacts'
+gem "simple_calendar", "~> 2.0"
+gem 'groupdate'
+gem "roo", "~> 2.8.0"
+gem 'roo-xls'
+gem 'creek'
+gem 'devise'
+gem 'faker'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
