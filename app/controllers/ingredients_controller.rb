@@ -9,7 +9,7 @@ class IngredientsController < ApplicationController
     if @ingredient.save
       redirect_to ingredient_path(@ingredient)
     end
-    @list = find_macro(@ingredient)
+    # @list = find_macro(@ingredient)
   end
 
   def index
@@ -23,7 +23,7 @@ class IngredientsController < ApplicationController
 
   def show
     @ingredient = Ingredient.find(params[:id])
-    @macros = ["Protein", @ingredient.protein], ["Lipid", @ingredient.lipid], ["Carbs", @ingredient.carbs]
+    @macros = ["Protein", @ingredient.proteins], ["Fats", @ingredient.fats], ["Carbs", @ingredient.carbs]
   end
 
   private
