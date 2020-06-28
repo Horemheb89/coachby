@@ -2,23 +2,23 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
   end
 
   def create
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
     @meal = Meal.new(meal_params)
     @meal.program = @program
     if @meal.save
-      redirect_to contract_program_meals_path(@contract, @program)
+      redirect_to program_meals_path(@program)
     end
   end
 
 
   def index
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
     @meals = Meal.all
   end
