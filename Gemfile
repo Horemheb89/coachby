@@ -23,6 +23,7 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 gem 'chartkick'
+
 gem 'openfoodfacts'
 gem "simple_calendar", "~> 2.0"
 gem 'groupdate'

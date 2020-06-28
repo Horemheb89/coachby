@@ -53,13 +53,16 @@ xlsx.each(category: 'alim_ssssgrp_nom_fr',
   tab << a
 end
 
-tab.each do |item|
-  puts item[:name]
-  Ingredient.create!(name: item[:name],
-    category: item[:category],
-    proteins: item[:proteins],
-    fats: item[:fats],
-    carbs: item[:carbs])
+tab.each_with_index do |item, index|
+  if index == 0
+    puts "columns name"
+  else
+    puts item[:name]
+    Ingredient.create!(name: item[:name],
+      category: item[:category],
+      proteins: item[:proteins],
+      fats: item[:fats],
+      carbs: item[:carbs])
+  end
 end
-
 

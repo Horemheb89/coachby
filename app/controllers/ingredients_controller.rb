@@ -29,7 +29,7 @@ class IngredientsController < ApplicationController
   private
 
   def ingredient_params
-    params.require(:ingredient).permit(:quantity, :unit, :name, :protein, :lipid, :carbs)
+    params.require(:ingredient).permit(:name, :proteins, :fats, :carbs)
   end
 
   # def find_macro(ingredient)

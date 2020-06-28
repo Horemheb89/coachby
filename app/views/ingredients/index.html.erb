@@ -8,7 +8,7 @@
     <%= text_field_tag :query,
       params[:query],
       class: "form-control",
-      placeholder: "Find a movie"
+      placeholder: "Find an ingredient"
     %>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
@@ -19,9 +19,9 @@
   <% @ingredients.each do  |ingredient| %>
     <ul>
       <li><%= link_to ingredient.name, ingredient_path(ingredient) %></li>
-      <li><%=  ingredient.proteins %></li>
-      <li><%=  ingredient.carbs %></li>
-      <li><%=  ingredient.fats %></li>
+      <li>Proteins: <%= ingredient.proteins %>gr/100 gr</li>
+      <li>Carbs: <%= ingredient.carbs %>gr/100 gr</li>
+      <li>Fats: <%= ingredient.fats %>gr/100 gr</li>
     </ul>
   <% end %>
 

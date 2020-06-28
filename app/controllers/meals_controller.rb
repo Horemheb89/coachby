@@ -53,20 +53,20 @@ class MealsController < ApplicationController
     total_cal
   end
 
-  # def macro(meal)
-  #   protein = 0
-  #   lipid = 0
-  #   carbs = 0
-  #   meal.doses.each do |dose|
-  #     protein += dose.ingredient.protein
-  #     lipid += dose.ingredient.lipid
-  #     carbs += dose.ingredient.carbs
-  #   end
-  #     macros = ["Protein", protein], ["Lipid", lipid], ["Carbs", carbs]
-  # end
+  def macro(meal)
+    protein = 0
+    lipid = 0
+    carbs = 0
+    meal.doses.each do |dose|
+      protein += dose.ingredient.protein
+      lipid += dose.ingredient.lipid
+      carbs += dose.ingredient.carbs
+    end
+      macros = ["Protein", protein], ["Lipid", lipid], ["Carbs", carbs]
+  end
 
   def meal_params
-    params.require(:meal).permit(:name, :name, :start_time)
+    params.require(:meal).permit(:name, :start_time)
   end
 
 end
