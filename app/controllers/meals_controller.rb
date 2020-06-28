@@ -43,15 +43,15 @@ class MealsController < ApplicationController
 
   private
 
-  # def calorie(meal)
-  #   total_cal = 0
-  #   meal.doses.each do |dose|
-  #     total_cal += (dose.ingredient.protein) * 4
-  #     total_cal += (dose.ingredient.lipid) * 8
-  #     total_cal += (dose.ingredient.carbs) * 4
-  #   end
-  #   total_cal
-  # end
+  def calorie(meal)
+    total_cal = 0
+    meal.doses.each do |dose|
+      total_cal += (dose.ingredient.protein) * 4
+      total_cal += (dose.ingredient.lipid) * 8
+      total_cal += (dose.ingredient.carbs) * 4
+    end
+    total_cal
+  end
 
   # def macro(meal)
   #   protein = 0
@@ -66,7 +66,7 @@ class MealsController < ApplicationController
   # end
 
   def meal_params
-    params.require(:meal).permit(:type, :name, :start_time)
+    params.require(:meal).permit(:name, :name, :start_time)
   end
 
 end

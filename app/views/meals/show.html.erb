@@ -3,7 +3,7 @@
 <div class="container">
   <h1>show meal</h1>
 
-  <p> <%= @meal.type %> </p>
+  <p> <%= @meal.name %> </p>
 
   <table>
       <thead>
@@ -21,7 +21,7 @@
           <% @meal.doses.each do |dose| %>
             <tr>
               <td> <%= dose.quantity %> </td>
-              <td> <%= link_to dose.ingredient.type, ingredient_path(dose.ingredient) %> </td>
+              <td> <%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> </td>
               <td> <%= ((dose.quantity * dose.ingredient.protein)/dose.ingredient.quantity).round   %> </td>
               <td> <%= (dose.quantity * dose.ingredient.lipid).round  %> </td>
               <td> <%= (dose.quantity * dose.ingredient.carbs).round  %> </td>
