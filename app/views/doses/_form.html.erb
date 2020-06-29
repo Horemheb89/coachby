@@ -1,12 +1,5 @@
-<h1>Doses#new</h1>
-<p>Find me in app/views/doses/new.html.erb</p>
-
 <%= simple_form_for [@meal, @dose] do |f| %>
   <%= f.input :quantity %>
   <%= f.association :ingredient, :collection => Ingredient.all %>
   <%= f.button :submit, class: 'main-btn ' %>
 <% end %>
-
-
-<%= link_to "add a new ingredient", new_ingredient_path %>
-

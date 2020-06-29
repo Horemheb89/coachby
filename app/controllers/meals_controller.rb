@@ -2,23 +2,23 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
   end
 
   def create
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
     @meal = Meal.new(meal_params)
     @meal.program = @program
     if @meal.save
-      redirect_to contract_program_meals_path(@contract, @program)
+      redirect_to program_meals_path(@program)
     end
   end
 
 
   def index
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
     @meals = Meal.all
   end
@@ -46,27 +46,27 @@ class MealsController < ApplicationController
   def calorie(meal)
     total_cal = 0
     meal.doses.each do |dose|
-      total_cal += (dose.ingredient.protein) * 4
-      total_cal += (dose.ingredient.lipid) * 8
+      total_cal += (dose.ingredient.proteins) * 4
+      total_cal += (dose.ingredient.fats) * 8
       total_cal += (dose.ingredient.carbs) * 4
     end
     total_cal
   end
 
-  # def macro(meal)
-  #   protein = 0
-  #   lipid = 0
-  #   carbs = 0
-  #   meal.doses.each do |dose|
-  #     protein += dose.ingredient.protein
-  #     lipid += dose.ingredient.lipid
-  #     carbs += dose.ingredient.carbs
-  #   end
-  #     macros = ["Protein", protein], ["Lipid", lipid], ["Carbs", carbs]
-  # end
+  def macro(meal)
+    protein = 0
+    lipid = 0
+    carbs = 0
+    meal.doses.each do |dose|
+      protein += (dose.ingredient.proteins * dose.quantity)/100
+      lipid += (dose.ingredient.fats * dose.quantity)/100
+      carbs += (dose.ingredient.carbs * dose.quantity)/100
+    end
+      macros = ["Protein", protein], ["Lipid", lipid], ["Carbs", carbs]
+  end
 
   def meal_params
-    params.require(:meal).permit(:name, :name, :start_time)
+    params.require(:meal).permit(:name, :start_time)
   end
 
 end

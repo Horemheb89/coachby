@@ -10,12 +10,12 @@ class ProgramsController < ApplicationController
     @program = Program.new(program_params)
     @program.contract = @contract
     if @program.save
-      redirect_to contract_program_path(@contract,@program)
+      redirect_to program_path(@program)
     end
   end
 
   def show
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:id])
   end
 

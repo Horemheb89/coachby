@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :programs, only: [] do
-    resources :meals, only: [:new, :create]
+    resources :meals, only: [:new, :create, :index,:show]
   end
 
   resources :programs, only: [] do
@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   end
 
     resources :ingredients
+    resources :contracts, only: [:index]
+    resources :programs, only: [:index, :show]
+
 end
