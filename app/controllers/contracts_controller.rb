@@ -10,7 +10,7 @@ class ContractsController < ApplicationController
     @contract = Contract.new(params_contract)
     @contract.coach = current_user
     if @contract.save
-      redirect_to contract_path(@contract)
+      redirect_to contracts_path(@contract)
     end
   end
 
