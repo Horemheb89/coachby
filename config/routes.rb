@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
     resources :ingredients
-    resources :contracts, only: [:index]
+    resources :contracts, only: [:index, :show]
     resources :programs, only: [:index, :show]
 
 end

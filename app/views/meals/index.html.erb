@@ -29,11 +29,12 @@
                 ((dose.quantity * dose.ingredient.carbs)*4)/100) %> </td>
 
                 <% sum_p += ((dose.quantity * dose.ingredient.proteins)/100).round  %>
-                <% sum_l += (dose.quantity * dose.ingredient.fats).round %>
-                <% sum_c += (dose.quantity * dose.ingredient.carbs).round   %>
-                <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100)*4 +
-                (dose.quantity * dose.ingredient.fats) * 9 +
-                 (dose.quantity * dose.ingredient.carbs)*4).round  %>
+                <% sum_l += ((dose.quantity * dose.ingredient.fats)/100).round %>
+                <% sum_c += ((dose.quantity * dose.ingredient.carbs)/100).round   %>
+
+                <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100) * 4 +
+                              ((dose.quantity * dose.ingredient.fats)/100) * 9 +
+                              ((dose.quantity * dose.ingredient.carbs)/100) * 4)  %>
               </tr>
               <% if meal.doses.last == dose %>
                   <tr>
