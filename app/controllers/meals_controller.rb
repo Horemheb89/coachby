@@ -16,9 +16,8 @@ class MealsController < ApplicationController
     end
   end
 
-
   def index
-    @meals = Meal.all
+      @meals = Meal.all
     if params["date"]
       @meals_date = Meal.where(start_time: params["date"])
     else

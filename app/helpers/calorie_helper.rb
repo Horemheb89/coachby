@@ -20,3 +20,13 @@ module CalorieHelper
     macro = [prot_ing, lipid_ing, carbs_ing]
   end
 end
+
+  def macro(meal)
+    prot_ing = lipid_ing = carbs_ing = 0
+    meal.doses.each do |dose|
+      prot_ing += (dose.ingredient.proteins * dose.quantity)/100
+      lipid_ing += (dose.ingredient.fats  * dose.quantity)/100
+      carbs_ing += (dose.ingredient.carbs * dose.quantity)/100
+    end
+    [["protein", prot_ing], ["lipid",lipid_ing], ["carbs", carbs_ing]]
+  end
