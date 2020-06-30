@@ -1,21 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 
 # Destroying previous instances
 User.destroy_all
 Contract.destroy_all
 
-# Seeding Starts
-puts "\n🌱 Seeding 🌱"
 
-# Creating specific Coach users
-data = [{
+# Seeding Starts
+puts "\n🌱 Seeding Starts 🌱"
+
+
+coach_data = [{
   email: "hugo@coachby.com",
   last_name: "Bottois",
   first_name: "Hugo"
@@ -33,36 +26,56 @@ data = [{
   first_name: "Hadrien"
 }]
 
-data.each do |team_member|
-  user = User.new(team_member)
-  user.password = "123456"
-  user.is_coach = true
-  puts "User created - Coach #{user.first_name}" if user.save
+# Creating Coaches
+
+coach_data.each do |member|
+  coach = User.new(member)
+  coach.password = "123456"
+  coach.is_coach = true
+  puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | password: #{coach.password}" if coach.save
+
+
+  # Creating random Athletes for each Coach
+
+  rand(5..15).times do
+    athlete = User.new(email: Faker::Internet.email,
+                    password: "123456",
+                    is_coach: false,
+                    last_name: Faker::Name.last_name,
+                    first_name: Faker::Name.first_name )
+    print " ◽️  Athlete created - #{athlete.first_name}. " if athlete.save
+
+
+    # Creating Contracts for each Coach
+
+    contract = Contract.new(coach_id: coach.id, athlete_id:athlete.id)
+    puts "Contract created (#{athlete.first_name} and #{coach.first_name})." if contract.save
+  end
+end
+
+# Creating main Athlete
+
+athlete = User.new(email: "usain@athlete.com",
+                password: "123456",
+                is_coach: false,
+                last_name: "Bolt",
+                first_name: "Usain")
+puts "\n🥇 Athlete Created - #{athlete.first_name} | email: #{athlete.email} | password: #{athlete.password}" if athlete.save
+
+
+# Creating random Athletes without contracts
+
+puts "\n👥 Creating Random Athletes"
+10.times do
+  athlete = User.new(email: Faker::Internet.email,
+                  password: "123456",
+                  is_coach: false,
+                  last_name: Faker::Name.last_name,
+                  first_name: Faker::Name.first_name )
+  puts " ◽️  Athlete Created - #{athlete.first_name}" if athlete.save
 end
 
 # Done
-puts "\n🌱 Done 🌱"
+puts "\n🌱 Seeding Completed 🌱"
 puts "You have #{User.count} users."
 puts "You have #{Contract.count} contracts."
-
-
-# puts "5 coach"
-
-# 5.times do
-#   User.create!(email: Faker::Internet.email,
-#                   password: "123456",
-#                   is_coach: true,
-#                   last_name: Faker::Name.last_name ,
-#                   first_name: Faker::Name.first_name)
-# end
-
-# puts "10 coach"
-
-
-# 10.times do
-#   User.create!(email: Faker::Internet.email,
-#                   password: "123456",
-#                   is_coach: false,
-#                   last_name: Faker::Name.last_name ,
-#                   first_name: Faker::Name.first_name )
-# end
