@@ -10,4 +10,10 @@ class ExercisesController < ApplicationController
       redirect_to program_sessions_path(@exercise)
     end
   end
+
+  private
+
+  def exercise_params
+    params.require(:exercise).permit(:name, :rounds, :reps, :weight, :rest_time)
+  end
 end

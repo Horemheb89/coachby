@@ -12,4 +12,10 @@ class SessionsController < ApplicationController
       redirect_to program_sessions_path(@program)
     end
   end
+
+  private
+
+  def session_params
+    params.require(:session).permit(:date, :start_time)
+  end
 end
