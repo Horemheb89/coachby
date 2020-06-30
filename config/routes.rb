@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     resources :sessions, only: [:new, :create]
   end
 
+  resources :programs, only: [] do
+    resources :exercises, only: [:new, :create]
+  end
+
   resources :meals, only: [] do
     resources :doses, only: [:new, :create]
   end
