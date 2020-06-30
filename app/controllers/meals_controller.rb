@@ -18,9 +18,14 @@ class MealsController < ApplicationController
 
 
   def index
+    @meals = Meal.all
+    if params["date"]
+      @meals_date = Meal.where(start_time: params["date"])
+    else
+      @meals_date = Meal.all
+    end
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
-    @meals = Meal.all
   end
 
   # def dashboard_day
