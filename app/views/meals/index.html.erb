@@ -1,8 +1,22 @@
 
 <h1> index meal </h1>
 
+
+  <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
+    <%= date %>
+    <% meals.each do |meal| %>
+      <%= link_to meal.name, new_meal_dose_path(meal) %>
+      <% end %>
+  <% end %>
+
+<%= link_to "add meal", new_program_meal_path(@program) %>
+
+
+
+
 <% @meals.each do |meal| %>
-  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal)  %> </h1>
+  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal) %> </h1>
+  <span> <%= (meal.start_time) %></span>
   <table>
         <thead>
             <tr>
@@ -54,7 +68,7 @@
 <% end %>
 
 
-<%= link_to "add meal", new_program_meal_path(@program) %>
+<%= column_chart @meals.map { |meal| [meal.start_time, calorie(meal)] } %>
 
 
 

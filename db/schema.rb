@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_151523) do
+ActiveRecord::Schema.define(version: 2020_06_30_172643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_151523) do
 
   create_table "meals", force: :cascade do |t|
     t.string "name"
-    t.datetime "date"
+    t.datetime "start_time"
     t.bigint "program_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
