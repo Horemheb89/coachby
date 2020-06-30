@@ -2,18 +2,62 @@
 <h1> index meal </h1>
 
 <% @meals.each do |meal| %>
-  <h1> <%=  meal.type %> </h1>
-  <% raise %>
+  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal)  %> </h1>
+  <table>
+        <thead>
+            <tr>
+              <th > Quantité</th>
+              <th > Ingrédient</th>
+              <th > Protein</th>
+              <th > Lipid</th>
+              <th > Carbs</th>
+              <th > Calories</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+            <% meal.doses.each do |dose| %>
+              <tr>
+                <td> <%= dose.quantity %> </td>
+                <td> <%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> </td>
+                <td> <%= ((dose.quantity * dose.ingredient.proteins)/100).round   %> </td>
+                <td> <%= ((dose.quantity * dose.ingredient.fats)/100).round  %> </td>
+                <td> <%= ((dose.quantity * dose.ingredient.carbs)/100).round  %> </td>
+
+                <td> <%= (((dose.quantity * dose.ingredient.proteins)/100)*4 +
+                ((dose.quantity * dose.ingredient.fats)/100) * 9 +
+                ((dose.quantity * dose.ingredient.carbs)*4)/100) %> </td>
+
+                <% sum_p += ((dose.quantity * dose.ingredient.proteins)/100).round  %>
+                <% sum_l += ((dose.quantity * dose.ingredient.fats)/100).round %>
+                <% sum_c += ((dose.quantity * dose.ingredient.carbs)/100).round   %>
+
+                <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100) * 4 +
+                              ((dose.quantity * dose.ingredient.fats)/100) * 9 +
+                              ((dose.quantity * dose.ingredient.carbs)/100) * 4)  %>
+              </tr>
+              <% if meal.doses.last == dose %>
+                  <tr>
+                    <td> Totaux:  </td>
+                    <td> <%=  %> </td>
+                    <td> <%= sum_p %> </td>
+                    <td> <%= sum_l %> </td>
+                    <td> <%= sum_c %> </td>
+                    <td> <%= sum_cal %> </td>
+                    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+                  </tr>
+              <% end %>
+            <% end %>
+        </tbody>
+    </table>
+    <%= link_to "add portion", new_meal_dose_path(meal) %>
 <% end %>
 
 
+<%= link_to "add meal", new_program_meal_path(@program) %>
 
 
 
-
-
-
-<%= link_to "add meal", new_contract_program_meal_path(@contract, @program) %>
 
 
 
