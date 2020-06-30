@@ -1,4 +1,14 @@
 class SessionsController < ApplicationController
+
+  def index
+    @program = Program.find(params[:program_id])
+    @sessions = Session.all
+  end
+
+  def show
+
+  end
+
   def new
     @session = Session.new
     @program = Program.find(params[:program_id])
