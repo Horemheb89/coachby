@@ -1,10 +1,8 @@
-#logo {
-  letter-spacing: 0.2em;
-  margin: 0px;
-}
+// Main Classes
 
-.navbar-light .navbar-toggler {
-  color: $red;
+.navbar {
+  padding: 0.2rem 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-lewagon {
@@ -16,6 +14,33 @@
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+// Links
+
+.navbar-light .navbar-toggler {
+  color: $red;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  margin: 0px 4px;
+  color: $gray;
+}
+
+.navbar-nav .nav-item:hover .nav-link {
+    color: $red;
+}
+
+// Content
+
+#logo {
+  letter-spacing: 0.2em;
+  margin: 0px;
+}
+
+.avatar {
+  padding: 4px 4px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
 }
