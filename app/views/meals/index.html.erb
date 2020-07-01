@@ -101,15 +101,11 @@
               }
           });
       </script> -->
-      <%= column_chart macro(meal) %>
+      <%= column_chart macro(meal), ytitle: "(Gr)", min: 0, max: macro_max(meal) + 40 %>
     </div>
   </div>
     <%= link_to "add portion", new_meal_dose_path(meal) %>
 <% end %>
 
-
-<%= column_chart @meals.map { |meal| [meal.start_time.strftime("%a"), calorie(meal)] } %>
-
-
-
+<%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)]} %>
 

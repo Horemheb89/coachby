@@ -17,16 +17,18 @@ class MealsController < ApplicationController
   end
 
   def index
-      @meals = Meal.all
-    if params["date"]
-      @meals_date = Meal.where(start_time: params["date"])
-    else
-      @meals_date = Meal.all
-    end
+    @meals = Meal.all
+      if params["date"]
+        @meals_date = Meal.where(start_time: params["date"])
+      else
+        @meals_date = Meal.all
+      end
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
     @labels = ["protein", "lipid", "carbs"]
-  end
+    # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
+    # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
+   end
 
   # def dashboard_day
   #   @meals = Meal.all
