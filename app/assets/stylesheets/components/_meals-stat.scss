@@ -5,10 +5,12 @@
 }
 
 .nutri-table{
+  margin-top: 36px;
+  text-align:center;
+
   table {
     border:3px solid #6495ed;
     width:70%;
-    margin:auto;
   }
 
   thead, tfoot {
@@ -26,7 +28,7 @@
     border:1px dotted #6495ed;
     padding:5px;
     background-color:#EFF6FF;
-    width:25%;
+    width: 200px;
   }
 
   td {
@@ -34,7 +36,10 @@
     font-size:80%;
     border:1px solid #6495ed;
     padding:5px;
-    text-align:center;
+  }
+
+  .cell-total {
+    background-color: #EFF6FF;
   }
 }
 

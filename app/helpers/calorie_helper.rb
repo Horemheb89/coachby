@@ -17,7 +17,9 @@ module CalorieHelper
     prot_ing = params[:quantity] * ingredient.proteins
     lipid_ing = params[:quantity] * ingredient.fats
     carbs_ing = params[:quantity] * ingredient.carbs
-    macro = [prot_ing, lipid_ing, carbs_ing]
+    macro = [prot_ing, lipid_ing, carbs_ing] # chart.js
+    # macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
+
   end
 end
 
@@ -28,5 +30,6 @@ end
       lipid_ing += (dose.ingredient.fats  * dose.quantity)/100
       carbs_ing += (dose.ingredient.carbs * dose.quantity)/100
     end
-    [["protein", prot_ing], ["lipid",lipid_ing], ["carbs", carbs_ing]]
+      # macro = [prot_ing, lipid_ing, carbs_ing] # chart.js
+      macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
   end

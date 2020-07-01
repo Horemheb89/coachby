@@ -25,6 +25,7 @@ class MealsController < ApplicationController
     end
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
+    @labels = ["protein", "lipid", "carbs"]
   end
 
   # def dashboard_day
