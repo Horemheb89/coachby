@@ -12,7 +12,7 @@ class DosesController < ApplicationController
     date = @meal.start_time
 
     if @dose.save
-      redirect_to program_meals_path(@program, date: date) # to do : find a way to send on index meals with same date params
+      redirect_to program_meals_path(@program, date: date)
     end
   end
 

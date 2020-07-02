@@ -107,5 +107,17 @@
     <%= link_to "add portion", new_meal_dose_path(meal) %>
 <% end %>
 
-<%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)]} %>
 
+<% @meals_date.map do |meal| %>
+  <% if meal.name ==  "Petit-dejeuner" %>
+    <% @meal_type["petit-dejeuner"] = calorie(meal) %>
+  <% elsif meal.name == "dejeuner" %>
+    <% @meal_type["dejeuner"] = calorie(meal) %>
+  <% elsif meal.name == "gouter" %>
+    <% @meal_type["gouter"] = calorie(meal) %>
+  <% elsif meal.name == "diner" %>
+    <% @meal_type["diner"] = calorie(meal) %>
+  <% end %>
+<% end %>
+
+<%= column_chart @meal_type %>
