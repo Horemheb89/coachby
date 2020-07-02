@@ -34,6 +34,8 @@ class MealsController < ApplicationController
     @meal = Meal.new
     @meal.start_time = params["date"]
 
+    # create a new dose for a meal in index
+    @dose = Dose.new
   end
 
   # def dashboard_day
@@ -80,5 +82,10 @@ class MealsController < ApplicationController
 
   def meal_params
     params.require(:meal).permit(:name, :start_time)
+  end
+
+
+   def dose_params
+    params.require(:dose).permit(:quantity, :ingredient_id, :meal_id)
   end
 end

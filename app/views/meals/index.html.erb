@@ -106,6 +106,8 @@
   </div>
     <%= link_to "add portion", new_meal_dose_path(meal) %>
 
+    <%= render "doses/form", meal: meal, dose: @dose %>
+
 <% end %>
 
 

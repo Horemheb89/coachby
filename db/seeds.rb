@@ -2,6 +2,7 @@
 # Destroying previous instances
 User.destroy_all
 Contract.destroy_all
+Ingredient.destroy_all
 
 
 # Seeding Starts
@@ -79,9 +80,6 @@ end
 puts "\n🌱 Seeding Completed 🌱"
 puts "You have #{User.count} users."
 puts "You have #{Contract.count} contracts."
-
-
-Ingredient.destroy_all
 
 require 'roo'
 require 'roo-xls'
