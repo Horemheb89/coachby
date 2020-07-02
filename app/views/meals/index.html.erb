@@ -11,7 +11,7 @@
 
 <%= link_to "add meal", new_program_meal_path(@program) %>
 
-
+<%= render "form", meal: @meal %>
 
 <% @meals_date.each do |meal| %>
   <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal) %> </h1>
@@ -101,7 +101,7 @@
               }
           });
       </script> -->
-      <%= column_chart macro(meal), ytitle: "(Gr)", min: 0, max: macro_max(meal) + 40 %>
+      <%= column_chart macro(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
     </div>
   </div>
     <%= link_to "add portion", new_meal_dose_path(meal) %>

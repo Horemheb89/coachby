@@ -29,6 +29,10 @@ class MealsController < ApplicationController
     # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
     # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
     @meal_type = { "petit-dejeuner" => 0, "dejeuner" => 0, "gouter" => 0, "diner" => 0 }
+
+    # create a new meal
+    @meal = Meal.new
+    @meal.start_time = params["date"]
   end
 
   # def dashboard_day
@@ -55,7 +59,7 @@ class MealsController < ApplicationController
     total_cal = 0
     meal.doses.each do |dose|
       total_cal += (dose.ingredient.proteins) * 4
-      total_cal += (dose.ingredient.fats) * 8
+      total_cal += (dose.ingredient.fats) * 9
       total_cal += (dose.ingredient.carbs) * 4
     end
     total_cal
