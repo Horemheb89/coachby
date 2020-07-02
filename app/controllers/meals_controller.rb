@@ -28,7 +28,7 @@ class MealsController < ApplicationController
     @labels = ["protein", "lipid", "carbs"]
     # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
     # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
-   end
+  end
 
   # def dashboard_day
   #   @meals = Meal.all
