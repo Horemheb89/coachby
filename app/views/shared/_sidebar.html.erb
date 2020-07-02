@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <div class="sidebar">
+
+    <div class="sidebar-links">
+
+      <%= link_to "/" do %>
+        <p class="sidebar-item">Dashboard</p>
+      <% end %>
+
+      <%= link_to contracts_path do %>
+        <p class="sidebar-item">Athletes</p>
+      <% end %>
+
+    </div>
+
+  </div>
+<% end %>
