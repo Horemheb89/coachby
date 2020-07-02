@@ -33,6 +33,7 @@ class MealsController < ApplicationController
     # create a new meal
     @meal = Meal.new
     @meal.start_time = params["date"]
+
   end
 
   # def dashboard_day
@@ -80,5 +81,4 @@ class MealsController < ApplicationController
   def meal_params
     params.require(:meal).permit(:name, :start_time)
   end
-
 end
