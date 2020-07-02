@@ -8,6 +8,7 @@
 
 User.destroy_all
 Contract.destroy_all
+Ingredient.destroy_all
 
 
 puts "5 coach"
@@ -31,9 +32,6 @@ puts "10 coach"
                   first_name: Faker::Name.first_name )
 end
 
-
-
-Ingredient.destroy_all
 
 require 'roo'
 require 'roo-xls'

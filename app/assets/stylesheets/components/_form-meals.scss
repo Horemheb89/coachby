@@ -1,4 +1,9 @@
-.form-inline {
+.form-inline-meal {
+  display: flex;
+  align-items: center;
+}
+
+.form-inline-dose {
   display: flex;
   align-items: center;
 }

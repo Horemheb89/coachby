@@ -35,8 +35,7 @@ class MealsController < ApplicationController
     @meal.start_time = params["date"]
 
     # create a new dose for a meal in index
-    @dose = Dose.new(params[:meal_id])
-    @dose.save
+    @dose = Dose.new
   end
 
   # def dashboard_day

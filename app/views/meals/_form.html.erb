@@ -1,7 +1,7 @@
 
 
 <%= simple_form_for [@program, @meal] do |f| %>
-  <div class="form-inline">
+  <div class="form-inline-meal">
     <%= f.input :name, :collection => %w[Petit-dejeuner Dejeuner Gouter Diner] %>
     <%= f.input :start_time, as: :date, html5: true %>
   </div>
