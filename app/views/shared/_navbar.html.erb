@@ -1,15 +1,30 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "#", class: "navbar-brand" do %>
-    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
+<div class="navbar navbar-expand-md navbar-light navbar-lewagon">
+
+<div class="navbar-brand">
+  <%= link_to "/" do %>
+    <h2 id="logo">COACH<span class="red-text">BY</span></h2>
+  <% end %>
+  <% if user_signed_in? %>
+    <p class="red-text m-0 pl-2"><%= current_user.first_name %></p>
+  <% end %>
+</div>
+
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="fa fa-caret-down"></span>
   </button>
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <%= link_to "Home", "/", class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Blog", "/", class: "nav-link" %>
+      </li>
+
       <% if user_signed_in? %>
         <% if current_user.is_coach %>
           <li class="nav-item active">
@@ -38,20 +53,20 @@
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= image_tag "coach_avatar", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           </li>
         <% end %>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Find a coach", "#", class: "nav-link" %>
+          <%= link_to "Login", "/users/sign_in", class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Log in", "/users/sign_in", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Sign up", "/users/sign_up", class: "nav-link" %>
+          <%= link_to "/users/sign_up", class: "nav-link" do %>
+            <strong>Join</strong>
+          <% end %>
         </li>
       <% end %>
+
     </ul>
   </div>
 </div>

@@ -1,0 +1,32 @@
+// Layout Classes
+.sidebar-wrapper {
+  display: flex;
+}
+
+.sidebar-content {
+  flex-grow: 1;
+}
+
+// Main Classes
+.sidebar {
+  flex-shrink: 0;
+  width: 176px;
+  height: calc(100vh - 50.781px);
+
+  background-color: $black;
+}
+
+// Links
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem;
+}
+
+.sidebar-item {
+  padding: 0px 0px 8px 0px;
+  color: $gray;
+  &:hover{
+    color: $light-gray;
+  }
+}
