@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :programs, only: [] do
-    resources :sessions, only: [:new, :create]
+    resources :sessions, only: [:new, :create, :index, :show]
+  end
+
+  resources :programs, only: [] do
+    resources :exercises, only: [:new, :create]
   end
 
   resources :meals, only: [] do
