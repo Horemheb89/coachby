@@ -2,9 +2,9 @@ module CalorieHelper
   def calorie(meal)
     total_cal = 0
     meal.doses.each do |dose|
-      total_cal += (dose.ingredient.proteins) * 4
-      total_cal += (dose.ingredient.fats) * 8
-      total_cal += (dose.ingredient.carbs) * 4
+      total_cal += (dose.ingredient.proteins * dose.quantity)/100 * 4
+      total_cal += (dose.ingredient.fats * dose.quantity)/100 * 9
+      total_cal += (dose.ingredient.carbs * dose.quantity)/100 * 4
     end
     total_cal
   end
