@@ -1,5 +1,9 @@
-<%= simple_form_for [@meal, @dose] do |f| %>
-  <%= f.input :quantity %>
-  <%= f.association :ingredient, :collection => Ingredient.all %>
-  <%= f.button :submit, class: 'main-btn ' %>
-<% end %>
+
+
+<div class="form-inline">
+  <%= simple_form_for [meal, @dose] do |f| %>
+      <%= f.input :quantity %>
+      <%= f.association :ingredient, :collection => Ingredient.all %>
+      <%= f.button :submit, class: 'main-btn ' %>
+  <% end %>
+</div>
