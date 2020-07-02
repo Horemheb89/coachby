@@ -5,6 +5,7 @@
 
 .footer-category {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   p {
     color: $gray;
