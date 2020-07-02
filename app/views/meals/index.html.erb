@@ -1,20 +1,35 @@
 
 <h1> index meal </h1>
 
-<% @meals.each do |meal| %>
-  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal)  %> </h1>
-  <table>
-        <thead>
-            <tr>
-              <th > Quantité</th>
-              <th > Ingrédient</th>
-              <th > Protein</th>
-              <th > Lipid</th>
-              <th > Carbs</th>
-              <th > Calories</th>
-            </tr>
-        </thead>
-        <tbody>
+
+  <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
+    <%= link_to date, program_meals_path(@program, date: date) %>
+    <% meals.each do |meal| %>
+      <%= link_to meal.name, program_meal_path(@program, meal) %>
+      <% end %>
+  <% end %>
+
+<%= link_to "add meal", new_program_meal_path(@program) %>
+
+<%= render "form", meal: @meal %>
+
+<% @meals_date.each do |meal| %>
+  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal) %> </h1>
+  <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
+  <div class = meal-stat>
+    <div class = "nutri-table">
+        <table>
+          <thead>
+              <tr>
+                <th > Quantité</th>
+                <th > Ingrédient</th>
+                <th > Protein</th>
+                <th > Lipid</th>
+                <th > Carbs</th>
+                <th > Calories</th>
+              </tr>
+          </thead>
+          <tbody>
             <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
             <% meal.doses.each do |dose| %>
               <tr>
@@ -40,24 +55,70 @@
                   <tr>
                     <td> Totaux:  </td>
                     <td> <%=  %> </td>
-                    <td> <%= sum_p %> </td>
-                    <td> <%= sum_l %> </td>
-                    <td> <%= sum_c %> </td>
-                    <td> <%= sum_cal %> </td>
+                    <td class = "cell-total"> <%= sum_p %> </td>
+                    <td class = "cell-total"> <%= sum_l %> </td>
+                    <td class = "cell-total"> <%= sum_c %> </td>
+                    <td class = "cell-total"> <%= sum_cal %> </td>
                     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
                   </tr>
-              <% end %>
+                <% end %>
             <% end %>
-        </tbody>
-    </table>
+          </tbody>
+      </table>
+    </div>
+    <div class = "graph">
+      <!-- <canvas id="myChart" width="400" height="400"></canvas>
+      <script>
+        let ctx = document.getElementById('myChart').getContext('2d');
+          new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: <%= @labels.to_json.html_safe %>,
+                  datasets: [{
+                      label: '# of Macro',
+                      data: <%= macro(meal).to_json.html_safe %>,
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)'
+                      ],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }]
+                  }
+              }
+          });
+      </script> -->
+      <%= column_chart macro(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
+    </div>
+  </div>
     <%= link_to "add portion", new_meal_dose_path(meal) %>
+
 <% end %>
 
 
-<%= link_to "add meal", new_program_meal_path(@program) %>
+<% @meals_date.map do |meal| %>
+  <% if meal.name ==  "Petit-dejeuner" %>
+    <% @meal_type["petit-dejeuner"] = calorie(meal) %>
+  <% elsif meal.name == "dejeuner" %>
+    <% @meal_type["dejeuner"] = calorie(meal) %>
+  <% elsif meal.name == "gouter" %>
+    <% @meal_type["gouter"] = calorie(meal) %>
+  <% elsif meal.name == "diner" %>
+    <% @meal_type["diner"] = calorie(meal) %>
+  <% end %>
+<% end %>
 
-
-
-
-
-
+<%= column_chart @meal_type %>
