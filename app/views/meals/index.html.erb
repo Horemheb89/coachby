@@ -116,13 +116,13 @@
 
 <% @meals_date.map do |meal| %>
   <% if meal.name.downcase ==  "petit-dejeuner" %>
-    <% @meal_type["petit-dejeuner"] = calorie(meal) %>
+    <% @meal_type["petit-dejeuner"] += calorie(meal) %>
   <% elsif meal.name.downcase == "dejeuner" %>
-    <% @meal_type["dejeuner"] = calorie(meal) %>
+    <% @meal_type["dejeuner"] += calorie(meal) %>
   <% elsif meal.name.downcase == "gouter" %>
-    <% @meal_type["gouter"] = calorie(meal) %>
+    <% @meal_type["gouter"] += calorie(meal) %>
   <% elsif meal.name.downcase == "diner" %>
-    <% @meal_type["diner"] = calorie(meal) %>
+    <% @meal_type["diner"] += calorie(meal) %>
   <% end %>
 <% end %>
 
