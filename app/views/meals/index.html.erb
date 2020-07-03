@@ -101,7 +101,7 @@
               }
           });
       </script> -->
-      <%= column_chart macro(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
+      <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
     </div>
   </div>
     <%= link_to "add portion", new_meal_dose_path(meal) %>

@@ -34,6 +34,16 @@ end
       # macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
   end
 
+    def macro_char(meal)
+    prot_ing = lipid_ing = carbs_ing = 0
+    meal.doses.each do |dose|
+      prot_ing += (dose.ingredient.proteins * dose.quantity)/100
+      lipid_ing += (dose.ingredient.fats  * dose.quantity)/100
+      carbs_ing += (dose.ingredient.carbs * dose.quantity)/100
+    end
+      macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
+  end
+
 
   def macro_max(meal)
     prot_ing = lipid_ing = carbs_ing = 0
