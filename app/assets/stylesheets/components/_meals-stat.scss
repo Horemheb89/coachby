@@ -2,8 +2,14 @@
 .meal-stat {
   display: flex;
   justify-content: space-around;
+  min-height: 300px;
 }
 
+.graph {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+}
 
 .nutri-table{
   margin-top: 36px;
