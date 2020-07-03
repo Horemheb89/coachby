@@ -11,8 +11,9 @@ class MealsController < ApplicationController
     @program = Program.find(params[:program_id])
     @meal = Meal.new(meal_params)
     @meal.program = @program
+    date = params["meal"]["start_time"]
     if @meal.save
-      redirect_to program_meals_path(@program)
+      redirect_to program_meals_path(@program, date: date)
     end
   end
 
@@ -36,18 +37,8 @@ class MealsController < ApplicationController
 
     # create a new dose for a meal in index
     @dose = Dose.new
-  end
 
-  # def dashboard_day
-  #   @meals = Meal.all
-  #   @meals_day = []
-  #   @meals.each do |meal|
-  #     if meal.start_time == params['format']
-  #       @meals_day << meal
-  #     end
-  #   end
-  #   @meals_day
-  # end
+  end
 
   def show
     @meal = Meal.find(params[:id])

@@ -3,15 +3,17 @@
 
 
   <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
-    <%= link_to date, program_meals_path(@program, date: date) %>
+    <%= link_to date.strftime("%m/%d/%Y"), program_meals_path(@program, date: date) %>
     <% meals.each do |meal| %>
-      <%= link_to meal.name, program_meal_path(@program, meal) %>
-      <% end %>
+    <div class = "meal-list">
+      <ul>
+        <li> <%= link_to meal.name, program_meal_path(@program, meal) %> </li>
+      </ul>
+    </div>
+    <% end %>
   <% end %>
 
-<%= link_to "add meal", new_program_meal_path(@program) %>
-
-<%= render "form", meal: @meal %>
+  <%= render "form", meal: @meal %>
 
 <% @meals_date.each do |meal| %>
   <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal) %> </h1>
@@ -65,6 +67,7 @@
             <% end %>
           </tbody>
       </table>
+        <%= render "doses/form", meal: meal, dose: @dose %>
     </div>
     <div class = "graph">
       <!-- <canvas id="myChart" width="400" height="400"></canvas>
@@ -101,25 +104,25 @@
               }
           });
       </script> -->
-      <%= column_chart macro(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
+      <% unless meal.doses.empty?  %>
+        <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
+      <% end %>
     </div>
   </div>
-    <%= link_to "add portion", new_meal_dose_path(meal) %>
 
-    <%= render "doses/form", meal: meal, dose: @dose %>
 
 <% end %>
 
 
 <% @meals_date.map do |meal| %>
-  <% if meal.name ==  "Petit-dejeuner" %>
-    <% @meal_type["petit-dejeuner"] = calorie(meal) %>
-  <% elsif meal.name == "dejeuner" %>
-    <% @meal_type["dejeuner"] = calorie(meal) %>
-  <% elsif meal.name == "gouter" %>
-    <% @meal_type["gouter"] = calorie(meal) %>
-  <% elsif meal.name == "diner" %>
-    <% @meal_type["diner"] = calorie(meal) %>
+  <% if meal.name.downcase ==  "petit-dejeuner" %>
+    <% @meal_type["petit-dejeuner"] += calorie(meal) %>
+  <% elsif meal.name.downcase == "dejeuner" %>
+    <% @meal_type["dejeuner"] += calorie(meal) %>
+  <% elsif meal.name.downcase == "gouter" %>
+    <% @meal_type["gouter"] += calorie(meal) %>
+  <% elsif meal.name.downcase == "diner" %>
+    <% @meal_type["diner"] += calorie(meal) %>
   <% end %>
 <% end %>
 
