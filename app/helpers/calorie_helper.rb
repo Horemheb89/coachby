@@ -30,8 +30,8 @@ end
       lipid_ing += (dose.ingredient.fats  * dose.quantity)/100
       carbs_ing += (dose.ingredient.carbs * dose.quantity)/100
     end
-      # macro = [prot_ing, lipid_ing, carbs_ing] # chart.js
-      macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
+      macro = [prot_ing, lipid_ing, carbs_ing] # chart.js
+      # macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
   end
 
 

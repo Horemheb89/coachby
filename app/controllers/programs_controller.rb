@@ -23,6 +23,12 @@ class ProgramsController < ApplicationController
     @programs = Program.all
   end
 
+  def index_clients
+    @contract = Contract.find(params[:id])
+    @programs = Program.where(contract_id: @contract)
+  end
+
+
   private
 
   def program_params

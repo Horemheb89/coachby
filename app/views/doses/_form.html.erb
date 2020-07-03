@@ -1,7 +1,7 @@
 
 
   <%= simple_form_for [meal, dose] do |f| %>
-  <div class="form-inline-dose ">
+  <div class="form-inline">
         <%= f.input :quantity %>
         <%= f.association :ingredient, :collection => Ingredient.all %>
   </div>

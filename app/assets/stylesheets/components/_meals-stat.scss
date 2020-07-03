@@ -44,3 +44,34 @@
 }
 
 
+.nutri-table-meal {
+  text-align:center;
+  width:70%;
+
+  thead, tfoot {
+    background-color:#D0E3FA;
+    border:3px solid #6495ed;
+  }
+
+  tbody {
+    background-color:#FFFFFF;
+    border:3px solid #6495ed;
+  }
+
+  th {
+    font-family:monospace;
+    background-color:#EFF6FF;
+    width: 200px;
+    background-color:#FFFFFF;
+  }
+
+  td {
+    font-family:sans-serif;
+    padding:5px;
+
+  }
+
+  .cell-total {
+    background-color: #EFF6FF;
+  }
+}

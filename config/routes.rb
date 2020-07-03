@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :contracts, only: [:new, :create] do
-    resources :programs, only: [:new, :create] do
+    resources :programs, only: [:new, :create,:index, :show] do
     end
   end
 
@@ -23,5 +23,8 @@ Rails.application.routes.draw do
     resources :ingredients
     resources :contracts, only: [:index, :show]
     resources :programs, only: [:index, :show]
+
+  get "contract/:id/index_clients", to: "programs#index_clients", as: "dashboard"
+
 
 end

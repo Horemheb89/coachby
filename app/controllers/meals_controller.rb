@@ -36,18 +36,9 @@ class MealsController < ApplicationController
 
     # create a new dose for a meal in index
     @dose = Dose.new
-  end
 
-  # def dashboard_day
-  #   @meals = Meal.all
-  #   @meals_day = []
-  #   @meals.each do |meal|
-  #     if meal.start_time == params['format']
-  #       @meals_day << meal
-  #     end
-  #   end
-  #   @meals_day
-  # end
+
+  end
 
   def show
     @meal = Meal.find(params[:id])
