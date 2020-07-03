@@ -18,40 +18,57 @@
 <% end %>
 
 <% @programs.each do |program| %>
-  <% program.meals.each do |meal| %>
+  <% program.meals.group_by(&:start_time).each do |day, meals| %>
+    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
       <table class = "nutri-table-meal">
         <thead>
-            <tr>
-              <th > Date </th>
-              <th > Protein</th>
-              <th > Lipid</th>
-              <th > Carbs</th>
-              <th > Calories</th>
-            </tr>
+          <tr>
+            <th > Date </th>
+            <th > Protein</th>
+            <th > Lipid</th>
+            <th > Carbs</th>
+            <th > Calories</th>
+          </tr>
         </thead>
         <tbody>
+          <% sum_p += meals.map{|meal| macro(meal)[0]}.sum()  %>
+          <% sum_l += meals.map{|meal| macro(meal)[1]}.sum()  %>
+          <% sum_c += meals.map{|meal| macro(meal)[2]}.sum()  %>
+          <% sum_cal += meals.map{|meal| calorie(meal)}.sum() %>
+        <tr>
+          <td> <%= link_to meals.last.start_time.strftime("%m/%d/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
+          <td class = "cell-total"> <%= sum_p %> </td>
+          <td class = "cell-total"> <%= sum_l %> </td>
+          <td class = "cell-total"> <%= sum_c %> </td>
+          <td class = "cell-total"> <%= sum_cal %> </td>
           <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-          <% meal.doses.each do |dose| %>
-            <% sum_p += macro(meal)[0]  %>
-            <% sum_l += macro(meal)[1] %>
-            <% sum_c += macro(meal)[2] %>
-            <% sum_cal += calorie(meal) %>
-
-          <% if meal.doses.last == dose %>
-            <tr>
-              <td> <%= meal.start_time.strftime("%m/%d/%Y") %>  </td>
-              <td class = "cell-total"> <%= sum_p %> </td>
-              <td class = "cell-total"> <%= sum_l %> </td>
-              <td class = "cell-total"> <%= sum_c %> </td>
-              <td class = "cell-total"> <%= sum_cal %> </td>
-              <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-            </tr>
-          <% end %>
-        <% end %>
-        </tbody>
-      </table>
-    <% end %>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class = "meal-stat">
   <div> <%= line_chart meal_prot_date, ytitle: "Protein" %> </div>

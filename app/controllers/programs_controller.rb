@@ -24,6 +24,7 @@ class ProgramsController < ApplicationController
   end
 
   def index_clients
+    @meals = Meal.all
     @contract = Contract.find(params[:id])
     @programs = Program.where(contract_id: @contract)
   end
