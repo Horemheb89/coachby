@@ -32,42 +32,26 @@
         <tbody>
           <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
           <% meal.doses.each do |dose| %>
-          <!-- put <%= %> to see meal/days stats  -->
-              <% meal.start_time.strftime("%m/%d/%Y") %>
-              <% ((dose.quantity * dose.ingredient.proteins)/100).round   %>
-              <% ((dose.quantity * dose.ingredient.fats)/100).round  %>
-              <% ((dose.quantity * dose.ingredient.carbs)/100).round  %>
+            <% sum_p += macro(meal)[0]  %>
+            <% sum_l += macro(meal)[1] %>
+            <% sum_c += macro(meal)[2] %>
+            <% sum_cal += calorie(meal) %>
 
-              <% (((dose.quantity * dose.ingredient.proteins)/100)*4 +
-              ((dose.quantity * dose.ingredient.fats)/100) * 9 +
-              ((dose.quantity * dose.ingredient.carbs)*4)/100) %>
-
-              <% sum_p += ((dose.quantity * dose.ingredient.proteins)/100).round  %>
-              <% sum_l += ((dose.quantity * dose.ingredient.fats)/100).round %>
-              <% sum_c += ((dose.quantity * dose.ingredient.carbs)/100).round   %>
-
-              <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100) * 4 +
-                            ((dose.quantity * dose.ingredient.fats)/100) * 9 +
-                            ((dose.quantity * dose.ingredient.carbs)/100) * 4)  %>
-
-            <!--   -->
-            <% if meal.doses.last == dose %>
-              <tr>
-                <td> <%= meal.start_time.strftime("%m/%d/%Y") %>  </td>
-                <td class = "cell-total"> <%= sum_p %> </td>
-                <td class = "cell-total"> <%= sum_l %> </td>
-                <td class = "cell-total"> <%= sum_c %> </td>
-                <td class = "cell-total"> <%= sum_cal %> </td>
-                <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-              </tr>
-            <% end %>
+          <% if meal.doses.last == dose %>
+            <tr>
+              <td> <%= meal.start_time.strftime("%m/%d/%Y") %>  </td>
+              <td class = "cell-total"> <%= sum_p %> </td>
+              <td class = "cell-total"> <%= sum_l %> </td>
+              <td class = "cell-total"> <%= sum_c %> </td>
+              <td class = "cell-total"> <%= sum_cal %> </td>
+              <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+            </tr>
           <% end %>
+        <% end %>
         </tbody>
       </table>
     <% end %>
 <% end %>
-
-
 
 <div class = "meal-stat">
   <div> <%= line_chart meal_prot_date, ytitle: "Protein" %> </div>
