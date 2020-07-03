@@ -11,8 +11,9 @@ class MealsController < ApplicationController
     @program = Program.find(params[:program_id])
     @meal = Meal.new(meal_params)
     @meal.program = @program
+    date = params["meal"]["start_time"]
     if @meal.save
-      redirect_to program_meals_path(@program)
+      redirect_to program_meals_path(@program, date: date)
     end
   end
 

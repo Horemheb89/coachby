@@ -19,7 +19,6 @@ module CalorieHelper
     carbs_ing = params[:quantity] * ingredient.carbs
     macro = [prot_ing, lipid_ing, carbs_ing] # chart.js
     # macro_chartkick = [["protein", prot_ing], ["lipid",lipid_ing], ["carbs",carbs_ing]] # chartkick
-
   end
 end
 
