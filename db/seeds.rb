@@ -1,9 +1,10 @@
 
 # Destroying previous instances
+Dose.destroy_all
 User.destroy_all
 Contract.destroy_all
 Ingredient.destroy_all
-
+Meal.destroy_all
 
 # Seeding Starts
 puts "\n🌱 Seeding Starts 🌱"
@@ -92,7 +93,7 @@ tab = []
 xlsx.each(category: 'alim_ssssgrp_nom_fr',
                 name: 'alim_nom_fr',
                 proteins: 'Protéines (g/100g)',
-                fats: 'Glucides (g/100g)',
+                fats: 'Lipides (g/100g)',
                 carbs: 'Glucides (g/100g)') do |a|
                 # fibre: 'Fibres alimentaires (g/100g)',
                 # sel: 'Sel chlorure de sodium (g/100g)')
