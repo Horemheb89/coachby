@@ -1,4 +1,4 @@
-<h1> index program for <%= @programs.first %></h1>
+<h1> index program for <%=  %></h1>
 
 <% meal_cal_date = [] %>
 <% meal_prot_date = [] %>
@@ -16,6 +16,10 @@
    <% meal_carb_date << [meal.start_time, macro(meal)[2]] %>
   <% end %>
 <% end %>
+
+<div class = "meal-stat">
+  <%= line_chart meal_cal_date, ytitle: "Calorie" %>
+</div>
 
 <% @programs.each do |program| %>
   <% program.meals.group_by(&:start_time).each do |day, meals| %>
@@ -49,22 +53,28 @@
 <% end %>
 
 
+<!-- [
+  {:name=>"MR", :data=>{day=> sum protein, Wed, 01 Mar 2017=>66, Sat, 01 Apr 2017=>73, Sun, 01 Jan 2017=>44}},
+  {:name=>"CT", :data=>{Wed, 01 Feb 2017=>4, Wed, 01 Mar 2017=>6, Sat, 01 Apr 2017=>8, Sun, 01 Jan 2017=>52}},
+  {:name=>"XR", :data=>{Wed, 01 Mar 2017=>1}},
+]
+ -->
 
 
+<% line_data = [] %>
+<% data_p = data_l = data_c = {} %>
+<% @programs.first(1).each do |program| %>
+  <% program.meals.group_by(&:start_time).each do |day, meals| %>
+    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+    <% sum_p = meals.map{|meal| meal.proteins}.sum  %>
+    <% data_p[day.strftime("%m/%d/%Y")] = sum_p %>
+    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+  <% end %>
+    <% line_data << {:name => "protein", :data => data_p } %>
+    <%= line_data %>
+<% end %>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<%= line_chart line_data, ytitle: "Macro" %>
 
 
 
@@ -76,9 +86,6 @@
   <div> <%= line_chart meal_carb_date, ytitle: "Carbs" %> </div>
 </div>
 
-<div class = "meal-stat">
-  <%= line_chart meal_cal_date, ytitle: "Calorie" %>
-</div>
 
 <!-- better with activerecords request ? -->
 <!--  <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("(carbs*4)+(proteins*4)+(fats*9)"), ytitle: "Calorie" %>
