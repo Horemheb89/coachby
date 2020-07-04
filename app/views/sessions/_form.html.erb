@@ -1,0 +1,9 @@
+<%= simple_form_for [@program, @session] do |f| %>
+  <%= f.input :exercise %>
+  <%= f.input :rounds %>
+  <%= f.input :reps %>
+  <%= f.input :weight %>
+  <%= f.input :rest_time %>
+  <%= f.input :date, as: :date, html5: true %>
+  <%= f.button :submit, class: 'main-btn ' %>
+<% end %>
