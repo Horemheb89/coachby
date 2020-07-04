@@ -2,6 +2,7 @@
 # Destroying previous instances
 User.destroy_all
 Contract.destroy_all
+Ingredient.destroy_all
 
 
 # Seeding Starts
@@ -80,9 +81,6 @@ puts "\n🌱 Seeding Completed 🌱"
 puts "You have #{User.count} users."
 puts "You have #{Contract.count} contracts."
 
-
-Ingredient.destroy_all
-
 require 'roo'
 require 'roo-xls'
 
@@ -113,3 +111,5 @@ tab.each_with_index do |item, index|
       carbs: item[:carbs])
   end
 end
+
+exercises = ["air squat", "alligator walk", "barbell thrusters", "bench press", "box jump", "burpees", "clean and jerk", "deadlift", "dips", "double under", "front squat", "handstand pushup", "hip raise", "hollow rock/hold", "kettlebell swing", "knees to elbows", "lunges", "muscle up", "overhead squat", "power clean" , "pistol squat", "pulls up", "push ups", "push press", "rose climb", "sumo deadlift", "squat", "shoulder press", "snatch", "wall ball"]

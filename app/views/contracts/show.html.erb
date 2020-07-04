@@ -3,7 +3,7 @@
   <h2 class="sub-greeting"> You are viewing <%= @contract.athlete.first_name.capitalize %>'s profile </h2>
 <%  else %>
   <h1 class="greeting"> Hello, <%= @contract.athlete.first_name.capitalize %> ! </h1>
-  <h2 class="sub-greeting"> Your coach is <%= @contract.coach.first_name.capitalize %>'s profile </h2>
+  <h2 class="sub-greeting"> Your coach is <%= @contract.coach.first_name.capitalize %> </h2>
 <%  end %>
 
 <h1><%= @contract.athlete.first_name.capitalize %>'s information </h1>
@@ -29,3 +29,6 @@
   <%= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
 
           <%= link_to "create program", new_contract_program_path(@contract) %>
+
+
+<%= link_to "test", dashboard_path %>

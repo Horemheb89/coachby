@@ -9,9 +9,9 @@ class DosesController < ApplicationController
     @dose = Dose.new(dose_params)
     @program = @meal.program
     @dose.meal = @meal
-    if @dose.save
-      redirect_to program_meals_path(@program)
-    end
+    date = @meal.start_time
+    @dose.save
+    redirect_to program_meals_path(@program, date: date)
   end
 
 private

@@ -7,6 +7,7 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+// @import "simple_calendar"; to import defauld style simple calendar
 
 // Your CSS partials
 @import "components/index";
@@ -50,4 +51,9 @@ a {
 a:hover {
   color: $black;
   text-decoration: none;
+}
+
+// General Layout
+.red-text {
+  color: $red;
 }

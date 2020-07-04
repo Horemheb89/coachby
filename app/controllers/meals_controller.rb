@@ -11,28 +11,34 @@ class MealsController < ApplicationController
     @program = Program.find(params[:program_id])
     @meal = Meal.new(meal_params)
     @meal.program = @program
+    date = params["meal"]["start_time"]
     if @meal.save
-      redirect_to program_meals_path(@program)
+      redirect_to program_meals_path(@program, date: date)
     end
   end
 
-
   def index
+    @meals = Meal.all
+      if params["date"]
+        @meals_date = Meal.where(start_time: params["date"])
+      else
+        @meals_date = Meal.all
+      end
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
-    @meals = Meal.all
-  end
+    @labels = ["protein", "lipid", "carbs"]
+    # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
+    # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
+    @meal_type = { "petit-dejeuner" => 0, "dejeuner" => 0, "gouter" => 0, "diner" => 0 }
 
-  # def dashboard_day
-  #   @meals = Meal.all
-  #   @meals_day = []
-  #   @meals.each do |meal|
-  #     if meal.start_time == params['format']
-  #       @meals_day << meal
-  #     end
-  #   end
-  #   @meals_day
-  # end
+    # create a new meal
+    @meal = Meal.new
+    @meal.start_time = params["date"]
+
+    # create a new dose for a meal in index
+    @dose = Dose.new
+
+  end
 
   def show
     @meal = Meal.find(params[:id])
@@ -47,7 +53,7 @@ class MealsController < ApplicationController
     total_cal = 0
     meal.doses.each do |dose|
       total_cal += (dose.ingredient.proteins) * 4
-      total_cal += (dose.ingredient.fats) * 8
+      total_cal += (dose.ingredient.fats) * 9
       total_cal += (dose.ingredient.carbs) * 4
     end
     total_cal
@@ -69,4 +75,8 @@ class MealsController < ApplicationController
     params.require(:meal).permit(:name, :start_time)
   end
 
+
+   def dose_params
+    params.require(:dose).permit(:quantity, :ingredient_id, :meal_id)
+  end
 end

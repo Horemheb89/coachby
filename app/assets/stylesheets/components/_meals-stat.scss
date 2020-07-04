@@ -1,0 +1,85 @@
+
+.meal-stat {
+  display: flex;
+  justify-content: space-around;
+  min-height: 300px;
+}
+
+.graph {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.nutri-table{
+  margin-top: 12px;
+  text-align:center;
+  width: 70%;
+
+  table {
+    border:3px solid #6495ed;
+    width:70%;
+  }
+
+  thead, tfoot {
+    background-color:#D0E3FA;
+    border:1px solid #6495ed;
+  }
+
+  tbody {
+    background-color:#FFFFFF;
+    border:1px solid #6495ed;
+  }
+
+  th {
+    font-family:monospace;
+    border:1px dotted #6495ed;
+    padding:5px;
+    background-color:#EFF6FF;
+    width: 200px;
+  }
+
+  td {
+    font-family:sans-serif;
+    font-size:80%;
+    border:1px solid #6495ed;
+    padding:5px;
+  }
+
+  .cell-total {
+    background-color: #EFF6FF;
+  }
+}
+
+
+.nutri-table-meal {
+  text-align:center;
+  width:70%;
+
+  thead, tfoot {
+    background-color:#D0E3FA;
+    border:3px solid #6495ed;
+  }
+
+  tbody {
+    background-color:#FFFFFF;
+    border:3px solid #6495ed;
+  }
+
+  th {
+    font-family:monospace;
+    background-color:#EFF6FF;
+    width: 200px;
+    background-color:#FFFFFF;
+  }
+
+  td {
+    font-family:sans-serif;
+    padding:5px;
+
+  }
+
+  .cell-total {
+    background-color: #EFF6FF;
+  }
+}
