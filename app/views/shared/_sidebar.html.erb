@@ -11,6 +11,20 @@
         <p class="sidebar-item">Athletes</p>
       <% end %>
 
+      <% if @contract != nil %>
+        <div class="sidebar-athlete">
+          <%= link_to new_contract_program_path(@contract) do %>
+            <p class="sidebar-item">Create Program</p>
+          <% end %>
+          <%= link_to "/" do %>
+            <p class="sidebar-item">Exercice</p>
+          <% end %>
+          <%= link_to contract_program_path(@contract) do %>
+            <p class="sidebar-item">Diet</p>
+          <% end %>
+        </div>
+      <% end %>
+
     </div>
 
   </div>

@@ -16,6 +16,11 @@
   background-color: $black;
 }
 
+.sidebar-athlete {
+  border-top: solid 1px $gray;
+  padding: 1.5rem 0rem;
+}
+
 // Links
 .sidebar-links {
   display: flex;
