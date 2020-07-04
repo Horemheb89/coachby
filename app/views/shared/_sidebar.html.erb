@@ -3,26 +3,51 @@
 
     <div class="sidebar-links">
 
-      <%= link_to "/" do %>
-        <p class="sidebar-item">Dashboard</p>
+      <!-- Coach -->
+      <% if current_user.is_coach %>
+
+        <%= link_to contracts_path do %>
+          <p class="sidebar-item">Athletes</p>
+        <% end %>
+
+        <%= link_to new_contract_path do %>
+          <p class="sidebar-item">Add Athlete</p>
+        <% end %>
+
+
+        <% if @contract != nil && @contract.id != nil %>
+          <div class="sidebar-athlete">
+            <p><%= @contract.athlete.first_name.capitalize %></p>
+            <%= link_to new_contract_program_path(@contract) do %>
+              <p class="sidebar-item">Create Program</p>
+            <% end %>
+            <%= link_to "/" do %>
+              <p class="sidebar-item">Exercice</p>
+            <% end %>
+            <%= link_to contract_program_path(@contract) do %>
+              <p class="sidebar-item">Diet</p>
+            <% end %>
+          </div>
+        <% end %>
+
       <% end %>
 
-      <%= link_to contracts_path do %>
-        <p class="sidebar-item">Athletes</p>
-      <% end %>
+      <!-- Athlete -->
+      <% if !current_user.is_coach %>
+        <%= link_to dashboard_path do %>
+          <p class="sidebar-item">Profile</p>
+        <% end %>
 
-      <% if @contract != nil %>
-        <div class="sidebar-athlete">
-          <%= link_to new_contract_program_path(@contract) do %>
-            <p class="sidebar-item">Create Program</p>
-          <% end %>
+        <% if @contract != nil && @contract.id != nil %>
+
           <%= link_to "/" do %>
             <p class="sidebar-item">Exercice</p>
           <% end %>
           <%= link_to contract_program_path(@contract) do %>
             <p class="sidebar-item">Diet</p>
           <% end %>
-        </div>
+
+        <% end %>
       <% end %>
 
     </div>
