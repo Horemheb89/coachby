@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :contracts, only: [:index, :show]
   resources :programs, only: [:index, :show]
 
-  get "contract/:id/index_clients", to: "programs#index_clients", as: "dashboard"
+  get "contract/:id/index_clients", to: "programs#index_clients"
 
 
 end
