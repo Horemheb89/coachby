@@ -12,7 +12,11 @@
   <% @contracts.each do |contract| %>
     <div>
       <%= link_to contract_path(contract) do %>
-        <p><%= contract.athlete.first_name %></p>
+        <div class="card-contract">
+          <% n = rand(1..5) %>
+          <%= image_tag "avatar_athlete_#{n}" %>
+          <p><%= contract.athlete.first_name %></p>
+        </div>
       <% end %>
     </div>
   <% end %>
