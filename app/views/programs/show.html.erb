@@ -1,3 +1,5 @@
+<h1>Program of the day</h3>
+<h3>Meals</h3>
 
 <p> You have to eat :</p>
 
@@ -8,4 +10,15 @@
 
 <%= link_to "add a meal", new_program_meal_path(@program) %>
 
+<h3>Exercises</h3>
+
+<%= week_calendar number_of_weeks: 1, events: @sessions do |date, sessions| %>
+    <% sessions.each do |session| %>
+    <div class = "session-list">
+      <ul>
+        <li> <%= date %> <%= session.id %> </li>
+      </ul>
+    </div>
+    <% end %>
+  <% end %>
 
