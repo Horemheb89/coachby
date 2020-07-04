@@ -5,7 +5,7 @@
 <%  if @user.is_coach %>
   <h2 class="greeting"> Welcome to your profile, <%= @user.first_name.capitalize %> ! </h1>
 <%  else %>
-  <h class="greeting"> <%= @user.first_name.capitalize %> ! </h1>
+  <h1 class="greeting"> <%= @user.first_name.capitalize %> ! </h1>
   <h2 class="sub-greeting"> Your coach is <%= @user.first_name.capitalize %> </h2>
 <%  end %>
 
