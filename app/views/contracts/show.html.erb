@@ -19,14 +19,14 @@
 <h1><%= @contract.athlete.first_name.capitalize %>'s exercise plan </h1>
 
 <h2> show program exercise toplines </h2>
-
-  <%= link_to "Detailed Exercise Plan", "/contracts/:contract_id/programs/:id/session" %>
-
+  <% @contract.programs.each do |program| %>
+  <%= link_to "Detailed Exercise Plan", program_sessions_path(program) %>
+  <% end %>
 <h1><%= @contract.athlete.first_name.capitalize %>'s diet plan </h1>
 
 <h2> Daily targets: show targets </h2>
 
-  <%= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
+  <%#= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
 
           <%= link_to "create program", new_contract_program_path(@contract) %>
 

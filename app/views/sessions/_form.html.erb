@@ -1,5 +1,5 @@
 <%= simple_form_for([@program, @session]) do |f| %>
-  <%= f.input :date %>
+  <%= f.input :start_time %>
   <h3>Exercises</h3>
   <div id='exercises'>
     <%= f.simple_fields_for :exercises do |exercise| %>
