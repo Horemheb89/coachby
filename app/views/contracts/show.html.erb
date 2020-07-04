@@ -35,4 +35,15 @@
   <%= link_to "create program", new_contract_program_path(@contract) %>
   <%= link_to "test", dashboard_path %>
 
+<h1><%= @contract.athlete.first_name.capitalize %>'s diet plan </h1>
+
+<h2> Daily targets: show targets </h2>
+
+  <%= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
+
+          <%= link_to "create program", new_contract_program_path(@contract) %>
+
+
+<%= link_to "see program", index_clients_path(@contract) %>
+
 </div>
