@@ -26,12 +26,14 @@
       <%= render 'shared/sidebar' %>
       <div class="sidebar-content">
 
-        <div class="container">
+        <!-- Add containers inside your view html.erb file -->
+        <!-- <div class="container"> -->
           <%= yield %>
-        </div>
+        <!-- </div> -->
 
       </div>
     </div>
     <%= javascript_include_tag "application" %>
+    <%= render 'shared/footer' %>
   </body>
 </html>

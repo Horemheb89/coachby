@@ -1,30 +1,17 @@
-<h1>#DASHBOARD</h1>
+<h1>PAGES#DASHBOARD</h1>
 
-<h1>My Profile</h1>
+<h1 class="greeting"> Welcome to your profile, athlete <span> <%= @user.first_name.capitalize %> </span> ! </h1>
 
-<%  if @user.is_coach %>
-  <h2 class="greeting"> Welcome to your profile, <%= @user.first_name.capitalize %> ! </h1>
-<%  else %>
-  <h class="greeting"> <%= @user.first_name.capitalize %> ! </h1>
-  <h2 class="sub-greeting"> Your coach is <%= @user.first_name.capitalize %> </h2>
-<%  end %>
-
-<h1><%= @user.first_name.capitalize %>'s information </h1>
-
-<h2> Age: (calculate from DoB)</h2>
-
-<h2> Height: <%= @user.height %> 180cm </h2>
-
-<h2> Weight: <%= @user.weight %> 80kg </h2>
-
-
-<h2> show program exercise toplines </h2>
-
-  <%= link_to "Detailed Exercise Plan", "/contracts/:contract_id/programs/:id/session" %>
-
-<h1><%= @user.first_name.capitalize %>'s diet plan </h1>
-
-<h2> Daily targets: show targets </h2>
-
-  <%= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
-form to update" %>
+<div class="athlete-card">
+  <img class="avatar-large" alt="avatar-large" src="https://images.unsplash.com/photo-1552933529-e359b2477252?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" />
+  <div class="athlete-card-infos">
+    <h2 class="athlete-name"> <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %> </h2>
+    <h2> Coach: <%= @user.coach.first_name.capitalize %> </h2>
+    <h3> Height: 160 cm </h3>
+    <h3> Weight: 160 cm </h3>
+    <h3> Email address: <%= @user.email %> </h3>
+    <h2> My program: </h2>
+    <h3> <%= link_to "My Exercise Plan", "/contracts/:contract_id/programs/:id/session" %> </h3>
+    <h3> <%= link_to "My Diet Plan", "/contracts/:contract_id/programs/:id" %> </h3>
+  </div>
+</div>
