@@ -1,20 +1,81 @@
 .card-contract {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
+  //Source for CSS: https://codepen.io/thejamespower/pen/OVNYLL?editors=0100
 
+  //Variable to size the avatar and button
+  $height: 80px;
+
+  //Content - Wrapper
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 8px;
   background-color: $white;
-  p {
-    margin: 0px;
-    padding: 8px 0px;
+
+  //Content - Left Side
+
+  .card-contract-info {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0px;
+      padding: 0px 24px;
+    }
+
+    img {
+      width: $height;
+      height: $height;
+      object-fit: cover;
+    }
   }
-  img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    //background-position: center;
-    //background-repeat: no-repeat;
-    //background-size: cover;
-    //position: relative;
+
+  //Content - Right Side
+
+  .card-contract-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $height;
+    height: $height;
+    background-color: $black;
+
+    position: relative;
+    overflow:hidden;
+    transition: .3s;
+
+    p {
+      margin: 0px;
+      color: $white;
+      z-index: 1;
+    }
+
+    &:after {
+      position: absolute;
+      transition: .3s;
+      content: '';
+      width: 0;
+      left: -20%;
+      bottom: 0;
+      height: 120%;
+      background: $red;
+      transform: skewX(15deg);
+    }
   }
+
+  //Behaviour
+
+  &:hover .card-contract-btn {
+    cursor: pointer;
+
+    &:after {
+      //width: 100%;
+      //left: 0;
+      left: -20%;
+      width: 150%;
+    }
+  }
+
 }

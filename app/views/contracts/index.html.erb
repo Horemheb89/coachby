@@ -13,9 +13,14 @@
     <div>
       <%= link_to contract_path(contract) do %>
         <div class="card-contract">
-          <% n = rand(1..5) %>
-          <%= image_tag "avatar_athlete_#{n}" %>
-          <p><%= contract.athlete.first_name %></p>
+          <div class="card-contract-info">
+            <% n = rand(1..5) %>
+            <%= image_tag "avatar_athlete_#{n}" %>
+            <p><%= contract.athlete.first_name %></p>
+          </div>
+          <div class="card-contract-btn">
+            <p><%= icon('fas', 'chevron-right') %></p>
+          </div>
         </div>
       <% end %>
     </div>
