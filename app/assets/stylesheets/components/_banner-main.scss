@@ -1,0 +1,16 @@
+.banner-main {
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(asset-path("banner_main_image.jpg"));
+  padding: 80px 0px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  h1 {
+    color: $white;
+  }
+  p {
+    color: $white;
+  }
+}
