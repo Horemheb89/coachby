@@ -4,14 +4,14 @@
   //Variable to size the avatar and button
   $height: 80px;
 
-  //Content - Wrapper
-
+  //Card
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   margin-bottom: 8px;
   background-color: $white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
 
   //Content - Left Side
 
@@ -44,7 +44,7 @@
 
     position: relative;
     overflow:hidden;
-    transition: .3s;
+    transition: .4s;
 
     p {
       margin: 0px;
@@ -54,7 +54,7 @@
 
     &:after {
       position: absolute;
-      transition: .3s;
+      transition: .4s;
       content: '';
       width: 0;
       left: -20%;
