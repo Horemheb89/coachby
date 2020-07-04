@@ -16,16 +16,17 @@ class SessionsController < ApplicationController
 
   def create
     @program = Program.find(params[:program_id])
+
     @session = Session.new(session_params)
     @session.program = @program
     if @session.save
-      redirect_to program_sessions_path(@program)
+      redirect_to program_path(@program)
     end
   end
 
   private
 
   def session_params
-    params.require(:session).permit(:date, :start_time)
+    params.require(:session).permit(:date, :start_time, exercises_attributes: [:id, :name, :rounds, :reps, :weight, :rest_time, :_destroy])
   end
 end
