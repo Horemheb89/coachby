@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'pages#dashboard'
 
   resources :contracts, only: [:new, :create] do
-    resources :programs, only: [:new, :create,:index, :show] do
-    end
+    resources :programs, only: [:new, :create]
   end
 
   resources :programs, only: [] do
