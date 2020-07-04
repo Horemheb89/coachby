@@ -2,10 +2,12 @@ class IngredientsController < ApplicationController
 
   def new
     @ingredient = Ingredient.new
+    authorize @ingredient
   end
 
   def create
     @ingredient = Ingredient.new(ingredient_params)
+    authorize @ingredient
     if @ingredient.save
       redirect_to ingredient_path(@ingredient)
     end
@@ -14,6 +16,7 @@ class IngredientsController < ApplicationController
 
   def index
     @ingredient = Ingredient.new
+    authorize @ingredient
     if params[:query].present?
       @ingredients = Ingredient.where("name ILIKE ?", "%#{params[:query]}%")
     else
@@ -23,6 +26,7 @@ class IngredientsController < ApplicationController
 
   def show
     @ingredient = Ingredient.find(params[:id])
+    authorize @ingredient
     @macros = ["Protein", @ingredient.proteins], ["Fats", @ingredient.fats], ["Carbs", @ingredient.carbs]
   end
 

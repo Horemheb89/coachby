@@ -32,6 +32,9 @@ gem 'roo-xls'
 gem 'creek'
 gem 'devise'
 gem 'faker'
+gem 'pundit'
+
+gem "cocoon"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -1,0 +1,39 @@
+.athlete-card {
+  overflow: hidden;
+  height: 320px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.athlete-card img {
+  height: 240px;
+  width: 240px;
+  object-fit: cover;
+  padding-left: 8px;
+}
+
+.athlete-card h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.athlete-card .athlete-name {
+  text-decoration: underline;
+  font-size: 32px;
+  padding-bottom: 8px;
+}
+
+.athlete-card h3 {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.athlete-card .athlete-card-infos {
+  padding: 16px;
+}

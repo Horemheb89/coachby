@@ -4,10 +4,12 @@ class ContractsController < ApplicationController
 
   def new
     @contract = Contract.new
+    authorize @contract
   end
 
   def create
     @contract = Contract.new(params_contract)
+    authorize @contract
     @contract.coach = current_user
     if @contract.save
       redirect_to contracts_path(@contract)
@@ -16,10 +18,11 @@ class ContractsController < ApplicationController
 
   def index
     @user = current_user
-    @contracts = Contract.where(coach_id: @user.id)
+    @contracts = policy_scope(Contract)
   end
 
   def show
+    authorize @contract
   end
 
   private
