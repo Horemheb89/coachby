@@ -5,7 +5,9 @@
     <h2 id="logo">COACH<span class="red-text">BY</span></h2>
   <% end %>
   <% if user_signed_in? %>
-    <p class="red-text m-0 pl-2"><%= current_user.first_name %></p>
+    <% if current_user.is_coach %>
+      <p class="red-text m-0 pl-2"><%= current_user.first_name %></p>
+    <% end %>
   <% end %>
 </div>
 
@@ -26,43 +28,20 @@
       </li>
 
       <% if user_signed_in? %>
-        <% if current_user.is_coach %>
-          <li class="nav-item active">
-            <%= link_to "My athletes", "/contracts", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Add an athlete", "/contracts/new", class: "nav-link" %>
-          </li>
           <li class="nav-item">
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= image_tag "avatar_coach.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "My exercises", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "My diet plan", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "My profile", dashboard_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= image_tag "coach_avatar", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          </li>
-        <% end %>
+
       <% else %>
         <li class="nav-item">
           <%= link_to "Login", "/users/sign_in", class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "/users/sign_up", class: "nav-link" do %>
-            <strong>Join</strong>
+            <strong>Sign up</strong>
           <% end %>
         </li>
       <% end %>

@@ -3,4 +3,5 @@ class Ingredient < ApplicationRecord
   has_many :meals, through: :doses
 
   validates :proteins, :fats, :carbs, presence: true
+
 end
