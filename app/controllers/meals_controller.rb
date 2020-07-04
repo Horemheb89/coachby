@@ -2,6 +2,7 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
+    authorize @meal
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
   end
@@ -10,6 +11,7 @@ class MealsController < ApplicationController
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
     @meal = Meal.new(meal_params)
+    authorize @meal
     @meal.program = @program
     date = params["meal"]["start_time"]
     if @meal.save
@@ -18,11 +20,11 @@ class MealsController < ApplicationController
   end
 
   def index
-    @meals = Meal.all
+    @meals = policy_scope(Meal)
       if params["date"]
-        @meals_date = Meal.where(start_time: params["date"])
+        @meals_date = @meals.where(start_time: params["date"])
       else
-        @meals_date = Meal.all
+        @meals_date = @meals.all
       end
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:program_id])
@@ -42,6 +44,7 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
+    authorize @meal
     @total_cal = calorie(@meal)
     @dose = Dose.new
     @macro_meal = macro(@meal)

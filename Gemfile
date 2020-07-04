@@ -32,6 +32,7 @@ gem 'roo-xls'
 gem 'creek'
 gem 'devise'
 gem 'faker'
+gem 'pundit'
 
 gem "cocoon"
 

@@ -2,10 +2,12 @@ class ExercisesController < ApplicationController
 
   def new
     @exercise = Exercise.new
+    authorize @exercise
   end
 
   def create
     @exercise = Exercise.new(exercise_params)
+    authorize @exercise
     if @exercise.save
       redirect_to program_sessions_path(@exercise)
     end

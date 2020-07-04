@@ -1,17 +1,39 @@
-<h1>PAGES#DASHBOARD</h1>
-
-<h1 class="greeting"> Welcome to your profile, athlete <span> <%= @user.first_name.capitalize %> </span> ! </h1>
-
-<div class="athlete-card">
-  <img class="avatar-large" alt="avatar-large" src="https://images.unsplash.com/photo-1552933529-e359b2477252?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" />
-  <div class="athlete-card-infos">
-    <h2 class="athlete-name"> <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %> </h2>
-    <h2> Coach: <%= @user.coach.first_name.capitalize %> </h2>
-    <h3> Height: 160 cm </h3>
-    <h3> Weight: 160 cm </h3>
-    <h3> Email address: <%= @user.email %> </h3>
-    <h2> My program: </h2>
-    <h3> <%= link_to "My Exercise Plan", "/contracts/:contract_id/programs/:id/session" %> </h3>
-    <h3> <%= link_to "My Diet Plan", "/contracts/:contract_id/programs/:id" %> </h3>
+<div class="banner-main">
+  <div class="container">
+    <h1><%= @user.first_name.capitalize %>'s profile</h1>
+    <p>Manage your information</p>
   </div>
+</div>
+
+<div class="container">
+
+  <h1 class="greeting"> Welcome to your profile, athlete <span> <%= @user.first_name.capitalize %> </span> ! </h1>
+
+  <div class="athlete-card">
+    <img class="avatar-large" alt="avatar-large" src="https://images.unsplash.com/photo-1552933529-e359b2477252?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" />
+    <div class="athlete-card-infos">
+      <h2 class="athlete-name"> <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %> </h2>
+      <% if @contract %>
+        <h2> Coach: <%= @contract.coach.first_name.capitalize %> </h2>
+      <% else %>
+        <h2> COACH: No coach yet! </h2>
+      <% end %>
+      <h3> Height: 160 cm </h3>
+      <h3> Weight: 160 cm </h3>
+      <h3> Email address: <%= @user.email %> </h3>
+      <h2> My program: </h2>
+      <h3> <%= link_to "My Exercise Plan", "/contracts/:contract_id/programs/:id/session" %> </h3>
+      <h3> <%= link_to "My Diet Plan", "/contracts/:contract_id/programs/:id" %> </h3>
+    </div>
+  </div>
+
+  <% if @contract %>
+    <div class="simple-coach-card">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <div class="simple-coach-card-infos">
+        <h2>Coach <%= @contract.coach.first_name.capitalize %> </h2>
+        <p>Contact <%= @contract.coach.first_name.capitalize %></p>
+      </div>
+    </div>
+  <% end %>
 </div>
