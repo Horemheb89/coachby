@@ -53,17 +53,17 @@ coach_data.each do |member|
     contract = Contract.new(coach_id: coach.id, athlete_id:athlete.id)
     puts "Contract created (#{athlete.first_name} and #{coach.first_name})." if contract.save
   end
+
+# Creating main Athlete and assign for each coach
+  usain = User.new(email: "usain@athlete.com",
+                  password: "123456",
+                  is_coach: false,
+                  last_name: "Bolt",
+                  first_name: "Usain")
+  puts "\n🥇 Athlete Created - #{usain.first_name} | email: #{usain.email} | password: #{usain.password}" if usain.save
+  contract = Contract.new(coach_id: coach.id, athlete_id:usain.id)
+  print " ◽️ Contract created (#{usain.first_name} and #{coach.first_name})." if contract.save
 end
-
-# Creating main Athlete
-
-athlete = User.new(email: "usain@athlete.com",
-                password: "123456",
-                is_coach: false,
-                last_name: "Bolt",
-                first_name: "Usain")
-puts "\n🥇 Athlete Created - #{athlete.first_name} | email: #{athlete.email} | password: #{athlete.password}" if athlete.save
-
 
 # Creating random Athletes without contracts
 
