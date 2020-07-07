@@ -1,1 +1,46 @@
-// Specific CSS for your home-page
+.banner-landing {
+  background-image: linear-gradient(rgba(0,0,0,0.9), rgba(40,0,0,0.8)), url(asset-path("banner_landing_image.jpg"));
+
+  padding: 200px 0px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  text-align: center;
+
+  h1 {
+    color: $white;
+    font-weight: 400;
+    font-size: 60px;
+    letter-spacing: 0.4em;
+  }
+
+  h2 {
+    color: $white;
+  }
+
+  p {
+    color: $gray;
+  }
+
+  .banner-landing-btn {
+    display: flex;
+    justify-content: center;
+
+    p {
+      padding: 24px 56px;
+      margin: 8px 0px 0px 0px;
+      color: $white;
+      background-color: $red;
+      transition: .8s;
+
+      &:hover {
+      background-color: $black;
+      transition: .0s;
+      }
+    }
+
+  }
+}
