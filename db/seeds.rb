@@ -43,13 +43,6 @@ puts "\n🌱 Seeding Starts 🌱"
 #   end
 # end
 
-
-
-
-
-
-
-
 coach_data = [{
   email: "hugo@coachby.com",
   last_name: "Bottois",
@@ -79,12 +72,18 @@ coach_data.each do |member|
 
   # Creating random Athletes for each Coach
 
+weight = [55,80,90,100,70,80]
+height = [180,155,160,170,170,175]
+
   rand(2..5).times do
     athlete = User.new(email: Faker::Internet.email,
                     password: "123456",
                     is_coach: false,
                     last_name: Faker::Name.last_name,
-                    first_name: Faker::Name.first_name )
+                    first_name: Faker::Name.first_name,
+                    weight: weight.sample,
+                    height: height.sample,
+                    dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'))
     print " ◽️  Athlete created - #{athlete.first_name}. " if athlete.save
 
     # Creating Contracts for each Coach
@@ -98,7 +97,7 @@ coach_data.each do |member|
     name_meals = ["petit-dejeuner" ,"dejeuner" ,"gouter" ,"diner"]
 
     d = Date.today
-    10.times do
+    30.times do
       d += 1
       name_meals.each do |name_meal|
         mealday = Meal.new(name: name_meal,
