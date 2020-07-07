@@ -45,10 +45,6 @@
                 ((dose.quantity * dose.ingredient.fats)/100) * 9 +
                 ((dose.quantity * dose.ingredient.carbs)*4)/100) %> </td>
 
-                <% sum_p += ((dose.quantity * dose.ingredient.proteins)/100).round  %>
-                <% sum_l += ((dose.quantity * dose.ingredient.fats)/100).round %>
-                <% sum_c += ((dose.quantity * dose.ingredient.carbs)/100).round   %>
-
                 <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100) * 4 +
                               ((dose.quantity * dose.ingredient.fats)/100) * 9 +
                               ((dose.quantity * dose.ingredient.carbs)/100) * 4)  %>
@@ -57,9 +53,9 @@
                   <tr>
                     <td> Totaux:  </td>
                     <td> <%=  %> </td>
-                    <td class = "cell-total"> <%= sum_p %> </td>
-                    <td class = "cell-total"> <%= sum_l %> </td>
-                    <td class = "cell-total"> <%= sum_c %> </td>
+                    <td class = "cell-total"> <%= meal.proteins %> </td>
+                    <td class = "cell-total"> <%= meal.fats %> </td>
+                    <td class = "cell-total"> <%= meal.carbs %> </td>
                     <td class = "cell-total"> <%= sum_cal %> </td>
                     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
                   </tr>
@@ -126,4 +122,4 @@
   <% end %>
 <% end %>
 
-<%= column_chart @meal_type %>
+<%= column_chart @meal_type, ytitle: "Calories"%>
