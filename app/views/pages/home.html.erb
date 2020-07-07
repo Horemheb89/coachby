@@ -1,2 +1,26 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner-landing">
+  <div class="container">
+    <div class="category-padding">
+      <h1>COACH<span class="red-text">BY</span></h1>
+      <p>Helping over 15 000 trainers and atheles connect.</p>
+    </div>
+    <h2>TRAIN BETTER. <span class="red-text">BE GREATER.</span></h2>
+    <% if user_signed_in? %>
+      <p>Welcome back <%= current_user.first_name %>.</p>
+    <% else %>
+      <%= link_to "/users/sign_up", class: "banner-landing-btn" do %>
+        <p>SIGN UP</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="category-padding">
+    <h1>THIS IS COACH<span class="red-text">BY</span></h1>
+    <h3>Our vision</h3>
+    <p>We believe good communication is what makes athletes perform to their true potential. We are committed to making performance technology available to athletes at all levels. </p>
+    <h3>Our product</h3>
+    <p>CoachBy streamlines the management and communication of performance information. Our platform centralises athlete’s data and allows trainers to create custom programs for them.</p>
+  </div>
+</div>
