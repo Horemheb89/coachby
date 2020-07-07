@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def index
     @program = Program.find(params[:program_id])
-    @sessions = policy_scope(Session)
+    @sessions = policy_scope(Session).includes(:exercises)
   end
 
   def show
