@@ -8,17 +8,18 @@
 <div class="container">
   <h2>Sessions </h2>
     <div class="row">
-      <% @sessions.each do |session| %>
-        <div class="col-12 card-session mb-3" style="max-width: 18rem;">
-          <div class="card-header"> <h3><%= session.start_time %> session</h3></div>
-            <div class="card-body">
-              <h5 class="card-title">Exercises</h5>
+        <% @sessions.each do |session| %>
+        <div class="card-product">
+        <img src="https://lmimirror3pvr.azureedge.net/static/media/1769/a871b582-b5ee-4585-9115-81a3ae2f099d/ww_32-288x288_reebok_lesmills_ss16_d3_bodypump_02_053-1_f1.jpg" />
+          <div class="card-product-infos">
+            <h2><%= session.start_time %> session</h2>
               <% session.exercises.each do |exercise| %>
               <p class="card-text"> <%= exercise.name %></p>
               <% end %>
-            </div>
-        </div>
+          </div>
       <% end %>
+      </div>
     </div>
 </div>
+
 
