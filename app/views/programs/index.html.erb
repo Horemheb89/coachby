@@ -3,4 +3,5 @@
 
 <% @programs.each do |program| %>
   <%= program %>
+  <%= link_to "Program show", program_path(program) %>
 <% end %>
