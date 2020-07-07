@@ -39,7 +39,6 @@ class MealsController < ApplicationController
 
     # create a new dose for a meal in index
     @dose = Dose.new
-
   end
 
   def show
