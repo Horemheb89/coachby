@@ -33,11 +33,11 @@
       padding: 24px 56px;
       margin: 8px 0px 0px 0px;
       color: $white;
-      background-color: $black;
+      background-color: $red;
       transition: .8s;
 
       &:hover {
-      background-color: $red;
+      background-color: $black;
       transition: .0s;
       }
     }
