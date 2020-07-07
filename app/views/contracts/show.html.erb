@@ -24,26 +24,24 @@
       <h3> Age: 30 </h3>
       <h3> Email address: <%= @contract.athlete.email %> </h3>
       <h2> <%= @contract.athlete.first_name.capitalize %>'s program: </h2>
-      <h3> <%= link_to "Detailed Exercise Plan", "/contracts/:contract_id/programs/:id/session" %> </h3>
-      <h3> <%= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %> </h3>
+      <h3> <%= link_to "See Programs", programs_path %> </h3>
     </div>
   </div>
 
 
 
 
-  <%= link_to "create program", new_contract_program_path(@contract) %>
-  <%= link_to "test", dashboard_path %>
+  <%#= link_to "create program", new_contract_program_path(@contract) %>
 
-<h1><%= @contract.athlete.first_name.capitalize %>'s diet plan </h1>
+// <h1><%#= @contract.athlete.first_name.capitalize %>'s diet plan </h1>
 
 <h2> Daily targets: show targets </h2>
 
-  <%= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
+  <%#= link_to "Detailed Diet Plan", "/contracts/:contract_id/programs/:id" %>
 
           <%= link_to "create program", new_contract_program_path(@contract) %>
 
 
-<%= link_to "see program", index_clients_path(@contract) %>
+<%#= link_to "see program", index_clients_path(@contract) %>
 
 </div>

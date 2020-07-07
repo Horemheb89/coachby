@@ -8,7 +8,7 @@
 <p> <%= @program.fats_target%> g fats/day </p>
 
 
-<%= link_to "add a meal", new_program_meal_path(@program) %>
+<%= link_to "see meals", program_meals_path(@program) %>
 
 <h3>Exercises</h3>
 
@@ -21,4 +21,6 @@
     </div>
     <% end %>
   <% end %>
+
+<%= link_to "see exercises", program_sessions_path(@program) %>
 
