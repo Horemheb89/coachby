@@ -2,6 +2,10 @@
 
 
 <% @programs.each do |program| %>
-  <%= program %>
+  <ul>
+    <li>
+      <%= link_to "see meals", program_meals_path(program) %>
+    </li>
+  </ul>
   <%= link_to "Program show", program_path(program) %>
 <% end %>

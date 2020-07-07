@@ -20,14 +20,14 @@ class MealsController < ApplicationController
   end
 
   def index
-    @meals = policy_scope(Meal)
+    @program = Program.find(params[:program_id])
+    @meals = policy_scope(Meal).where(program_id: @program.id)
       if params["date"]
         @meals_date = @meals.where(start_time: params["date"])
       else
-        @meals_date = @meals.all
+        @meals_date = @meals
       end
     # @contract = Contract.find(params[:contract_id])
-    @program = Program.find(params[:program_id])
     @labels = ["protein", "lipid", "carbs"]
     # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
     # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
@@ -39,7 +39,6 @@ class MealsController < ApplicationController
 
     # create a new dose for a meal in index
     @dose = Dose.new
-
   end
 
   def show
