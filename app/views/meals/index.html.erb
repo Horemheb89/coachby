@@ -5,11 +5,11 @@
     <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
       <span class = "datedays"> <%= link_to date.strftime("%m/%d/%Y"), program_meals_path(@program, date: date) %> </span>
       <% meals.each do |meal| %>
-      <div class = "meal-list">
-        <ul>
-          <li> <%= link_to meal.name, program_meal_path(@program, meal) %> </li>
-        </ul>
-      </div>
+        <div class = "meal-list">
+          <ul>
+            <li> <%= link_to meal.name, program_meal_path(@program, meal) %> </li>
+          </ul>
+        </div>
       <% end %>
     <% end %>
 
