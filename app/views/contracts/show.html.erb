@@ -15,7 +15,8 @@
   <%  end %>
 
   <div class="athlete-card">
-    <img class="avatar-large" alt="avatar-large" src="/assets/avatar_athlete_1.jpg">
+    <!-- <img class="avatar-large" alt="avatar-large" src="/assets/avatar_athlete_1.jpg"> -->
+    <%= image_tag "avatar_athlete_1.jpg", class: "avatar-large" %>
     <div class="athlete-card-infos">
       <h2 class="athlete-name"> <%= @contract.athlete.first_name.capitalize %> <%= @contract.athlete.last_name.capitalize %> </h2>
       <h2> Coach: <%= @contract.coach.first_name.capitalize %> </h2>
