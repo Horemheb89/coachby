@@ -3,7 +3,7 @@
 Dose.destroy_all
 User.destroy_all
 Contract.destroy_all
-#Ingredient.destroy_all
+Ingredient.destroy_all
 Meal.destroy_all
 Dose.destroy_all
 Program.destroy_all
@@ -12,36 +12,36 @@ Program.destroy_all
 # Seeding Starts
 puts "\n🌱 Seeding Starts 🌱"
 
-# require 'roo'
-# require 'roo-xls'
+require 'roo'
+require 'roo-xls'
 
-# path = 'db/table.xls'
-# xlsx = Roo::Spreadsheet.open path
+path = 'db/table.xls'
+xlsx = Roo::Spreadsheet.open path
 
-# tab = []
+tab = []
 
-# xlsx.each(category: 'alim_ssssgrp_nom_fr',
-#                 name: 'alim_nom_fr',
-#                 proteins: 'Protéines (g/100g)',
-#                 fats: 'Lipides (g/100g)',
-#                 carbs: 'Glucides (g/100g)') do |a|
-#                 # fibre: 'Fibres alimentaires (g/100g)',
-#                 # sel: 'Sel chlorure de sodium (g/100g)')
-#   tab << a
-# end
+xlsx.each(category: 'alim_ssssgrp_nom_fr',
+                name: 'alim_nom_fr',
+                proteins: 'Protéines (g/100g)',
+                fats: 'Lipides (g/100g)',
+                carbs: 'Glucides (g/100g)') do |a|
+                # fibre: 'Fibres alimentaires (g/100g)',
+                # sel: 'Sel chlorure de sodium (g/100g)')
+  tab << a
+end
 
-# tab.each_with_index do |item, index|
-#   if index == 0
-#     puts "columns name"
-#   else
-#     puts item[:name]
-#     Ingredient.create!(name: item[:name],
-#       category: item[:category],
-#       proteins: item[:proteins],
-#       fats: item[:fats],
-#       carbs: item[:carbs])
-#   end
-# end
+tab.each_with_index do |item, index|
+  if index == 0
+    puts "columns name"
+  else
+    puts item[:name]
+    Ingredient.create!(name: item[:name],
+      category: item[:category],
+      proteins: item[:proteins],
+      fats: item[:fats],
+      carbs: item[:carbs])
+  end
+end
 
 coach_data = [{
   email: "hugo@coachby.com",
