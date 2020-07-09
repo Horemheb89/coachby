@@ -3,7 +3,7 @@
 <div class="container-meal">
   <h1> Meal plan </h1>
     <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
-      <%= link_to date.strftime("%m/%d/%Y"), program_meals_path(@program, date: date) %>
+      <span class = "datedays"> <%= link_to date.strftime("%m/%d/%Y"), program_meals_path(@program, date: date) %> </span>
       <% meals.each do |meal| %>
       <div class = "meal-list">
         <ul>
@@ -16,7 +16,7 @@
     <%= render "form", meal: @meal %>
 
   <% @meals_date.each do |meal| %>
-    <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal) %> </h1>
+    <h3> <%=  link_to meal.name.capitalize(),program_meal_path(meal.program_id,meal) %> </h3>
     <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
     <div class = meal-stat>
       <div class = "nutri-table">
@@ -101,12 +101,10 @@
             });
         </script> -->
         <% unless meal.doses.empty?  %>
-          <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
+          <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40, colors: ["#EF4B2A"] %>
         <% end %>
       </div>
     </div>
-
-
   <% end %>
 
 
@@ -121,8 +119,6 @@
       <% @meal_type["diner"] += calorie(meal) %>
     <% end %>
   <% end %>
-
-  <%= column_chart @meal_type, ytitle: "Calories", min: 0 %>
-
+  <%= column_chart @meal_type, ytitle: "Calories", min: 0, colors: ["#EF4B2A"] %>
 </div>
 
