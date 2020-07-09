@@ -1,101 +1,108 @@
-<h1> index program for <%=  %></h1>
+<div class="container-meal">
+  <h1> diet dashboard <%=  %></h1>
 
-<% meal_cal_date = [] %>
-<% meal_prot_date = [] %>
-<% meal_fat_date = [] %>
-<% meal_carb_date = [] %>
+  <% meal_cal_date = [] %>
+  <% meal_prot_date = [] %>
+  <% meal_fat_date = [] %>
+  <% meal_carb_date = [] %>
 
-<% @programs.each do |program| %>
-  <%= link_to program, program_meals_path(program) %>
-  <% program.meals.each do |meal| %>
-   <p> <% meal.name %> <% meal.start_time %>  </p>
-   <p> <% calorie(meal) %> </p>
-   <% meal_cal_date << [meal.start_time, calorie(meal)] %>
-   <% meal_prot_date << [meal.start_time, macro(meal)[0]] %>
-   <% meal_fat_date << [meal.start_time, macro(meal)[1]] %>
-   <% meal_carb_date << [meal.start_time, macro(meal)[2]] %>
+
+  <% @programs.each do |program| %>
+    <%= link_to "See meals", program_meals_path(program) %>
+    <% program.meals.each do |meal| %>
+     <p> <% meal.name %> <% meal.start_time %>  </p>
+     <p> <% calorie(meal) %> </p>
+     <% meal_cal_date << [meal.start_time.strftime("%m/%d/%Y"), calorie(meal)] %>
+     <% meal_prot_date << [meal.start_time.strftime("%m/%d/%Y"), macro(meal)[0]] %>
+     <% meal_fat_date << [meal.start_time.strftime("%m/%d/%Y"), macro(meal)[1]] %>
+     <% meal_carb_date << [meal.start_time.strftime("%m/%d/%Y"), macro(meal)[2]] %>
+    <% end %>
   <% end %>
-<% end %>
 
-<div class = "meal-stat">
-  <%= line_chart meal_cal_date, ytitle: "Calorie" %>
-</div>
+  <div class = "meal-stat">
+    <%= line_chart meal_cal_date, ytitle: "Calorie", width: "800px" %>
+  </div>
 
-<% @programs.each do |program| %>
-  <% program.meals.group_by(&:start_time).each do |day, meals| %>
-    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-      <table class = "nutri-table-meal">
-        <thead>
+    <% line_data = [] %>
+  <% data_p = {} %>
+  <% data_l = {} %>
+  <% data_c = {} %>
+
+  <% @programs.first(1).each do |program| %>
+    <% program.meals.group_by(&:start_time).each do |day, meals| %>
+
+      <% sum_p = 0 %>
+      <% sum_c = 0 %>
+      <% sum_l = 0 %>
+      <% sum_cal = 0 %>
+
+      <% sum_p = meals.map{|meal| meal.proteins}.sum  %>
+      <% sum_l = meals.map{|meal| meal.fats}.sum  %>
+      <% sum_c = meals.map{|meal| meal.carbs}.sum  %>
+
+      <% data_p[day.strftime("%m/%d/%Y")] = sum_p %>
+      <% data_l[day.strftime("%m/%d/%Y")] = sum_l %>
+      <% data_c[day.strftime("%m/%d/%Y")] = sum_c %>
+
+    <% end %>
+      <% line_data << {:name => "protein", :data => data_p } %>
+      <% line_data << {:name => "fats", :data => data_l } %>
+      <% line_data << {:name => "carbs", :data => data_c } %>
+  <% end %>
+
+  <div class = "meal-stat">
+    <%= line_chart line_data, ytitle: "Macro", width: "800px" %>
+  </div>
+
+  <% @programs.each do |program| %>
+    <% program.meals.group_by(&:start_time).each do |day, meals| %>
+      <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+        <table class = "nutri-table-meal">
+          <thead>
+            <tr>
+              <th > Date </th>
+              <th > Protein</th>
+              <th > Lipid</th>
+              <th > Carbs</th>
+              <th > Calories</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% sum_p += meals.map{|meal|  meal.proteins}.sum()  %>
+            <% sum_l += meals.map{|meal|  meal.fats}.sum()  %>
+            <% sum_c += meals.map{|meal| meal.carbs}.sum()  %>
+            <% sum_cal += meals.map{|meal| calorie(meal)}.sum() %>
           <tr>
-            <th > Date </th>
-            <th > Protein</th>
-            <th > Lipid</th>
-            <th > Carbs</th>
-            <th > Calories</th>
+            <td> <%= link_to meals.last.start_time.strftime("%m/%d/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
+            <td class = "cell-total"> <%= sum_p %> </td>
+            <td class = "cell-total"> <%= sum_l %> </td>
+            <td class = "cell-total"> <%= sum_c %> </td>
+            <td class = "cell-total"> <%= sum_cal %> </td>
+            <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
           </tr>
-        </thead>
-        <tbody>
-
-          <% sum_p += meals.map{|meal|  meal.proteins}.sum()  %>
-          <% sum_l += meals.map{|meal|  meal.fats}.sum()  %>
-          <% sum_c += meals.map{|meal| meal.carbs}.sum()  %>
-          <% sum_cal += meals.map{|meal| calorie(meal)}.sum() %>
-        <tr>
-          <td> <%= link_to meals.last.start_time.strftime("%m/%d/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
-          <td class = "cell-total"> <%= sum_p %> </td>
-          <td class = "cell-total"> <%= sum_l %> </td>
-          <td class = "cell-total"> <%= sum_c %> </td>
-          <td class = "cell-total"> <%= sum_cal %> </td>
-          <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    <% end %>
   <% end %>
-<% end %>
 
 
-<!-- [
-  {:name=>"MR", :data=>{day=> sum protein, Wed, 01 Mar 2017=>66, Sat, 01 Apr 2017=>73, Sun, 01 Jan 2017=>44}},
-  {:name=>"CT", :data=>{Wed, 01 Feb 2017=>4, Wed, 01 Mar 2017=>6, Sat, 01 Apr 2017=>8, Sun, 01 Jan 2017=>52}},
-  {:name=>"XR", :data=>{Wed, 01 Mar 2017=>1}},
-]
- -->
-
-
-<% line_data = [] %>
-<% data_p = {} %>
-<% data_l = {} %>
-<% data_c = {} %>
-
-<% @programs.first(1).each do |program| %>
-  <% program.meals.group_by(&:start_time).each do |day, meals| %>
-
-    <% sum_p = 0 %>
-    <% sum_c = 0 %>
-    <% sum_l = 0 %>
-    <% sum_cal = 0 %>
-
-    <% sum_p = meals.map{|meal| meal.proteins}.sum  %>
-    <% sum_l = meals.map{|meal| meal.fats}.sum  %>
-    <% sum_c = meals.map{|meal| meal.carbs}.sum  %>
-
-    <% data_p[day.strftime("%m/%d/%Y")] = sum_p %>
-    <% data_l[day.strftime("%m/%d/%Y")] = sum_l %>
-    <% data_c[day.strftime("%m/%d/%Y")] = sum_c %>
-
-  <% end %>
-    <% line_data << {:name => "protein", :data => data_p } %>
-    <% line_data << {:name => "fats", :data => data_l } %>
-    <% line_data << {:name => "carbs", :data => data_c } %>
-<% end %>
-
-<%= line_chart line_data, ytitle: "Macro" %>
+  <!-- [
+    {:name=>"MR", :data=>{day=> sum protein, Wed, 01 Mar 2017=>66, Sat, 01 Apr 2017=>73, Sun, 01 Jan 2017=>44}},
+    {:name=>"CT", :data=>{Wed, 01 Feb 2017=>4, Wed, 01 Mar 2017=>6, Sat, 01 Apr 2017=>8, Sun, 01 Jan 2017=>52}},
+    {:name=>"XR", :data=>{Wed, 01 Mar 2017=>1}},
+  ]
+   -->
 
 
 
-<!-- better with activerecords request ? -->
-<!--  <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("(carbs*4)+(proteins*4)+(fats*9)"), ytitle: "Calorie" %>
- <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("proteins"), ytitle: "proteins" %>
- <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("fats"), ytitle: "fats" %>
- <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("carbs"), ytitle: "carbs" %>
- -->
+
+
+
+  <!-- better with activerecords request ? -->
+  <!--  <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("(carbs*4)+(proteins*4)+(fats*9)"), ytitle: "Calorie" %>
+   <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("proteins"), ytitle: "proteins" %>
+   <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("fats"), ytitle: "fats" %>
+   <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("carbs"), ytitle: "carbs" %>
+   -->
+</div>
