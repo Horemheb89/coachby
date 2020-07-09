@@ -1,35 +1,15 @@
-.form-inline-stat {
+
+.line-stat-from {
   display: flex;
   align-items: center;
 }
 
-.form-inline-stat label {
-  margin: 5px 10px 5px 0;
-}
-
-.form-inline-stat input {
-  vertical-align: middle;
-  margin: 5px 10px 5px 0;
-  padding: 10px;
-  background-color: #fff;
+.my-button {
+  margin: 0;
+  padding: 5px 10px;
+  background-color: dodgerblue;
   border: 1px solid #ddd;
+  color: white;
 }
 
-// .form-inline-stat button {
-//   padding: 10px 20px;
-//   border: 1px solid #ddd;
-//   color: white;
-// }
 
-
-
-@media (max-width: 800px) {
-  .form-inline-stat input {
-    margin: 10px 0;
-  }
-
-  .form-inline-stat {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}

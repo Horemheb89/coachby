@@ -1,4 +1,13 @@
 
+.container-meal {
+   padding-right: 15px;
+    padding-left: 15px;
+
+    /* Et on centre */
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .meal-stat {
   display: flex;
   justify-content: space-around;
@@ -9,6 +18,7 @@
   display: flex;
   justify-content: space-around;
   margin: auto;
+  width: 200px;
 }
 
 .nutri-table{
