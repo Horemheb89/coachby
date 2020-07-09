@@ -1,11 +1,11 @@
 
 
-<%= simple_form_for [meal, dose] do |f| %>
-  <div class="form-inline-stat">
-      <%= f.input :quantity %>
-      <%= f.association :ingredient, :collection => Ingredient.all %>
-      <%= f.button :submit, class: 'main-btn ' %>
-  </div>
-<% end %>
+  <%= simple_form_for [meal, dose] do |f| %>
+<div class="line-stat-from">
+        <%= f.input :quantity %>
+        <%= f.input :ingredient, :collection => Ingredient.all %>
+        <%= f.button :submit, class: 'my-button' %>
+</div>
+  <% end %>
 
 

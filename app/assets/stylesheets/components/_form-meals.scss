@@ -1,35 +1,9 @@
-.form-inline-stat {
+
+.line-stat-from {
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 
-.form-inline-stat label {
-  margin: 5px 10px 5px 0;
-}
-
-.form-inline-stat input {
-  vertical-align: middle;
-  margin: 5px 10px 5px 0;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-
-// .form-inline-stat button {
-//   padding: 10px 20px;
-//   border: 1px solid #ddd;
-//   color: white;
-// }
 
 
-
-@media (max-width: 800px) {
-  .form-inline-stat input {
-    margin: 10px 0;
-  }
-
-  .form-inline-stat {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}

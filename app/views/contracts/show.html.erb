@@ -26,6 +26,7 @@
       <!-- <h2> <%= @contract.athlete.first_name.capitalize %>'s program: </h2> -->
     </div>
   </div>
+
   <div class="redirect_links">
     <h3> <%= link_to "See #{@contract.athlete.first_name.capitalize}'s Program", programs_path %> </h3>
     <h3> <%= link_to "Create program for #{@contract.athlete.first_name.capitalize}", new_contract_program_path(@contract) %> </h3>

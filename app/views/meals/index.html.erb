@@ -1,129 +1,124 @@
 
-<h1> index meal </h1>
 
+<div class="container-meal">
+  <h1> Meal plan </h1>
+    <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
+      <span class = "datedays"> <%= link_to date.strftime("%m/%d/%Y"), program_meals_path(@program, date: date) %> </span>
+      <% meals.each do |meal| %>
+        <div class = "meal-list">
+          <ul>
+            <li> <%= link_to meal.name, program_meal_path(@program, meal) %> </li>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
 
-  <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
-    <%= link_to date.strftime("%m/%d/%Y"), program_meals_path(@program, date: date) %>
-    <% meals.each do |meal| %>
-    <div class = "meal-list">
-      <ul>
-        <li> <%= link_to meal.name, program_meal_path(@program, meal) %> </li>
-      </ul>
+    <%= render "form", meal: @meal %>
+
+  <% @meals_date.each do |meal| %>
+    <h3> <%=  link_to meal.name.capitalize(),program_meal_path(meal.program_id,meal) %> </h3>
+    <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
+    <div class = meal-stat>
+      <div class = "nutri-table">
+          <table>
+            <thead>
+                <tr>
+                  <th > Quantité</th>
+                  <th > Ingrédient</th>
+                  <th > Protein</th>
+                  <th > Lipid</th>
+                  <th > Carbs</th>
+                  <th > Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+              <% meal.doses.each do |dose| %>
+                <tr>
+                  <td> <%= dose.quantity %> </td>
+                  <td> <%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> </td>
+                  <td> <%= ((dose.quantity * dose.ingredient.proteins)/100).round   %> </td>
+                  <td> <%= ((dose.quantity * dose.ingredient.fats)/100).round  %> </td>
+                  <td> <%= ((dose.quantity * dose.ingredient.carbs)/100).round  %> </td>
+
+                  <td> <%= (((dose.quantity * dose.ingredient.proteins)/100)*4 +
+                  ((dose.quantity * dose.ingredient.fats)/100) * 9 +
+                  ((dose.quantity * dose.ingredient.carbs)*4)/100) %> </td>
+
+                  <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100) * 4 +
+                                ((dose.quantity * dose.ingredient.fats)/100) * 9 +
+                                ((dose.quantity * dose.ingredient.carbs)/100) * 4)  %>
+                </tr>
+                <% if meal.doses.last == dose %>
+                    <tr>
+                      <td> Totaux:  </td>
+                      <td> <%=  %> </td>
+                      <td class = "cell-total"> <%= meal.proteins %> </td>
+                      <td class = "cell-total"> <%= meal.fats %> </td>
+                      <td class = "cell-total"> <%= meal.carbs %> </td>
+                      <td class = "cell-total"> <%= sum_cal %> </td>
+                      <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+                    </tr>
+                  <% end %>
+              <% end %>
+            </tbody>
+        </table>
+          <%= render "doses/form", meal: meal, dose: @dose %>
+      </div>
+      <div class = "graph">
+        <!-- <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+          let ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%= @labels.to_json.html_safe %>,
+                    datasets: [{
+                        label: '# of Macro',
+                        data: <%= macro(meal).to_json.html_safe %>,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script> -->
+        <% unless meal.doses.empty?  %>
+          <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40, colors: ["#EF4B2A"] %>
+        <% end %>
+      </div>
     </div>
+  <% end %>
+
+
+  <% @meals_date.map do |meal| %>
+    <% if meal.name.downcase ==  "petit-dejeuner" %>
+      <% @meal_type["petit-dejeuner"] += calorie(meal) %>
+    <% elsif meal.name.downcase == "dejeuner" %>
+      <% @meal_type["dejeuner"] += calorie(meal) %>
+    <% elsif meal.name.downcase == "gouter" %>
+      <% @meal_type["gouter"] += calorie(meal) %>
+    <% elsif meal.name.downcase == "diner" %>
+      <% @meal_type["diner"] += calorie(meal) %>
     <% end %>
   <% end %>
+  <%= column_chart @meal_type, ytitle: "Calories", min: 0, colors: ["#EF4B2A"] %>
+</div>
 
-  <%= render "form", meal: @meal %>
-
-<% @meals_date.each do |meal| %>
-  <h1> <%=  link_to meal.name,program_meal_path(meal.program_id,meal) %> </h1>
-  <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
-  <div class = meal-stat>
-    <div class = "nutri-table">
-        <table>
-          <thead>
-              <tr>
-                <th > Quantité</th>
-                <th > Ingrédient</th>
-                <th > Protein</th>
-                <th > Lipid</th>
-                <th > Carbs</th>
-                <th > Calories</th>
-              </tr>
-          </thead>
-          <tbody>
-            <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-            <% meal.doses.each do |dose| %>
-              <tr>
-                <td> <%= dose.quantity %> </td>
-                <td> <%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> </td>
-                <td> <%= ((dose.quantity * dose.ingredient.proteins)/100).round   %> </td>
-                <td> <%= ((dose.quantity * dose.ingredient.fats)/100).round  %> </td>
-                <td> <%= ((dose.quantity * dose.ingredient.carbs)/100).round  %> </td>
-
-                <td> <%= (((dose.quantity * dose.ingredient.proteins)/100)*4 +
-                ((dose.quantity * dose.ingredient.fats)/100) * 9 +
-                ((dose.quantity * dose.ingredient.carbs)*4)/100) %> </td>
-
-                <% sum_p += ((dose.quantity * dose.ingredient.proteins)/100).round  %>
-                <% sum_l += ((dose.quantity * dose.ingredient.fats)/100).round %>
-                <% sum_c += ((dose.quantity * dose.ingredient.carbs)/100).round   %>
-
-                <% sum_cal += (((dose.quantity * dose.ingredient.proteins)/100) * 4 +
-                              ((dose.quantity * dose.ingredient.fats)/100) * 9 +
-                              ((dose.quantity * dose.ingredient.carbs)/100) * 4)  %>
-              </tr>
-              <% if meal.doses.last == dose %>
-                  <tr>
-                    <td> Totaux:  </td>
-                    <td> <%=  %> </td>
-                    <td class = "cell-total"> <%= sum_p %> </td>
-                    <td class = "cell-total"> <%= sum_l %> </td>
-                    <td class = "cell-total"> <%= sum_c %> </td>
-                    <td class = "cell-total"> <%= sum_cal %> </td>
-                    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-                  </tr>
-                <% end %>
-            <% end %>
-          </tbody>
-      </table>
-        <%= render "doses/form", meal: meal, dose: @dose %>
-    </div>
-    <div class = "graph">
-      <!-- <canvas id="myChart" width="400" height="400"></canvas>
-      <script>
-        let ctx = document.getElementById('myChart').getContext('2d');
-          new Chart(ctx, {
-              type: 'bar',
-              data: {
-                  labels: <%= @labels.to_json.html_safe %>,
-                  datasets: [{
-                      label: '# of Macro',
-                      data: <%= macro(meal).to_json.html_safe %>,
-                      backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)'
-                      ],
-                      borderColor: [
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)'
-                      ],
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                  scales: {
-                      yAxes: [{
-                          ticks: {
-                              beginAtZero: true
-                          }
-                      }]
-                  }
-              }
-          });
-      </script> -->
-      <% unless meal.doses.empty?  %>
-        <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40 %>
-      <% end %>
-    </div>
-  </div>
-
-
-<% end %>
-
-
-<% @meals_date.map do |meal| %>
-  <% if meal.name.downcase ==  "petit-dejeuner" %>
-    <% @meal_type["petit-dejeuner"] += calorie(meal) %>
-  <% elsif meal.name.downcase == "dejeuner" %>
-    <% @meal_type["dejeuner"] += calorie(meal) %>
-  <% elsif meal.name.downcase == "gouter" %>
-    <% @meal_type["gouter"] += calorie(meal) %>
-  <% elsif meal.name.downcase == "diner" %>
-    <% @meal_type["diner"] += calorie(meal) %>
-  <% end %>
-<% end %>
-
-<%= column_chart @meal_type %>
