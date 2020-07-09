@@ -28,11 +28,11 @@ class ProgramsController < ApplicationController
   end
 
   def index_clients
+    skip_authorization
     @meals = Meal.all
     @contract = Contract.find(params[:id])
-    @programs = policy_scope(Program).where(contract_id: @contract)
+    @programs = Program.where(contract: @contract)
   end
-
 
   private
 
@@ -40,5 +40,3 @@ class ProgramsController < ApplicationController
     params.require(:program).permit(:proteins_target, :fats_target, :carbs_target, :contract_id)
   end
 end
-
-

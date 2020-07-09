@@ -15,13 +15,13 @@
   <%  end %>
 
   <div class="athlete-card">
-    <img class="avatar-large" alt="avatar-large" src="">
+    <img class="avatar-large" alt="avatar-large" src="/assets/avatar_athlete_1.jpg">
     <div class="athlete-card-infos">
       <h2 class="athlete-name"> <%= @contract.athlete.first_name.capitalize %> <%= @contract.athlete.last_name.capitalize %> </h2>
       <h2> Coach: <%= @contract.coach.first_name.capitalize %> </h2>
-      <h3> Height: 160 cm </h3>
-      <h3> Weight: 160 cm </h3>
-      <h3> Age: 30 </h3>
+      <h3> Height: <%= @contract.athlete.height %> cm </h3>
+      <h3> Weight: <%= @contract.athlete.height %> kg </h3>
+      <h3> Date of Birth: <%= @contract.athlete.dob %> </h3>
       <h3> Email address: <%= @contract.athlete.email %> </h3>
       <!-- <h2> <%= @contract.athlete.first_name.capitalize %>'s program: </h2> -->
     </div>

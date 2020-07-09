@@ -16,8 +16,4 @@ class ProgramPolicy < ApplicationPolicy
   def index?
     true
   end
-
-  def index_clients?
-    true
-  end
 end
