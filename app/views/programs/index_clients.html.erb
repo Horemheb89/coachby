@@ -1,7 +1,7 @@
 <div class="container-meal">
   <h1> diet dashboard <%=  %></h1>
 
-  <%= cal_ref = 0 %>
+  <% cal_ref = 0 %>
   <% data_cal = {} %>
   <% data_cal_ref = {} %>
   <% line_data_cal = [] %>
@@ -22,7 +22,7 @@
   <% end %>
 
   <div class = "meal-graph">
-    <%= line_chart line_data_cal, ytitle: "Calorie", width: "800px" %>
+    <%= line_chart line_data_cal, ytitle: "Calorie", width: "1420px" %>
   </div>
 
 
@@ -61,15 +61,18 @@
       <% data_c_ref[day.strftime("%m/%d/%Y")] = program.carbs_target %>
 
     <% end %>
+    <div>
       <% line_data_p << {:name => "protein", :data => data_p } %>
       <% line_data_p << {:name => "proteins_target", :data => data_p_ref } %>
-
+    </div>
+    <div>
       <% line_data_f << {:name => "fats", :data => data_l } %>
       <% line_data_f << {:name => "fats_target", :data => data_l_ref } %>
-
+    </div>
+    <div>
       <% line_data_c << {:name => "carbs", :data => data_c } %>
       <% line_data_c << {:name => "carbs_target", :data => data_c_ref } %>
-
+    </div>
   <% end %>
 
   <div class = "meal-graph_macro">
