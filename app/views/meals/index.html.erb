@@ -83,11 +83,11 @@
         </table>
           <%= render "doses/form", meal: meal, dose: @dose %>
       </div>
+
       <div class = "graph">
-        <!-- <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id= "<%= "myChart#{meal.name}"%>" width="400" height="400"></canvas>
         <script>
-          let ctx = document.getElementById('myChart').getContext('2d');
-            new Chart(ctx, {
+            new Chart(document.getElementById("<%= "myChart#{meal.name}"%>").getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: <%= @labels.to_json.html_safe %>,
@@ -117,10 +117,10 @@
                     }
                 }
             });
-        </script> -->
-        <% unless meal.doses.empty?  %>
+        </script>
+   <!--      <% unless meal.doses.empty?  %>
           <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40, colors: ["#EF4B2A"] %>
-        <% end %>
+        <% end %> -->
       </div>
     </div>
   <% end %>
