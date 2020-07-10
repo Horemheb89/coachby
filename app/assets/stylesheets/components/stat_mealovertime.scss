@@ -43,6 +43,14 @@
 }
 
 
-.meal-stat {
+.meal-graph {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.meal-graph_macro {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom:30px;
 }
