@@ -13,6 +13,24 @@
       <% end %>
     <% end %>
 
+
+    <div class="macro_card">
+      <div class = "macro">
+        <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> g</h2>
+        <p> Protein </p>
+        <div>
+        </div>
+      </div>
+      <div class = "macro">
+        <h2> <%=   @meals_date.map { |meal| meal.fats}.sum() %> g</h2>
+        <p> Fats </p>
+      </div>
+      <div class = "macro">
+        <h2> <%=   @meals_date.map { |meal| meal.carbs}.sum() %> g</h2>
+        <p> Carbs </p>
+      </div>
+    </div>
+
     <%= render "form", meal: @meal %>
 
   <% @meals_date.each do |meal| %>
