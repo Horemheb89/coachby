@@ -43,6 +43,19 @@
 }
 
 
-.meal-stat {
+.meal-graph {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.meal-graph_macro {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom:30px;
+}
+
+.meal-graph_macro div {
+  background-color: white;
 }
