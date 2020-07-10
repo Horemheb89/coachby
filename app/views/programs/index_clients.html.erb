@@ -99,9 +99,8 @@
           <% col_fats = pickcolor(meals.map{|meal| meal.fats}.sum(), program.fats_target) %>
           <% col_carbs = pickcolor(meals.map{|meal| meal.carbs}.sum(), program.carbs_target) %>
           <% col_calorie = pickcolor(meals.map{|meal| calorie(meal)}.sum(), program.calorie_target) %>
-
             <tr>
-              <td> <%= link_to meals.last.start_time.strftime("%m/%d/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
+              <td> <%= link_to meals.last.start_time.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
               <td style="background-color: <%= col_protein %>" > <%= meals.map{|meal| meal.proteins}.sum() %> </td>
               <td style="background-color: <%= col_fats %>" > <%= meals.map{|meal| meal.fats}.sum() %> </td>
               <td style="background-color: <%= col_carbs %>" > <%= meals.map{|meal| meal.carbs}.sum() %> </td>
