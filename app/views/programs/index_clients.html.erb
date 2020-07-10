@@ -13,9 +13,9 @@
      <p> <% meal.name %> <% meal.start_time %>  </p>
      <p> <% calorie(meal) %> </p>
      <% meal_cal_date << [meal.start_time.strftime("%m/%d/%Y"), calorie(meal)] %>
-     <% meal_prot_date << [meal.start_time.strftime("%m/%d/%Y"), macro(meal)[0]] %>
-     <% meal_fat_date << [meal.start_time.strftime("%m/%d/%Y"), macro(meal)[1]] %>
-     <% meal_carb_date << [meal.start_time.strftime("%m/%d/%Y"), macro(meal)[2]] %>
+     <% meal_prot_date << [meal.start_time.strftime("%m/%d/%Y"), meal.proteins] %>
+     <% meal_fat_date << [meal.start_time.strftime("%m/%d/%Y"), meal.fats] %>
+     <% meal_carb_date << [meal.start_time.strftime("%m/%d/%Y"), meal.carbs] %>
     <% end %>
   <% end %>
 
@@ -69,8 +69,8 @@
           </thead>
           <tbody>
 
-            <% sum_p += meals.map{|meal|  meal.proteins}.sum()  %>
-            <% sum_l += meals.map{|meal|  meal.fats}.sum()  %>
+            <% sum_p += meals.map{|meal| meal.proteins}.sum()  %>
+            <% sum_l += meals.map{|meal| meal.fats}.sum()  %>
             <% sum_c += meals.map{|meal| meal.carbs}.sum()  %>
             <% sum_cal += meals.map{|meal| calorie(meal)}.sum() %>
           <tr>
