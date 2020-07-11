@@ -23,3 +23,7 @@ $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
 // Override other variables below!
+.tooltip .tooltip-inner {
+  padding: 8px;
+  background-color: $black;
+}

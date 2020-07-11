@@ -7,7 +7,7 @@
       <% if current_user.is_coach %>
 
         <%= link_to contracts_path do %>
-          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="All Athletes">
+          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
             <%= icon('fas', 'list') %>
           </p>
         <% end %>
@@ -35,7 +35,7 @@
               </p>
             <% end %>
             <%= link_to index_clients_path(contract) do %>
-              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Dashboard">
+              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Diet Dashboard">
                 <%= icon('fas', 'utensils') %>
               </p>
             <% end %>
