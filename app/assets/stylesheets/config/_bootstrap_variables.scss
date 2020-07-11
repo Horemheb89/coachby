@@ -27,3 +27,21 @@ $border-radius-sm: 2px;
   padding: 8px;
   background-color: $black;
 }
+
+.nav-pills {
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 24px 0px;
+
+  background-color: $black;
+}
+
+.nav-link {
+  margin: 0px;
+  color: $gray;
+  &:hover {
+    background-color: $dark-black;
+  }
+}
