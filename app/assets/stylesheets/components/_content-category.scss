@@ -3,7 +3,7 @@
 }
 
 .category-content {
-  padding: 32px 0px;
+  //padding: 32px 0px;
   //position: relative;
   //overflow: hidden;
 
@@ -18,11 +18,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
 
     padding: 40px;
 
-    p {
-      color: $gray;
-    }
   }
 }
