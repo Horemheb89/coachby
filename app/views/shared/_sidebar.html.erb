@@ -7,7 +7,10 @@
       <% if current_user.is_coach %>
 
         <%= link_to contracts_path do %>
-          <p class="sidebar-item"><%= icon('fas', 'list') %></p>
+          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
+            <%= icon('fas', 'list') %>
+            <!-- <span class="sidebar-item-text">Athletes</span> -->
+          </p>
         <% end %>
 
         <%= link_to new_contract_path do %>
@@ -22,6 +25,7 @@
           <% contract = @contract %>
         <% end %>
 
+        <!-- If the contract exist display the icons below -->
         <% if contract != nil %>
           <div class="sidebar-athlete">
             <%= link_to contract_path(contract) do %>

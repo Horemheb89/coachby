@@ -36,7 +36,19 @@
 .sidebar-item {
   padding: 0px 0px 8px 0px;
   color: $gray;
+
   &:hover{
     color: $light-gray;
+  }
+
+  .sidebar-item-text {
+    visibility: hidden;
+    position: absolute;
+    //z-index: 1;
+    //left: 105%;
+  }
+
+  &:hover .sidebar-item-text {
+    visibility: visible;
   }
 }
