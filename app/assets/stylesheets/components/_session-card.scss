@@ -1,0 +1,37 @@
+.session-card {
+  //Source for CSS: https://codepen.io/thejamespower/pen/OVNYLL?editors=0100
+
+  //Variable to size the avatar and button
+
+  //Card
+  display: flex;
+
+
+  margin-bottom: 8px;
+  background-color: $white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+}
+
+  //Content - Left Side
+
+.session-card-date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.session-card-date h3 {
+  font-size: 16px;
+  padding-left: 30px;
+}
+
+
+  img {
+    width: 80px;
+    height: 80px;
+    //object-fit: cover;
+  }
+
+  .session-card-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
