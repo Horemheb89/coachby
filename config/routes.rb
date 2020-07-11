@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :programs, only: [] do
-    resources :meals, only: [:new, :create, :index,:show]
+    resources :meals, only: [:new, :create, :index, :show]
   end
 
   resources :programs, only: [] do
@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   resources :programs, only: [:index, :show]
 
   get "contract/:id/index_clients", to: "programs#index_clients", as: "index_clients"
-
+  get "contract/:id/index", to: "programs#index", as: "index"
 
 end
