@@ -2,13 +2,13 @@
 <div class="banner-main">
   <div class="container">
     <h1>Athletes</h1>
-    <p>Manage your <%= @contracts.count %> contract(s).</p>
+    <p>Manage your <%= @contracts.count %> athlete(s).</p>
   </div>
 </div>
 
+<!-- List of all contracts -->
 <div class="container">
 
-  <!-- List of all contracts -->
   <div class="category-padding">
     <% @contracts.each do |contract| %>
         <%= link_to contract_path(contract) do %>
@@ -26,10 +26,32 @@
     <% end %>
   </div>
 
-  <!-- Create a new contract -->
-  <h3>Getting Started</h3>
-  <p>Need to add a new contract? Congratulations!</p>
-  <%= link_to "ADD ATHLETE", new_contract_path %>
+</div>
 
 
+<!-- Create a new contract -->
+<div class="white-background">
+  <div class="container">
+
+    <div class="category-padding">
+      <div class="category-content category-content-picture-right">
+        <div class="row">
+
+          <div class="col-12 col-xl-6">
+            <%= image_tag "banner_content_2.jpg" %>
+          </div>
+
+          <div class="col-12 col-xl-6 category-content-text">
+            <h3>Getting Started</h3>
+            <p>Need to add a new contract? Congratulations!</p>
+            <%= link_to new_contract_path, class: "btn-main" do %>
+              <p>ADD ATHLETE</p>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
