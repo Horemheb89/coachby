@@ -3,10 +3,14 @@ class SessionsController < ApplicationController
   def index
     @program = Program.find(params[:program_id])
     @sessions = policy_scope(Session).includes(:exercises)
+    #@sessions = Session.where(program_id: @program)
   end
 
   def show
-    authorize @session
+    @session = Session.find(params[:id])
+    @sessions = policy_scope(Session).includes(:exercises)
+    authorize @sessions
+    @exercises = Exercise.where(session: @session)
   end
 
   def new

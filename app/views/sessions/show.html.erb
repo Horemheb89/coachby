@@ -1,0 +1,33 @@
+<div class="banner-main">
+  <div class="container">
+    <h1>Sessions#show</h1>
+    <p>Exercises Details <i class="fas fa-quidditch"></i></p>
+  </div>
+</div>
+
+<%# raise %>
+
+<div class="container">
+  <% @exercises.each do |exercise| %>
+    <%#= session.created_at %>
+      <%# session.exercises.each do |exercise| %>
+        <%= exercise.name %>
+        <%= exercise.rounds %>
+        <%#= exercise.reps %>
+        <%#= exercise.weight %>
+        <%#= exercise.rest_time %>
+    <%# end %>
+  <% end %>
+
+  <button class="my-button">  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
+</div>
+
+<%# @sessions.each do |session| %>
+    <%#= session.start_time %>
+      <%# session.exercises.each do |exercise| %>
+        <%#= exercise.name %>
+        <%#= exercise.rounds %>
+        <%#= exercise.reps %>
+        <%#= exercise.weight %>
+        <%#= exercise.rest_time %>
+    <%# end %>

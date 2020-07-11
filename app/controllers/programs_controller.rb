@@ -25,6 +25,9 @@ class ProgramsController < ApplicationController
 
   def index
     @programs = policy_scope(Program)
+    @meals = Meal.all
+    @contract = Contract.find(params[:id])
+    @programs = Program.where(contract: @contract)
   end
 
   def index_clients

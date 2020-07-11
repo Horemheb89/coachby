@@ -45,3 +45,7 @@ document.addEventListener('turbolinks:load', () => {
   initProgressbarcarb()
   initProgressbarcalorie()
 });
+
+document.addEventListener("turbolinks:load", () => {
+  $('[data-toggle="tooltip"]').tooltip();
+});

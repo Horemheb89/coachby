@@ -10,7 +10,7 @@
 // Main Classes
 .sidebar {
   flex-shrink: 0;
-  width: 176px;
+  width: 64px;
   height: 100vh;
 
   position: -webkit-sticky;
@@ -20,22 +20,36 @@
   background-color: $black;
 }
 
-.sidebar-athlete {
-  border-top: solid 1px $gray;
-  padding: 1.5rem 0rem;
+.sidebar-category {
+  border-top: solid 1px $dark-gray;
+  padding: 1.5rem 0rem 0rem 0rem;
+  margin: 1.5rem 0rem 0rem 0rem;;
 }
 
 // Links
 .sidebar-links {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 1.5rem 1.5rem;
 }
 
 .sidebar-item {
   padding: 0px 0px 8px 0px;
   color: $gray;
+
   &:hover{
     color: $light-gray;
+  }
+
+  .sidebar-item-text {
+    visibility: hidden;
+    position: absolute;
+    //z-index: 1;
+    //left: 105%;
+  }
+
+  &:hover .sidebar-item-text {
+    visibility: visible;
   }
 }

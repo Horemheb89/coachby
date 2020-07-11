@@ -1,12 +1,48 @@
-<h1> index program </h1>
+<div class="banner-main">
+  <div class="container">
+    <h1><%= @contract.athlete.first_name.capitalize %>'s program</h1>
+  </div>
+</div>
 
+<div class="container">
 
-<% @programs.each do |program| %>
-  <ul>
-    <li>
-      <%= link_to "see meals", program_meals_path(program) %>
-    </li>
-  </ul>
-  <%= link_to "Program show", program_path(program) %>
-<% end %>
+  <h2> current program </h2>
+
+  <div class="container">
+
+    <div class="card-padding">
+      <div class="container card-index">
+      <% @programs.each do |program| %>
+        <div class="card-program-index">
+          <div class="card-program-index-info">
+            <% n = rand(1..4) %>
+            <%= image_tag "workout_#{n}.jpg" %>
+            <div class="d-flex flex-column">
+              <p>Your next workout is scheduled for: program.session.date </p>
+              <p><%= link_to "See exercise program", program_path(program) %></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-program-index">
+          <div class="card-program-index-info">
+            <% n = rand(1..4) %>
+            <%= image_tag "food_#{n}.jpg" %>
+            <div class="d-flex flex-column program-info">
+              <p><u>Daily targets: </u></p>
+              <ul>
+                <li><p>Proteins: <%= program.proteins_target %> g</p></li>
+                <li><p>Fats: <%= program.fats_target %> g</p></li>
+                <li><p>Carbs: <%= program.carbs_target %> g</p></li>
+              </ul>
+              <p><%= link_to "Go to diet plan", program_meals_path(program) %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h2> previous programs </h2>
+
+</div>
 
