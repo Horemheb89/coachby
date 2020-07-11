@@ -16,7 +16,7 @@
     <% sessions.each do |session| %>
     <div class = "session-list">
       <ul>
-        <li> <%= date %> <%= session.id %> </li>
+        <li> <%= link_to date, program_session_path(@program, session) %> </li>
       </ul>
     </div>
     <% end %>

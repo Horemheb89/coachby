@@ -1,7 +1,7 @@
 <div class="banner-main">
   <div class="container">
     <h1>Sessions#show</h1>
-    <p>Exercises Details <i class="fas fa-quidditch"></i></p>
+    <p>Exercises Details</p>
   </div>
 </div>
 
@@ -9,17 +9,40 @@
 
 <div class="container">
   <% @exercises.each do |exercise| %>
-    <%#= session.created_at %>
-      <%# session.exercises.each do |exercise| %>
+    <div class="exercise-container">
+      <div class="exercise-arrow">
+        <i class="fas fa-arrow-right" style="font-size: 2.5em;"></i>
+      </div>
+      <div class="exercice-row">
+        <i class="fas fa-meteor"></i>
+        <p>exercise name</p>
         <%= exercise.name %>
+      </div>
+      <div class="exercice-row">
+        <i class="fas fa-plus"></i>
+        <p>rounds</p>
         <%= exercise.rounds %>
-        <%#= exercise.reps %>
-        <%#= exercise.weight %>
-        <%#= exercise.rest_time %>
-    <%# end %>
+      </div>
+      <div class="exercice-row">
+        <i class="fas fa-redo-alt"></i>
+        <p>reps</p>
+        <%= exercise.reps %>
+      </div>
+      <div class="exercice-row">
+        <i class="fas fa-balance-scale"></i>
+        <p>weight</p>
+        <%= exercise.weight %>
+      </div>
+      <div class="exercice-row">
+        <i class="far fa-hourglass"></i>
+        <p>rest time</p>
+        <%= exercise.rest_time %>
+      </div>
+    </div>
   <% end %>
 
-  <button class="my-button">  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
+
+  <button>  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
 </div>
 
 <%# @sessions.each do |session| %>
