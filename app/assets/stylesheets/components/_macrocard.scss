@@ -2,11 +2,10 @@
 
 .macro_card {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 40px;
 }
-
 
 .macro {
   text-align: center;
@@ -17,7 +16,22 @@
   height: 150px;
   padding-top: 20px;
 
+  span {
+    color: "#303030";
+  }
+
+  h2 {
+    text-transform: lowercase;
+  }
+
   p {
     margin:0;
+    font-size: 18px;
+  }
+
+  div {
+    margin-top:10px;
+    display:flex;
+    justify-content: center;
   }
 }
