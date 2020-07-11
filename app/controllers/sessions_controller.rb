@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def show
+    @session = Session.find(params[:program_id])
     authorize @session
   end
 
