@@ -14,6 +14,7 @@ class SessionPolicy < ApplicationPolicy
   end
 
   def index?
-    user.coach
+    #user.coach
+    true
   end
 end
