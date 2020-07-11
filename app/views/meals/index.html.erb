@@ -18,16 +18,24 @@
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> g</h2>
         <p> Protein </p>
-        <div>
-        </div>
+        <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
+        <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
+        <p> <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> / <%= @program.proteins_target %> </p>
       </div>
+
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.fats}.sum() %> g</h2>
         <p> Fats </p>
+        <% ratio_fat = (@meals_date.map { |meal| meal.fats}.sum())/@program.fats_target.to_f %>
+        <div id = "fat-bar" data-macro= <%= ratio_fat > 1 ? 1 : ratio_fat %> ></div>
+        <p> <%= (@meals_date.map { |meal| meal.fats}.sum()) %> / <%= @program.fats_target %> </p>
       </div>
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.carbs}.sum() %> g</h2>
         <p> Carbs </p>
+        <% ratio_carb = (@meals_date.map { |meal| meal.carbs}.sum())/@program.carbs_target.to_f %>
+        <div id = "carb-bar" data-macro= <%= ratio_carb %> ></div>
+        <p> <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> / <%= @program.carbs_target %> </p>
       </div>
     </div>
 
@@ -85,24 +93,24 @@
       </div>
 
       <div class = "graph">
-        <canvas id= "<%= "myChart#{meal.name}"%>" width="400" height="400"></canvas>
+        <canvas id= "<%= "myChart#{meal.name}"%>" width="800" height="800"></canvas>
         <script>
             new Chart(document.getElementById("<%= "myChart#{meal.name}"%>").getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: <%= @labels.to_json.html_safe %>,
                     datasets: [{
-                        label: '# of Macro',
+                        label: "Macro",
                         data: <%= macro(meal).to_json.html_safe %>,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)'
+                            'rgba(251, 19, 0, 0.6)',
+                            'rgba(251, 240, 0, 0.6)',
+                            'rgba(0, 221, 251, 0.6)'
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)'
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 0.6)',
                         ],
                         borderWidth: 1
                     }]

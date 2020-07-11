@@ -1,8 +1,8 @@
 class DosesController < ApplicationController
   def new
     @meal = Meal.find(params[:meal_id])
-    @dose = Dose.new
     authorize @dose
+    @dose = Dose.new
   end
 
   def create
