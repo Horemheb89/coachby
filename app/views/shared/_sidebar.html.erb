@@ -45,7 +45,7 @@
             </li>
           <% end %>
 
-          <%= link_to programs_path do %>
+          <%= link_to index_path(contract) do %>
             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Programs">
               <p class="nav-link" href="#"><%= icon('fas', 'calendar') %></p>
             </li>
