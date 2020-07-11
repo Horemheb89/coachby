@@ -54,10 +54,28 @@ const initProgressbarcarb = () => {
 }
 
 
+const initProgressbarcalorie = () => {
+  let calorie = document.getElementById("carb-cal")
 
+  let circle = new ProgressBar.Circle(calorie, {
+    strokeWidth: 4,
+    easing: 'easeInOut',
+    duration: 1400,
+    color: '#00dcfa',
+    trailColor: '#eee',
+    trailWidth: 4,
+    svgStyle: {width: '40%', height: '40%'},
+
+
+
+  });
+
+
+  circle.animate(calorie.dataset.macro);  // Number from 0.0 to 1.0
+}
 
 // export default initProgressbarpro;
 // export default initProgressbarfat;
 // export default initProgressbarcarb;
 
-export { initProgressbarpro, initProgressbarfat, initProgressbarcarb };
+export { initProgressbarpro, initProgressbarfat, initProgressbarcarb, initProgressbarcalorie };

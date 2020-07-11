@@ -33,7 +33,7 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
-import { initProgressbarpro, initProgressbarfat, initProgressbarcarb } from "../plugins/progressbar.js"
+import { initProgressbarpro, initProgressbarfat, initProgressbarcarb, initProgressbarcalorie } from "../plugins/progressbar.js"
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -43,4 +43,5 @@ document.addEventListener('turbolinks:load', () => {
   initProgressbarpro()
   initProgressbarfat()
   initProgressbarcarb()
+  initProgressbarcalorie()
 });

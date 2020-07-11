@@ -1,20 +1,4 @@
 
-.container-meal {
-   padding-right: 15px;
-    padding-left: 15px;
-
-    /* Et on centre */
-    margin-right: auto;
-    margin-left: auto;
-
-    h1 {
-      color: $red;
-    }
-
-    h3 {
-      margin-top: 16px;
-    }
-}
 
 .meal-stat {
   display: flex;
@@ -37,7 +21,7 @@
 
   table {
     border:2px solid black;
-    width:70%;
+    width:100%;
     color: black;
   }
 
