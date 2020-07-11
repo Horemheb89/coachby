@@ -18,8 +18,9 @@
           </p>
         <% end %>
 
-        <!-- Find the contract -->
+        <!-- Find the contract and program -->
         <% if @program !=nil && @program.id != nil %>
+          <% program = @program %>
           <% contract = @program.contract %>
         <% end %>
         <% if @contract != nil && @contract.id != nil %>
