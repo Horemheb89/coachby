@@ -10,11 +10,11 @@
 .macro {
   text-align: center;
   background-color: white;
-  border: 1px solid grey;
   border-radius: 5px;
   width: 250px;
   height: 150px;
   padding-top: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 
   span {
     color: "#303030";

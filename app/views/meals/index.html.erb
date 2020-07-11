@@ -65,8 +65,8 @@
           <table>
             <thead>
                 <tr>
-                  <th > Quantité</th>
                   <th > Ingrédient</th>
+                  <th > Quantité</th>
                   <th > Protein</th>
                   <th > Lipid</th>
                   <th > Carbs</th>
@@ -77,8 +77,8 @@
               <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
               <% meal.doses.each do |dose| %>
                 <tr>
-                  <td> <%= dose.quantity %> </td>
                   <td> <%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> </td>
+                  <td> <%= dose.quantity %> </td>
                   <td> <%= ((dose.quantity * dose.ingredient.proteins)/100).round   %> </td>
                   <td> <%= ((dose.quantity * dose.ingredient.fats)/100).round  %> </td>
                   <td> <%= ((dose.quantity * dose.ingredient.carbs)/100).round  %> </td>
@@ -109,7 +109,7 @@
       </div>
 
       <div class = "graph">
-        <canvas id= "<%= "myChart#{meal.name}"%>" width="800" height="800"></canvas>
+        <canvas id= "<%= "myChart#{meal.name}"%>" width="600" height="600"></canvas>
         <script>
             new Chart(document.getElementById("<%= "myChart#{meal.name}"%>").getContext('2d'), {
                 type: 'bar',
@@ -161,7 +161,42 @@
       <% @meal_type["diner"] += calorie(meal) %>
     <% end %>
   <% end %>
-  <%= column_chart @meal_type, ytitle: "Calories", min: 0, colors: ["#EF4B2A"] %>
+
+<canvas id= "week"></canvas>
+        <script>
+            new Chart(document.getElementById("week").getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: <%= @meal_type_labels.to_json.html_safe %>,
+                    datasets: [{
+                        label: "Calories",
+                        data: <%= @meal_type.values %>,
+                        backgroundColor: [
+                            'rgba(251, 19, 0, 0.6)',
+                            'rgba(251, 240, 0, 0.6)',
+                            'rgba(0, 221, 251, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 0.6)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+
+
 </div>
 
 

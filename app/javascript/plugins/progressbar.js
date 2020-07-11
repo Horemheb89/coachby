@@ -64,7 +64,7 @@ const initProgressbarcalorie = () => {
     color: '#BA00FB',
     trailColor: '#eee',
     trailWidth: 4,
-    svgStyle: {width: '40%', height: '40%'},
+    svgStyle: {width: '80%', height: '100%'},
 
 
 
