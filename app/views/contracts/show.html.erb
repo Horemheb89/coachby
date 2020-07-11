@@ -21,7 +21,7 @@
       <h2 class="athlete-name"> <%= @contract.athlete.first_name.capitalize %> <%= @contract.athlete.last_name.capitalize %> </h2>
       <h2> Coach: <%= @contract.coach.first_name.capitalize %> </h2>
       <h3> Height: <%= @contract.athlete.height %> cm </h3>
-      <h3> Weight: <%= @contract.athlete.height %> kg </h3>
+      <h3> Weight: <%= @contract.athlete.weight %> kg </h3>
       <h3> Date of Birth: <%= @contract.athlete.dob %> </h3>
       <h3> Email address: <%= @contract.athlete.email %> </h3>
       <!-- <h2> <%= @contract.athlete.first_name.capitalize %>'s program: </h2> -->
@@ -29,7 +29,7 @@
   </div>
 
   <div class="redirect_links">
-    <h3> <%= link_to "See #{@contract.athlete.first_name.capitalize}'s Program", programs_path %> </h3>
+    <h3> <%= link_to "See #{@contract.athlete.first_name.capitalize}'s Program", index_path %> </h3>
     <h3> <%= link_to "Create program for #{@contract.athlete.first_name.capitalize}", new_contract_program_path(@contract) %> </h3>
     <h3> <%= link_to "See data for #{@contract.athlete.first_name.capitalize}", index_clients_path(@contract) %> </h3>
   </div>
