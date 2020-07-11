@@ -1,9 +1,15 @@
 
 .line-stat-from {
   display: flex;
-  align-items: center;
   margin-top: 10px;
-}
+  align-items: flex-end;
+  margin-bottom: 30px;
 
+
+  .form-group {
+    margin-bottom:0;
+    padding-right: 20px;
+  }
+}
 
 

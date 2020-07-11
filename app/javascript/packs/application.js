@@ -10,6 +10,8 @@ require("channels")
 
 require("chartkick")
 require("chart.js")
+require('progressbar.js');
+
 
 window.$ = $
 
@@ -31,10 +33,17 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { initProgressbarpro, initProgressbarfat, initProgressbarcarb, initProgressbarcalorie } from "../plugins/progressbar.js"
+
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+
+  initProgressbarpro()
+  initProgressbarfat()
+  initProgressbarcarb()
+  initProgressbarcalorie()
 });
 
 document.addEventListener("turbolinks:load", () => {
