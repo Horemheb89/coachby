@@ -1,16 +1,26 @@
 
 
+.meal {
+  min-height: 300px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background-color: white;
+  margin-bottom: 30px;
+  padding:20px;
+  border-radius: 5px;
+
+  div {
+    margin-bottom: 10px;
+  }
+}
+
 .meal-stat {
   display: flex;
-  justify-content: space-between;
   justify-content: space-around;
-  min-height: 300px;
 }
 
 .graph {
-  display: flex;
-  margin: auto;
-  width: 400px;
+  width:30%;
+
 }
 
 #week {
@@ -19,10 +29,8 @@
 }
 
 .nutri-table{
-  margin-top: 12px;
   text-align:center;
-  width: 70%;
-  margin-right: 50px;
+  width:60%;
 
   table {
     border:2px solid black;
