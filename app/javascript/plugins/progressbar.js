@@ -11,7 +11,7 @@ const initProgressbarpro = () => {
     strokeWidth: 4,
     easing: 'easeInOut',
     duration: 1400,
-    color: '#FFEA82',
+    color: '#fa1200',
     trailColor: '#eee',
     trailWidth: 4,
     svgStyle: {width: '80%', height: '80%'}
@@ -28,7 +28,7 @@ const initProgressbarfat = () => {
     strokeWidth: 4,
     easing: 'easeInOut',
     duration: 1400,
-    color: '#FFEA82',
+    color: '#faf000',
     trailColor: '#eee',
     trailWidth: 4,
     svgStyle: {width: '80%', height: '80%'}
@@ -44,7 +44,7 @@ const initProgressbarcarb = () => {
     strokeWidth: 4,
     easing: 'easeInOut',
     duration: 1400,
-    color: '#FFEA82',
+    color: '#00dcfa',
     trailColor: '#eee',
     trailWidth: 4,
     svgStyle: {width: '80%', height: '80%'}
