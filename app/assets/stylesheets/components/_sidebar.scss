@@ -10,7 +10,7 @@
 // Main Classes
 .sidebar {
   flex-shrink: 0;
-  width: 176px;
+  width: 64px;
   height: 100vh;
 
   position: -webkit-sticky;
@@ -29,6 +29,7 @@
 .sidebar-links {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 1.5rem 1.5rem;
 }
 
