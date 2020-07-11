@@ -1,85 +1,122 @@
 <% if user_signed_in? %>
-  <div class="sidebar">
+  <ul class="nav nav-pills flex-column">
 
-    <div class="sidebar-links">
+    <!-- Set contract and program variables. -->
+    <% if @program !=nil && @program.id != nil %>
+      <% program = @program %>
+      <% contract = @program.contract %>
+    <% end %>
 
-      <!-- Coach -->
-      <% if current_user.is_coach %>
+    <% if @contract != nil && @contract.id != nil %>
+      <% contract = @contract %>
+    <% end %>
 
-        <%= link_to contracts_path do %>
-          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
-            <%= icon('fas', 'list') %>
-          </p>
-        <% end %>
 
-        <%= link_to new_contract_path do %>
-          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Athlete">
-            <%= icon('fas', 'user-plus') %>
-          </p>
-        <% end %>
+    <!-- Coach -->
+    <% if current_user.is_coach %>
 
-        <!-- Find the contract and program -->
-        <% if @program !=nil && @program.id != nil %>
-          <% program = @program %>
-          <% contract = @program.contract %>
-        <% end %>
-        <% if @contract != nil && @contract.id != nil %>
-          <% contract = @contract %>
-        <% end %>
 
-        <!-- Contract links -->
-        <% if contract != nil %>
-          <div class="sidebar-category">
-            <%= link_to contract_path(contract) do %>
-              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %>'s Profile">
-                <%= icon('fas', 'user') %>
-              </p>
-            <% end %>
-            <%= link_to index_clients_path(contract) do %>
-              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Diet Dashboard">
-                <%= icon('fas', 'columns') %>
-              </p>
-            <% end %>
-            <%= link_to new_contract_program_path(contract) do %>
-              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Program">
-                <%= icon('fas', 'calendar-plus') %>
-              </p>
-            <% end %>
-          </div>
-        <% end %>
-
-        <!-- Program links -->
-        <% if program != nil %>
-          <div class="sidebar-category">
-            <%= link_to program_meals_path(program) do %>
-              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="All Meals">
-                <%= icon('fas', 'utensils') %>
-              </p>
-            <% end %>
-          </div>
-        <% end %>
-
+      <%= link_to contracts_path do %>
+        <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
+          <p class="nav-link"><%= icon('fas', 'list') %></p>
+        </li>
       <% end %>
 
-      <!-- Athlete -->
-      <% if !current_user.is_coach %>
-        <%= link_to dashboard_path do %>
-          <p class="sidebar-item">Profile</p>
+      <%= link_to new_contract_path do %>
+        <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Athlete">
+          <p class="nav-link" href="#"><%= icon('fas', 'user-plus') %></p>
+        </li>
+      <% end %>
+
+
+      <!-- Contract -->
+      <% if contract != nil %>
+        <div class="sidebar-category">
+
+          <%= link_to contract_path(contract) do %>
+             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Profile">
+              <p class="nav-link" href="#"><%= icon('fas', 'user') %></p>
+            </li>
+          <% end %>
+
+          <%= link_to index_clients_path(contract) do %>
+            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Dashboard">
+              <p class="nav-link" href="#"><%= icon('fas', 'columns') %></p>
+            </li>
+          <% end %>
+
+          <%= link_to new_contract_program_path(contract) do %>
+            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | New Program">
+              <p class="nav-link" href="#"><%= icon('fas', 'calendar-plus') %></p>
+            </li>
+          <% end %>
+
+        </div>
+      <% end %>
+
+
+      <!-- Program -->
+      <% if program != nil %>
+        <div class="sidebar-category">
+
+          <%= link_to program_meals_path(program) do %>
+            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Program | Meals">
+              <p class="nav-link" href="#"><%= icon('fas', 'utensils') %></p>
+            </li>
+          <% end %>
+
+          <%= link_to program_sessions_path(program) do %>
+            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Program | Exercices">
+              <p class="nav-link" href="#"><%= icon('fas', 'dumbbell') %></p>
+            </li>
+          <% end %>
+
+          <li class="nav-item dropdown" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Program | Exercices">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('fas', 'dumbbell') %></a>
+            <div class="dropdown-menu">
+              <%= link_to program_sessions_path(program) do %>
+                <a class="dropdown-item" href="#">All Sessions</a>
+              <% end %>
+              <a class="dropdown-item" href="#">New Session</a>
+            </div>
+          </li>
+
+        </div>
+      <% end %>
+    <% end %>
+
+
+    <!-- Athlete -->
+    <% if !current_user.is_coach %>
+
+
+      <!-- Contract -->
+      <% if contract != nil %>
+        <%= link_to contract_path(contract) do %>
+           <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %>'s Profile">
+            <p class="nav-link" href="#"><%= icon('fas', 'user') %></p>
+          </li>
         <% end %>
-
-        <% if @contract != nil && @contract.id != nil %>
-
-          <%= link_to contract_path(@contract) do %>
-            <p class="sidebar-item"><%= icon('fas', 'user') %></p>
-          <% end %>
-          <%= link_to index_clients_path(@contract) do %>
-            <p class="sidebar-item"><%= icon('fas', 'utensils') %></p>
-          <% end %>
-
+        <%= link_to index_clients_path(contract) do %>
+          <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Dashboard">
+            <p class="nav-link" href="#"><%= icon('fas', 'columns') %></p>
+          </li>
         <% end %>
       <% end %>
 
-    </div>
 
-  </div>
+      <!-- Program -->
+      <% if program != nil %>
+        <%= link_to program_meals_path(program) do %>
+          <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="All Meals">
+            <p class="nav-link" href="#"><%= icon('fas', 'utensils') %></p>
+          </li>
+        <% end %>
+      <% end %>
+
+
+    <% end %>
+
+
+  </ul>
 <% end %>
