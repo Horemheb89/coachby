@@ -37,5 +37,7 @@ module Coachby
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.beginning_of_week = :monday # simple form parameter
+
+    config.assets.paths << "#{Rails.root}/app/assets/videos"
   end
 end
