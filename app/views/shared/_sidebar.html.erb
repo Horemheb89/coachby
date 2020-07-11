@@ -7,25 +7,43 @@
       <% if current_user.is_coach %>
 
         <%= link_to contracts_path do %>
-          <p class="sidebar-item">Athletes</p>
+          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
+            <%= icon('fas', 'list') %>
+          </p>
         <% end %>
 
         <%= link_to new_contract_path do %>
-          <p class="sidebar-item">Add Athlete</p>
+          <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Athlete">
+            <%= icon('fas', 'user-plus') %>
+          </p>
         <% end %>
 
-
+        <!-- Find the contract and program -->
+        <% if @program !=nil && @program.id != nil %>
+          <% program = @program %>
+          <% contract = @program.contract %>
+        <% end %>
         <% if @contract != nil && @contract.id != nil %>
+          <% contract = @contract %>
+        <% end %>
+
+        <!-- If the contract exist display the icons below -->
+        <% if contract != nil %>
           <div class="sidebar-athlete">
-            <p><%= @contract.athlete.first_name.capitalize %></p>
-            <%= link_to programs_path do %>
-              <p class="sidebar-item">Create Program</p>
+            <%= link_to contract_path(contract) do %>
+              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %>'s Profile">
+                <%= icon('fas', 'user') %>
+              </p>
             <% end %>
-            <%= link_to "/" do %>
-              <p class="sidebar-item">Exercice</p>
+            <%= link_to index_clients_path(contract) do %>
+              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Diet Dashboard">
+                <%= icon('fas', 'utensils') %>
+              </p>
             <% end %>
-            <%= link_to "/" do %>
-              <p class="sidebar-item">Diet</p>
+            <%= link_to new_contract_program_path(contract) do %>
+              <p class="sidebar-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Program">
+                <%= icon('fas', 'calendar-plus') %>
+              </p>
             <% end %>
           </div>
         <% end %>
@@ -40,11 +58,11 @@
 
         <% if @contract != nil && @contract.id != nil %>
 
-          <%= link_to "/" do %>
-            <p class="sidebar-item">Exercice</p>
+          <%= link_to contract_path(@contract) do %>
+            <p class="sidebar-item"><%= icon('fas', 'user') %></p>
           <% end %>
-          <%= link_to contract_program_path(@contract) do %>
-            <p class="sidebar-item">Diet</p>
+          <%= link_to index_clients_path(@contract) do %>
+            <p class="sidebar-item"><%= icon('fas', 'utensils') %></p>
           <% end %>
 
         <% end %>

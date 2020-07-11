@@ -10,7 +10,7 @@ class SessionPolicy < ApplicationPolicy
   end
 
   def show?
-    user == record.coach || user == record.athlete
+    true
   end
 
   def index?
