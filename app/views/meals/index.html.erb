@@ -56,6 +56,7 @@
 
     <%= render "form", meal: @meal %>
 
+
   <% @meals_date.each do |meal| %>
     <div class = meal>
       <div>
@@ -67,12 +68,12 @@
           <table>
             <thead>
                 <tr>
-                  <th > Ingrédient</th>
-                  <th > Quantité</th>
-                  <th > Protein</th>
-                  <th > Lipid</th>
-                  <th > Carbs</th>
-                  <th > Calories</th>
+                  <th > Ingredient</th>
+                  <th > Quantity</th>
+                  <th style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> Proteins</th>
+                  <th style="background-color: rgba(251, 240, 0, 0.4);border-radius: 25px"> Fats</th>
+                  <th style="background-color: rgba(0, 221, 251, 0.4);border-radius: 25px"> Carbs</th>
+                  <th style="background-color: rgba(186, 0, 251,0.4);border-radius: 25px" > Calories</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,10 +98,10 @@
                     <tr>
                       <td> Totaux:  </td>
                       <td> <%=  %> </td>
-                      <td class = "cell-total"> <%= meal.proteins %> </td>
-                      <td class = "cell-total"> <%= meal.fats %> </td>
-                      <td class = "cell-total"> <%= meal.carbs %> </td>
-                      <td class = "cell-total"> <%= sum_cal %> </td>
+                      <td style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> <%= meal.proteins %> </td>
+                      <td style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px"> <%= meal.fats %> </td>
+                      <td style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px"> <%= meal.carbs %> </td>
+                      <td style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px"> <%= sum_cal %> </td>
                       <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
                     </tr>
                   <% end %>
@@ -115,19 +116,35 @@
             new Chart(document.getElementById("<%= "myChart#{meal.name}"%>").getContext('2d'), {
                 type: 'bar',
                 data: {
-                    labels: <%= @labels.to_json.html_safe %>,
+                    labels: ["Macro"],
                     datasets: [{
-                        label: "Macro",
-                        data: <%= macro(meal).to_json.html_safe %>,
+                        label: "Proteins",
+                        data: <%= [meal.proteins] %>,
                         backgroundColor: [
-                            'rgba(251, 19, 0, 0.6)',
-                            'rgba(251, 240, 0, 0.6)',
+                            'rgba(251, 19, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: "Fats",
+                        data: <%= [meal.fats] %>,
+                        backgroundColor: [
+                            'rgba(251, 240, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: "Carbs",
+                        data: <%= [meal.carbs] %>,
+                        backgroundColor: [
                             'rgba(0, 221, 251, 0.6)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(54, 162, 235, 0.6)'
                         ],
                         borderWidth: 1
                     }]
@@ -143,6 +160,36 @@
                 }
             });
         </script>
+
+       <!--  <canvas id= "<%= "myChartcal#{meal.name}" %>"  ></canvas>
+        <script>
+            new Chart(document.getElementById("<%= "myChartcal#{meal.name}"%>").getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ["calorie"],
+                    datasets: [{
+                        label: "calorie",
+                        data: <%= [calorie(meal)] %>,
+                        backgroundColor: [
+                            'rgba(151, 0, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script> -->
    <!--      <% unless meal.doses.empty?  %>
           <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40, colors: ["#EF4B2A"] %>
         <% end %> -->
@@ -167,7 +214,7 @@
 <canvas id= "week"></canvas>
         <script>
             new Chart(document.getElementById("week").getContext('2d'), {
-                type: 'bar',
+                type: 'horizontalBar',
                 data: {
                     labels: <%= @meal_type_labels.to_json.html_safe %>,
                     datasets: [{
@@ -187,6 +234,13 @@
                     }]
                 },
                 options: {
+                  legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  },
                     scales: {
                         yAxes: [{
                             ticks: {
