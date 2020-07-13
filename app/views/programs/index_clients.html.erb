@@ -1,30 +1,98 @@
-<div class="container-meal">
+<div class="container">
   <h1> diet dashboard <%=  %></h1>
   <% data_cal = {} %>
   <% data_cal_ref = {} %>
   <% line_data_cal = [] %>
 
 <!-- plot calories -->
-
   <% @programs.each do |program| %>
     <%= link_to "See meals", program_meals_path(program) %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
 
-    <% data_cal[day.strftime("%m/%d/%Y")] = meals.map{|meal| calorie(meal)}.sum %>
-    <% data_cal_ref[day.strftime("%m/%d/%Y")] = program.calorie_target %>
+      <% data_cal[day.strftime("%d/%m/%Y")] = meals.map{|meal| calorie(meal)}.sum %>
+      <% data_cal_ref[day.strftime("%d/%m/%Y")] = program.calorie_target %>
+
     <% end %>
-      <% line_data_cal << {:name => "calorie", :data => data_cal } %>
-      <% line_data_cal << {:name => "calorie_target", :data => data_cal_ref } %>
   <% end %>
 
+  <% data_cal = data_cal.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
+  <% data_cal_deux = {} %>
+
+  <% data_cal.each do |day,meal| %>
+  <% data_cal_deux[day] = meal  %>
+  <% end %>
+
+  <% data_cal_ref = data_cal_ref.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
+  <% data_cal_ref_deux = {} %>
+
+  <% data_cal_ref.each do |day,meal| %>
+  <% data_cal_ref_deux[day] = meal  %>
+  <% end %>
+
+
+
   <div class = "meal-graph">
-    <%= line_chart line_data_cal, ytitle: "Calorie", width: "1420px" %>
+
+    <canvas id="calorie"></canvas>
+    <script>
+        const config = {
+            type:'line',
+            data:{
+              labels: <%= data_cal_deux.keys.to_json.html_safe %>,
+              datasets: [{
+                    label: "Calories",
+                    data: <%= data_cal_deux.values.to_json.html_safe %>,
+                    fill:  false,
+                    borderColor: 'blue'
+                  },{
+                    label: "Goal",
+                    data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
+                    fill:  false,
+                    borderColor: 'red'
+                  }
+                ],
+            },
+            options: {
+                responsive: true,
+                title:{
+                    display: true,
+                    text:"Chart.js Time Scale"
+                },
+                scales:{
+                  xAxes: [{
+                    type: 'time',
+                    //
+                     time: {
+                      parser: 'DD/MM/YYYY',
+                      tooltipFormat: 'DD/MM/YYYY',
+                      unit: 'day',
+                      unitStepSize: 1,
+                      displayFormats: {
+                        'day': 'DD/MM/YYYY'
+                      }
+                    },
+                    ticks: {
+                      autoSkip: true,
+                      maxTicksLimit: 20
+                    }
+                }], // XAxes ends
+                  yAxes: [{
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'value'
+                      }
+                  }]
+              }
+            }
+        };
+
+    window.onload = function () {
+        const ctx = document.getElementById("calorie").getContext("2d");
+        window.myLine = new Chart(ctx, config);
+    };
+</script>
   </div>
-
-
 <!-- plot macro -->
-
-
   <% line_data_p = [] %>
   <% line_data_c = [] %>
   <% line_data_f = [] %>
