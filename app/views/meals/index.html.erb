@@ -116,7 +116,7 @@
             new Chart(document.getElementById("<%= "myChart#{meal.name}"%>").getContext('2d'), {
                 type: 'bar',
                 data: {
-                    labels: ["Macro"],
+                    labels: [""],
                     datasets: [{
                         label: "Proteins",
                         data: <%= [meal.proteins] %>,
@@ -150,6 +150,19 @@
                     }]
                 },
                 options: {
+                    title: {
+                    display: true,
+                    position: 'top',
+                    text: 'Macro',
+                    padding: 20,
+                    },
+                    legend: {
+                      display: true,
+                      position:'bottom',
+                      labels: {
+                          fontColor: 'black'
+                      }
+                    },
                     scales: {
                         yAxes: [{
                             ticks: {
@@ -157,6 +170,7 @@
                             }
                         }]
                     }
+
                 }
             });
         </script>
