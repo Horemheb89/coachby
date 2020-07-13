@@ -57,14 +57,14 @@ const initProgressbarcarb = () => {
 const initProgressbarcalorie = () => {
   let calorie = document.getElementById("carb-cal")
 
-  let circle = new ProgressBar.Circle(calorie, {
+  let circle = new ProgressBar.Line(calorie, {
     strokeWidth: 4,
     easing: 'easeInOut',
     duration: 1400,
-    color: '#00dcfa',
+    color: '#BA00FB',
     trailColor: '#eee',
     trailWidth: 4,
-    svgStyle: {width: '40%', height: '40%'},
+    svgStyle: {width: '80%', height: '100%'},
 
 
 

@@ -1,54 +1,82 @@
 
 
+.meal {
+  min-height: 300px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background-color: white;
+  margin-bottom: 30px;
+  padding:20px;
+  border-radius: 5px;
+
+}
+
 .meal-stat {
   display: flex;
   justify-content: space-around;
-  min-height: 300px;
 }
 
 .graph {
-  display: flex;
-  justify-content: space-around;
-  margin: auto;
-  width: 200px;
-  color: $red;
+  width:30%;
+
+  div {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+
+#week {
+  height: 300px;
+  width: 80%;
 }
 
 .nutri-table{
-  margin-top: 12px;
   text-align:center;
-  width: 70%;
+  width:60%;
+  border-radius: 5px 5px 0 0;
 
   table {
-    border:2px solid black;
+    border-collapse: collapse;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    overflow: hidden;
+    // box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     width:100%;
-    color: black;
   }
 
   thead, tfoot {
-    background-color:$red;
-    border:1px solid black;
+    padding: 5px 10px;
+    border-bottom: 1px solid gray;
   }
 
   tbody {
     background-color:white;
-    border:1px solid black;
+
+    tr:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+    tr:last-child {
+      background:white;
+      font-weight: bold;
+      font-size:20px;
+    }
   }
 
   th {
     font-family:monospace;
     color: black;
-    border:1px solid black;
-    padding:5px;
-    background-color:$red;
+    // padding:2px;
+    background-color:white;
     width: 200px;
+    height: 40px;
   }
 
   td {
     font-family:sans-serif;
     font-size:80%;
-    border:1px solid black;
     padding:5px;
+    color: black;
   }
 
   .cell-total {
@@ -64,8 +92,6 @@
     a:hover {
     color: $red;
   }
-
-
 }
 
 

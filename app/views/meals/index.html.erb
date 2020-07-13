@@ -13,14 +13,15 @@
       <% end %>
     <% end %>
 
-
     <div class="macro_card">
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> g</h2>
         <p> Protein </p>
         <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
         <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
-        <p> <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> / <%= @program.proteins_target %> </p>
+        <div>
+          <p style="color: <%= "red" if ratio_prot > 1.2 %>" > <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
+        </div>
       </div>
 
       <div class = "macro">
@@ -28,48 +29,59 @@
         <p> Fats </p>
         <% ratio_fat = (@meals_date.map { |meal| meal.fats}.sum())/@program.fats_target.to_f %>
         <div id = "fat-bar" data-macro= <%= ratio_fat > 1 ? 1 : ratio_fat %> ></div>
-        <p> <%= (@meals_date.map { |meal| meal.fats}.sum()) %> / <%= @program.fats_target %> </p>
+        <div>
+          <p style="color: <%= "red" if ratio_fat > 1.2 %>" > <%= (@meals_date.map { |meal| meal.fats}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
+        </div>
       </div>
+
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.carbs}.sum() %> g</h2>
         <p> Carbs </p>
         <% ratio_carb = (@meals_date.map { |meal| meal.carbs}.sum())/@program.carbs_target.to_f %>
         <div id = "carb-bar" data-macro= <%= ratio_carb > 1 ? 1 : ratio_carb %> ></div>
-        <p> <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> / <%= @program.carbs_target %> </p>
+        <div>
+          <p style="color: <%= "red" if ratio_carb > 1.2 %>" > <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> </p>/ <p> <%= @program.carbs_target %> </p>
+        </div>
       </div>
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| calorie(meal)}.sum() %> </h2>
-        <p> Calorie </p>
+        <p> Calories </p>
         <% ratio_cal = (@meals_date.map { |meal|calorie(meal)}.sum())/@program.calorie_target.to_f %>
         <div id = "carb-cal" data-macro= <%= ratio_cal > 1 ? 1 : ratio_cal %> ></div>
-        <p> <%= (@meals_date.map { |meal|calorie(meal)}.sum()) %> / <%= @program.calorie_target %> </p>
+        <div>
+          <p style="color: <%= "red" if ratio_cal > 1.2 %>" > <%= (@meals_date.map { |meal| calorie(meal)}.sum()) %> </p>/ <p> <%= @program.calorie_target %> </p>
+        </div>
       </div>
     </div>
 
     <%= render "form", meal: @meal %>
 
+
   <% @meals_date.each do |meal| %>
-    <h3> <%=  link_to meal.name.capitalize(),program_meal_path(meal.program_id,meal) %> </h3>
-    <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
-    <div class = meal-stat>
-      <div class = "nutri-table">
+    <div class = meal>
+      <div>
+        <h3> <%=  link_to meal.name.capitalize(),program_meal_path(meal.program_id,meal) %> </h3>
+        <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
+      </div>
+      <div class = "meal-stat">
+        <div class = "nutri-table">
           <table>
             <thead>
                 <tr>
-                  <th > Quantité</th>
-                  <th > Ingrédient</th>
-                  <th > Protein</th>
-                  <th > Lipid</th>
-                  <th > Carbs</th>
-                  <th > Calories</th>
+                  <th > Ingredient</th>
+                  <th > Quantity</th>
+                  <th style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> Proteins</th>
+                  <th style="background-color: rgba(251, 240, 0, 0.4);border-radius: 25px"> Fats</th>
+                  <th style="background-color: rgba(0, 221, 251, 0.4);border-radius: 25px"> Carbs</th>
+                  <th style="background-color: rgba(186, 0, 251,0.4);border-radius: 25px" > Calories</th>
                 </tr>
             </thead>
             <tbody>
               <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
               <% meal.doses.each do |dose| %>
                 <tr>
-                  <td> <%= dose.quantity %> </td>
                   <td> <%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> </td>
+                  <td> <%= dose.quantity %> </td>
                   <td> <%= ((dose.quantity * dose.ingredient.proteins)/100).round   %> </td>
                   <td> <%= ((dose.quantity * dose.ingredient.fats)/100).round  %> </td>
                   <td> <%= ((dose.quantity * dose.ingredient.carbs)/100).round  %> </td>
@@ -86,10 +98,10 @@
                     <tr>
                       <td> Totaux:  </td>
                       <td> <%=  %> </td>
-                      <td class = "cell-total"> <%= meal.proteins %> </td>
-                      <td class = "cell-total"> <%= meal.fats %> </td>
-                      <td class = "cell-total"> <%= meal.carbs %> </td>
-                      <td class = "cell-total"> <%= sum_cal %> </td>
+                      <td style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> <%= meal.proteins %> </td>
+                      <td style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px"> <%= meal.fats %> </td>
+                      <td style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px"> <%= meal.carbs %> </td>
+                      <td style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px"> <%= sum_cal %> </td>
                       <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
                     </tr>
                   <% end %>
@@ -98,26 +110,85 @@
         </table>
           <%= render "doses/form", meal: meal, dose: @dose %>
       </div>
-
       <div class = "graph">
-        <canvas id= "<%= "myChart#{meal.name}"%>" width="800" height="800"></canvas>
+        <canvas id= "<%= "myChart#{meal.name}"%>" width="600" height="600"></canvas>
         <script>
             new Chart(document.getElementById("<%= "myChart#{meal.name}"%>").getContext('2d'), {
                 type: 'bar',
                 data: {
-                    labels: <%= @labels.to_json.html_safe %>,
+                    labels: [""],
                     datasets: [{
-                        label: "Macro",
-                        data: <%= macro(meal).to_json.html_safe %>,
+                        label: "Proteins",
+                        data: <%= [meal.proteins] %>,
                         backgroundColor: [
-                            'rgba(251, 19, 0, 0.6)',
-                            'rgba(251, 240, 0, 0.6)',
+                            'rgba(251, 19, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: "Fats",
+                        data: <%= [meal.fats] %>,
+                        backgroundColor: [
+                            'rgba(251, 240, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: "Carbs",
+                        data: <%= [meal.carbs] %>,
+                        backgroundColor: [
                             'rgba(0, 221, 251, 0.6)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(54, 162, 235, 0.6)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    title: {
+                    display: true,
+                    position: 'top',
+                    text: 'Macro',
+                    padding: 20,
+                    },
+                    legend: {
+                      display: true,
+                      position:'bottom',
+                      labels: {
+                          fontColor: 'black'
+                      }
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+
+                }
+            });
+        </script>
+
+       <!--  <canvas id= "<%= "myChartcal#{meal.name}" %>"  ></canvas>
+        <script>
+            new Chart(document.getElementById("<%= "myChartcal#{meal.name}"%>").getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ["calorie"],
+                    datasets: [{
+                        label: "calorie",
+                        data: <%= [calorie(meal)] %>,
+                        backgroundColor: [
+                            'rgba(151, 0, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -132,12 +203,13 @@
                     }
                 }
             });
-        </script>
+        </script> -->
    <!--      <% unless meal.doses.empty?  %>
           <%= column_chart macro_char(meal), ytitle: "Masse (Gr)", min: 0, max: macro_max(meal) + 40, colors: ["#EF4B2A"] %>
         <% end %> -->
       </div>
     </div>
+  </div>
   <% end %>
 
 
@@ -152,7 +224,49 @@
       <% @meal_type["diner"] += calorie(meal) %>
     <% end %>
   <% end %>
-  <%= column_chart @meal_type, ytitle: "Calories", min: 0, colors: ["#EF4B2A"] %>
+
+<canvas id= "week"></canvas>
+        <script>
+            new Chart(document.getElementById("week").getContext('2d'), {
+                type: 'horizontalBar',
+                data: {
+                    labels: <%= @meal_type_labels.to_json.html_safe %>,
+                    datasets: [{
+                        label: "Calories",
+                        data: <%= @meal_type.values %>,
+                        backgroundColor: [
+                            'rgba(251, 19, 0, 0.6)',
+                            'rgba(251, 240, 0, 0.6)',
+                            'rgba(0, 221, 251, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 0.6)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                  legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+
+
 </div>
 
 
