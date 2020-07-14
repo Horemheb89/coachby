@@ -1,20 +1,43 @@
 
-# Destroying previous instances
-Dose.destroy_all
-User.destroy_all
-Contract.destroy_all
-Ingredient.destroy_all
-Meal.destroy_all
-Dose.destroy_all
-Program.destroy_all
+require 'roo'
+require 'roo-xls'
 
 
 # Seeding Starts
 puts "\n🌱 Seeding Starts 🌱"
 
-require 'roo'
-require 'roo-xls'
 
+
+# Destroying previous instances
+puts "\n🗑  Destroying Dose instances."
+Dose.destroy_all
+puts "Success!"
+
+puts "\n🗑  Destroying User instances."
+User.destroy_all
+puts "Success!"
+
+puts "\n🗑  Destroying Contract instances."
+Contract.destroy_all
+puts "Success!"
+
+puts "\n🗑  Destroying Ingredient instances."
+Ingredient.destroy_all
+puts "Success!"
+
+puts "\n🗑  Destroying Meal instances."
+Meal.destroy_all
+puts "Success!"
+
+puts "\n🗑  Destroying Program instances."
+Program.destroy_all
+puts "Success!"
+
+puts
+
+
+
+# Seeding Ingredients
 path = 'db/table.xls'
 xlsx = Roo::Spreadsheet.open path
 
@@ -28,98 +51,99 @@ xlsx.each(category: 'alim_ssssgrp_nom_fr',
                 # fibre: 'Fibres alimentaires (g/100g)',
                 # sel: 'Sel chlorure de sodium (g/100g)')
   tab << a
+  # Smaller ingredients table
+  tab = tab.sample(500)
 end
 
 tab.each_with_index do |item, index|
   if index == 0
     puts "columns name"
   else
-    puts item[:name]
     Ingredient.create!(name: item[:name],
       category: item[:category],
       proteins: item[:proteins],
       fats: item[:fats],
       carbs: item[:carbs])
+    puts "🍉  Ingredient created (#{index}/#{tab.count})"
   end
 end
 
-coach_data = [{
-  email: "hugo@coachby.com",
-  last_name: "Bottois",
-  first_name: "Hugo"
-}, {
-  email: "caroline@coachby.com",
-  last_name: "Trenet",
-  first_name: "Caroline"
-}, {
-  email: "quentin@coachby.com",
-  last_name: "Rouillon",
-  first_name: "Quentin"
-}, {
-  email: "hadrien@coachby.com",
-  last_name: "Cheru",
-  first_name: "Hadrien"
-}]
-
-# Creating Coaches
-
-coach_data.each do |member|
-  coach = User.new(member)
-  coach.password = "123456"
-  coach.is_coach = true
-  puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | password: #{coach.password}" if coach.save
 
 
-  # Creating random Athletes for each Coach
+# Seeding Coach
+coach_data = {
+  email: "coach@coachby.com",
+  last_name: "Mignard",
+  first_name: "Sixtine",
+  password: "123456",
+  is_coach: true
+}
 
+coach = User.new(coach_data)
+puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | password: #{coach.password}" if coach.save
+
+
+
+# Seeding random Athletes for each Coach
 weight = [55,80,90,100,70,80]
 height = [180,155,160,170,170,175]
 
-  rand(2..5).times do
-    athlete = User.new(email: Faker::Internet.email,
-                    password: "123456",
-                    is_coach: false,
-                    last_name: Faker::Name.last_name,
-                    first_name: Faker::Name.first_name,
-                    weight: weight.sample,
-                    height: height.sample,
-                    dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'))
-    print " ◽️  Athlete created - #{athlete.first_name}. " if athlete.save
+5.times do
+  athlete = User.new(email: Faker::Internet.email,
+                  password: "123456",
+                  is_coach: false,
+                  last_name: Faker::Name.last_name,
+                  first_name: Faker::Name.first_name,
+                  weight: weight.sample,
+                  height: height.sample,
+                  dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'))
+  print "\n⚪️  Athlete created - #{athlete.first_name}. " if athlete.save
 
-    # Creating Contracts for each Coach
 
-    contract = Contract.new(coach_id: coach.id, athlete_id:athlete.id)
-    puts "Contract created (#{athlete.first_name} and #{coach.first_name})." if contract.save
 
-    program = Program.new(proteins_target: 320, fats_target: 200, carbs_target: 300, contract_id: contract.id)
-    puts "\n🗣 program is created successfully with #{athlete.first_name} and #{coach.first_name}" if program.save
+  # Seeding Contracts for each Coach
+  contract = Contract.new(coach_id: coach.id, athlete_id:athlete.id)
+  print "Contract created (#{athlete.first_name} and #{coach.first_name})." if contract.save
 
-    name_meals = ["petit-dejeuner" ,"dejeuner" ,"gouter" ,"diner"]
 
-    d = Date.today
-    30.times do
-      d += 1
-      name_meals.each do |name_meal|
-        mealday = Meal.new(name: name_meal,
-                        start_time: (d))
-        mealday.program = program
-        puts "\n🗣 meal is created successfully the the date is #{d}" if mealday.save
-        puts "meal is #{name_meal}"
 
-        quantity = [50,100,150,200]
+  # Seeding Programs for each Contract
+  proteins = [320, 340, 280]
+  fats = [200, 220, 180]
+  carbs = [300, 320, 280]
 
-        4.times do
-          rand_id = rand(Ingredient.count)
-          dosemeal = Dose.create(quantity: quantity.sample ,
-                          ingredient_id: Ingredient.order(Arel.sql('RANDOM()')).first.id)
-          dosemeal.meal = mealday
-          puts "\n🗣 dose is created successfully" if dosemeal.save
-        end
+  program = Program.new(proteins_target: proteins.sample,
+    fats_target: fats.sample,
+    carbs_target: carbs.sample,
+    contract_id: contract.id)
+  puts "Program created." if program.save
+
+
+
+  # Seeding Meals
+  name_meals = ["petit-dejeuner" ,"dejeuner" ,"gouter" ,"diner"]
+  d = Date.today
+
+  rand(15..30).times do
+    d += 1
+    name_meals.sample(rand(1..3)).each do |name_meal|
+      mealday = Meal.new(name: name_meal,
+                      start_time: (d))
+      mealday.program = program
+      puts "\n    ⚪️  Meal created - #{name_meal.capitalize} (#{d})" if mealday.save
+
+      quantity = [50,100,150,200]
+
+      rand(2..4).times do
+        rand_id = rand(Ingredient.count)
+        dosemeal = Dose.create(quantity: quantity.sample ,
+                        ingredient_id: Ingredient.order(Arel.sql('RANDOM()')).first.id)
+        dosemeal.meal = mealday
+        puts "    🔸  Dose created" if dosemeal.save
       end
     end
   end
 end
-
 
 
 
@@ -132,7 +156,7 @@ puts "\n👥 Creating Random Athletes"
                   is_coach: false,
                   last_name: Faker::Name.last_name,
                   first_name: Faker::Name.first_name )
-  puts " ◽️  Athlete Created - #{athlete.first_name}" if athlete.save
+  puts "⚪️  Athlete created - #{athlete.first_name}" if athlete.save
 end
 
 # Done
