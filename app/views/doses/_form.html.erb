@@ -3,7 +3,7 @@
 <%= simple_form_for [meal, dose] do |f| %>
   <div class="line-stat-from">
           <%= f.input :quantity %>
-          <%= f.input :ingredient, :collection => Ingredient.all %>
+          <%= f.input :ingredient_id, :collection => Ingredient.all %>
           <%= f.button :submit, class: 'my-button' %>
   </div>
 <% end %>
