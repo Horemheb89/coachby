@@ -29,6 +29,7 @@
   <% data_cal_ref_deux[day] = meal  %>
   <% end %>
 
+
   <div class = "meal-graph">
     <canvas id="calorie"></canvas>
     <script>
@@ -40,12 +41,14 @@
             label: "Calories",
             data: <%= data_cal_deux.values.to_json.html_safe %>,
             fill:  false,
-            borderColor: 'blue'
+            borderColor: ['rgba(186, 0, 251,1)']
             },{
             label: "Goal",
             data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
             fill:  false,
-            borderColor: 'red'
+            borderColor: ['rgba(0, 0, 0, 0.4)'],
+            borderDash: [5, 5],
+            pointRadius: 0
           }],
         },
         options: {
@@ -142,12 +145,14 @@
             label: "proteins",
             data: <%= data_p_deux.values.to_json.html_safe %>,
             fill:  false,
-            borderColor: 'blue'
+            borderColor: ['rgba(251, 19, 0, 1)']
             },{
             label: "Goal",
             data: <%= data_p_deux.map { |day,value| [day, program.proteins_target]}.to_h.values %>,
             fill:  false,
-            borderColor: 'red'
+            borderColor: ['rgba(0, 0, 0, 0.4)'],
+            borderDash: [5, 5],
+                pointRadius: 0
           }],
         },
         options: {
@@ -176,57 +181,7 @@
             }], // XAxes ends
             yAxes: [{
                 scaleLabel: {
-                  display: true,
-                  labelString: 'value'
-                }
-            }]
-          }
-        }
-    });
-
-    new Chart(document.getElementById("carbs").getContext("2d"), {
-        type:'line',
-        data:{
-          labels: <%= data_c_deux.keys.to_json.html_safe %>,
-          datasets: [{
-            label: "carbs",
-            data: <%= data_c_deux.values.to_json.html_safe %>,
-            fill:  false,
-            borderColor: 'blue'
-            },{
-            label: "Goal",
-            data: <%= data_c_deux.map { |day,value| [day, program.carbs_target]}.to_h.values %>,
-            fill:  false,
-            borderColor: 'red'
-          }],
-        },
-        options: {
-          responsive: true,
-          title:{
-              display: true,
-              text:"Chart.js Time Scale"
-          },
-          scales:{
-            xAxes: [{
-              type: 'time',
-              //
-              time: {
-              parser: 'DD/MM/YYYY',
-              tooltipFormat: 'DD/MM/YYYY',
-              unit: 'day',
-              unitStepSize: 1,
-              displayFormats: {
-                'day': 'DD/MM/YYYY'
-                }
-              },
-              ticks: {
-                autoSkip: true,
-                maxTicksLimit: 20
-              }
-            }], // XAxes ends
-            yAxes: [{
-                scaleLabel: {
-                  display: true,
+                  display: false,
                   labelString: 'value'
                 }
             }]
@@ -242,12 +197,14 @@
             label: "fats",
             data: <%= data_l_deux.values.to_json.html_safe %>,
             fill:  false,
-            borderColor: 'blue'
+            borderColor: ['rgba(251, 240, 0, 1)']
             },{
             label: "Goal",
             data: <%= data_l_deux.map { |day,value| [day, program.fats_target]}.to_h.values %>,
             fill:  false,
-            borderColor: 'red'
+            borderColor: ['rgba(0, 0, 0, 0.4)'],
+            borderDash: [5, 5],
+            pointRadius: 0
           }],
         },
         options: {
@@ -276,7 +233,59 @@
             }], // XAxes ends
             yAxes: [{
                 scaleLabel: {
-                  display: true,
+                  display: false,
+                  labelString: 'value'
+                }
+            }]
+          }
+        }
+    });
+
+    new Chart(document.getElementById("carbs").getContext("2d"), {
+        type:'line',
+        data:{
+          labels: <%= data_c_deux.keys.to_json.html_safe %>,
+          datasets: [{
+            label: "carbs",
+            data: <%= data_c_deux.values.to_json.html_safe %>,
+            fill:  false,
+            borderColor: ['rgba(0, 221, 251, 1)']
+            },{
+            label: "Goal",
+            data: <%= data_c_deux.map { |day,value| [day, program.carbs_target]}.to_h.values %>,
+            fill:  false,
+            borderColor: ['rgba(0, 0, 0, 0.4)'],
+            borderDash: [5, 5],
+            pointRadius: 0
+          }],
+        },
+        options: {
+          responsive: true,
+          title:{
+              display: true,
+              text:"Chart.js Time Scale"
+          },
+          scales:{
+            xAxes: [{
+              type: 'time',
+              //
+              time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                'day': 'DD/MM/YYYY'
+                }
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 20
+              }
+            }], // XAxes ends
+            yAxes: [{
+                scaleLabel: {
+                  display: false,
                   labelString: 'value'
                 }
             }]
@@ -288,45 +297,17 @@
   <% end %>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Table -->
-
   <% @programs.each do |program| %>
     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
         <table class = "nutri-table-meal">
             <thead>
               <tr>
-                <th > Date </th>
-                <th > Protein</th>
-                <th > Fats</th>
-                <th > Carbs</th>
-                <th > Calories</th>
+                <th style="background-color: rgba(245, 243, 242, 0.4) ;border-radius: 25px"> Date </th>
+                <th style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> Protein</th>
+                <th style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px"> Fats</th>
+                <th style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px"> Carbs</th>
+                <th style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px"> Calories</th>
               </tr>
             </thead>
           <tbody>
@@ -337,10 +318,10 @@
           <% col_calorie = pickcolor(meals.map{|meal| calorie(meal)}.sum(), program.calorie_target) %>
             <tr>
               <td> <%= link_to meals.last.start_time.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
-              <td style="background-color: <%= col_protein %>" > <%= meals.map{|meal| meal.proteins}.sum() %> </td>
-              <td style="background-color: <%= col_fats %>" > <%= meals.map{|meal| meal.fats}.sum() %> </td>
-              <td style="background-color: <%= col_carbs %>" > <%= meals.map{|meal| meal.carbs}.sum() %> </td>
-              <td style="background-color: <%= col_calorie %>" > <%= meals.map{|meal| calorie(meal)}.sum() %> </td>
+              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| meal.proteins}.sum() %> </td>
+              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| meal.fats}.sum() %> </td>
+              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| meal.carbs}.sum() %> </td>
+              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| calorie(meal)}.sum() %> </td>
               <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
             </tr>
           <% end %>
