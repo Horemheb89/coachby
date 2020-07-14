@@ -35,3 +35,22 @@
   align-items: center;
 }
 
+.exercise-table {
+  border-collapse: collapse;
+  width: 100%;
+
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: black;
+}
+
+tr:hover {
+  background-color:#EF4A2A;
+  opacity: 30%;
+  color: black;
+}
+

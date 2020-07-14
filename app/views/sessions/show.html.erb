@@ -1,7 +1,6 @@
 <div class="banner-main">
   <div class="container">
-    <h1>Sessions#show</h1>
-    <p>Exercises Details</p>
+    <h1>exercises of the session</h1>
   </div>
 </div>
 
@@ -9,37 +8,23 @@
 
 <div class="container">
   <% @exercises.each do |exercise| %>
-    <div class="exercise-container">
-      <div class="exercise-arrow">
-        <i class="fas fa-arrow-right" style="font-size: 2.5em;"></i>
-      </div>
-      <div class="exercice-row">
-        <i class="fas fa-meteor"></i>
-        <p>Exercise Name</p>
-        <%= exercise.name %>
-      </div>
-      <div class="exercice-row">
-        <i class="fas fa-plus"></i>
-        <p>Rounds</p>
-        <%= exercise.rounds %>
-      </div>
-      <div class="exercice-row">
-        <i class="fas fa-redo-alt"></i>
-        <p>Reps</p>
-        <%= exercise.reps %>
-      </div>
-      <div class="exercice-row">
-        <i class="fas fa-balance-scale"></i>
-        <p>Weight</p>
-        <%= exercise.weight %>
-      </div>
-      <div class="exercice-row">
-        <i class="far fa-hourglass"></i>
-        <p>Rest Time</p>
-        <%= exercise.rest_time %>
-      </div>
-    </div>
-  <% end %>
+    <table class="exercise-table">
+      <tr>
+        <th>Exercise</th>
+        <th>Rounds</th>
+        <th>Reps</th>
+        <th>Weight</th>
+        <th>Rest Time</th>
+      </tr>
+      <tr>
+        <td><%= exercise.name %></td>
+        <td><%= exercise.rounds %></td>
+        <td><%= exercise.reps %></td>
+        <td><%= exercise.weight %></td>
+        <td><%= exercise.rest_time %></td>
+      </tr>
+    </table>
+  <% end  %>
 
   <div class="button-exercises-container">
     <button class="btn-main">  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
