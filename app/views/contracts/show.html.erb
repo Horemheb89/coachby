@@ -9,16 +9,16 @@
 
   <!-- Meal Alert -->
   <% if @meals_today.count > 0 %>
-    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %>meal(s) scheduled for today.</p>
+    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %> meal(s) scheduled for today.</p>
   <% else %>
-    <p>No meals scheduled for today.</p>
+    <p>No meal scheduled for today.</p>
   <% end %>
 
   <!-- Session Alert -->
   <% if @meals_today.count > 0 %>
-    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %>meal(s) scheduled for today.</p>
+    <p><%= @contract.athlete.first_name %> has <%= @sessions_today.count %> session(s) scheduled for today.</p>
   <% else %>
-    <p>No meals scheduled for today.</p>
+    <p>No session scheduled for today.</p>
   <% end %>
 
   <div class="athlete-card">
