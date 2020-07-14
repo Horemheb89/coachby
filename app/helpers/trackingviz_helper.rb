@@ -5,7 +5,7 @@ module TrackingvizHelper
     if diff > 15
       "#FB0000"
     elsif diff < -15
-      "#76FB00"
+      "#38A02B"
     end
   end
 end

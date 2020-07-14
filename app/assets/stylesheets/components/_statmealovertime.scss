@@ -1,39 +1,78 @@
+
+ .page-title {
+  color: #EF4B2A;
+  margin: 30px 0px;
+ }
+
+.bowshadow {
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+
+
+.meal-graph {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding:10px;
+  border-radius: 5px;
+}
+
+.macrograph {
+  position: relative;
+  display: flex;
+  margin-bottom:60px;
+  height:300px;
+  width:370px;
+}
+
+.meal-graph_macro div {
+  background-color: white;
+}
+
+
 .nutri-table-meal {
   text-align:center;
-  width:70%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 10px;
+  width:100%;
   color: black;
+  margin-bottom: 60px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding:20px;
 
   table {
-    border:3px solid black;
-    width:70%;
+    border-collapse: collapse;
+
   }
 
   thead, tfoot {
-    background-color:$red;
-    border:1px solid black;
+
   }
 
   tbody {
     background-color:white;
-    border:1px solid black;
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:first-child {
+      background:white;
+    }
   }
 
   th {
-    font-family:monospace;
-    color: black;
-    border:1px solid black;
-    padding:5px;
-    background-color:$red;
-    width: 200px;
+    background:white;
+    font-weight: bold;
+    height:40px;
+    width: 20%;
   }
 
   td {
     font-family:sans-serif;
     font-size:80%;
-    border:1px solid black;
     padding:5px;
   }
 
@@ -43,19 +82,5 @@
 }
 
 
-.meal-graph {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-around;
-  background-color: white;
-}
 
-.meal-graph_macro {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom:30px;
-}
 
-.meal-graph_macro div {
-  background-color: white;
-}

@@ -28,7 +28,7 @@ class MealsController < ApplicationController
         @meals_date = @meals
       end
     # @contract = Contract.find(params[:contract_id])
-    @labels = ["Proteins","Fats", "Carbs", "Calorie"]
+    @labels = ["Proteins", "Fats", "Carbs", "Calorie"]
     # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
     # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
     @meal_type = { "petit-dejeuner" => 0, "dejeuner" => 0, "gouter" => 0, "diner" => 0 }
