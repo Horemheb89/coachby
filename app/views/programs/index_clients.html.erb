@@ -40,22 +40,29 @@
           datasets: [{
             label: "Calories",
             data: <%= data_cal_deux.values.to_json.html_safe %>,
-            fill:  false,
-            borderColor: ['rgba(186, 0, 251,1)']
+            fill:  true,
+            backgroundColor: ['rgba(186, 0, 251,0.2)'],
+            borderColor: ['rgba(186, 0, 251,1)'],
             },{
             label: "Goal",
             data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
             fill:  false,
-            borderColor: ['rgba(0, 0, 0, 0.4)'],
             borderDash: [5, 5],
             pointRadius: 0
           }],
         },
         options: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+                fontColor: 'rgba(0, 0, 0,1)'
+            }
+          },
           responsive: true,
           title:{
               display: true,
-              text:"Chart.js Time Scale"
+              text:"Calories"
           },
           scales:{
             xAxes: [{
@@ -131,9 +138,9 @@
     <% end %>
 
   <div class="macrograph">
-    <canvas id = "proteins" > </canvas>
-    <canvas id = "carbs"> </canvas>
-    <canvas id = "fats" > </canvas>
+    <canvas style = "  background-color: white;" id = "proteins" > </canvas>
+    <canvas style = "  background-color: white;" id = "carbs"> </canvas>
+    <canvas style = "  background-color: white;" id = "fats" > </canvas>
   </div>
 
     <script>
@@ -142,10 +149,11 @@
         data:{
           labels: <%= data_p_deux.keys.to_json.html_safe %>,
           datasets: [{
-            label: "proteins",
+            label: "Proteins",
             data: <%= data_p_deux.values.to_json.html_safe %>,
-            fill:  false,
-            borderColor: ['rgba(251, 19, 0, 1)']
+            fill:  true,
+            borderColor: ['rgba(251, 19, 0, 1)'],
+            backgroundColor: ['rgba(251, 19, 0, 0.2)'],
             },{
             label: "Goal",
             data: <%= data_p_deux.map { |day,value| [day, program.proteins_target]}.to_h.values %>,
@@ -156,10 +164,18 @@
           }],
         },
         options: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+                fontColor: 'rgba(0, 0, 0,1)'
+            }
+          },
+          maintainAspectRatio:false,
           responsive: true,
           title:{
               display: true,
-              text:"Chart.js Time Scale"
+              text:"Proteins"
           },
           scales:{
             xAxes: [{
@@ -194,10 +210,11 @@
         data:{
           labels: <%= data_l_deux.keys.to_json.html_safe %>,
           datasets: [{
-            label: "fats",
+            label: "Fats",
             data: <%= data_l_deux.values.to_json.html_safe %>,
-            fill:  false,
-            borderColor: ['rgba(251, 240, 0, 1)']
+            fill:  true,
+            borderColor: ['rgba(251, 240, 0, 1)'],
+            backgroundColor: ['rgba(251, 240, 0, 0.4)'],
             },{
             label: "Goal",
             data: <%= data_l_deux.map { |day,value| [day, program.fats_target]}.to_h.values %>,
@@ -208,10 +225,18 @@
           }],
         },
         options: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+                fontColor: 'rgba(0, 0, 0,1)'
+            }
+          },
+          maintainAspectRatio:false,
           responsive: true,
           title:{
               display: true,
-              text:"Chart.js Time Scale"
+              text:"Fats"
           },
           scales:{
             xAxes: [{
@@ -246,10 +271,11 @@
         data:{
           labels: <%= data_c_deux.keys.to_json.html_safe %>,
           datasets: [{
-            label: "carbs",
+            label: "Carbs",
             data: <%= data_c_deux.values.to_json.html_safe %>,
-            fill:  false,
-            borderColor: ['rgba(0, 221, 251, 1)']
+            fill:  true,
+            borderColor: ['rgba(0, 221, 251, 1)'],
+            backgroundColor: ['rgba(0, 221, 251, 0.2)'],
             },{
             label: "Goal",
             data: <%= data_c_deux.map { |day,value| [day, program.carbs_target]}.to_h.values %>,
@@ -260,10 +286,18 @@
           }],
         },
         options: {
+            legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+                fontColor: 'rgba(0, 0, 0,1)'
+            }
+          },
+          maintainAspectRatio:false,
           responsive: true,
           title:{
               display: true,
-              text:"Chart.js Time Scale"
+              text:"Carbs"
           },
           scales:{
             xAxes: [{
