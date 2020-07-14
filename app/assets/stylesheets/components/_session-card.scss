@@ -18,11 +18,13 @@
   }
 }
 
+
   //Content - Left Side
 
 .session-card-date {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .session-card-date h3 {
