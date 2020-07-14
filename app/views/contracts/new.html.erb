@@ -1,12 +1,14 @@
-<h1>Contract#new</h1>
-<p>Find me in app/views/contract/new.html.erb</p>
-
-
+<div class="banner-main">
+  <div class="container">
+    <h1>Create a contract with a new athlete</h1>
+    <p>Good for you, Coach!</p>
+  </div>
+</div>
 
 <div class="container">
 
   <%= simple_form_for @contract do |f| %>
-    <%= f.input :athlete_id, :collection => User.where(:is_coach => false) %>
+    <%= f.input :athlete_id, :collection => User.where(:is_coach => false).map { |user| [user.full_name, user.id]} %>
 <!--     <%= f.input :coach_id %>
  -->    <%= f.button :submit, class: 'main-btn ' %>
   <% end %>
