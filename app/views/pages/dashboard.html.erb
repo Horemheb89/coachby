@@ -19,11 +19,11 @@
         <h2> COACH: No coach yet! </h2>
       <% end %>
       <h3> Height: 160 cm </h3>
-      <h3> Weight: 160 cm </h3>
+      <h3> Weight: 160 kg </h3>
       <h3> Email address: <%= @user.email %> </h3>
       <h2> My program: </h2>
-      <h3> <%= link_to "My Exercise Plan", "/contracts/:contract_id/programs/:id/session" %> </h3>
-      <h3> <%= link_to "My Diet Plan", "/contracts/:contract_id/programs/:id" %> </h3>
+      <h3> <%= link_to "See exercise program", program_path(program) %> </h3>
+      <h3> <%= link_to "My Diet Plan", "/programs/:id/meals/new" %> </h3>
     </div>
   </div>
 
