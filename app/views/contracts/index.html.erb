@@ -16,7 +16,7 @@
             <div class="card-contract-info">
               <% n = rand(1..5) %>
               <%= image_tag "avatar_athlete_#{n}.jpg" %>
-              <p><%= contract.athlete.first_name %></p>
+              <p><%= contract.athlete.full_name %></p>
             </div>
             <div class="card-contract-btn">
               <p><%= icon('fas', 'chevron-right') %></p>

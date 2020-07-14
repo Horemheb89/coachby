@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :athletes, through: :contracts_as_coach
   has_one :contract_as_athlete, foreign_key: :athlete_id, class_name: "Contract"
   has_one :coach, through: :contract_as_athlete
+
+  def full_name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
 end
