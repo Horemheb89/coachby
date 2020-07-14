@@ -1,4 +1,27 @@
 
+ .page-title {
+  color: #EF4B2A;
+  margin: 30px 0px;
+ }
+
+.bowshadow {
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+
+
+.meal-graph {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding:10px;
+  border-radius: 5px;
+}
+
 .macrograph {
   position: relative;
   display: flex;
@@ -16,12 +39,17 @@
   text-align:center;
   width:100%;
   color: black;
+  margin-bottom: 60px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding:20px;
 
   table {
     border-collapse: collapse;
+
   }
 
   thead, tfoot {
+
   }
 
   tbody {
@@ -54,12 +82,5 @@
 }
 
 
-.meal-graph {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-around;
-  background-color: white;
-  width: 100%;
-}
 
 

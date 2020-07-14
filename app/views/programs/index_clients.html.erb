@@ -1,12 +1,12 @@
 <div class="container">
-  <h1> diet dashboard <%=  %></h1>
+  <h1 class = page-title> diet dashboard <i class="fas fa-chart-line"></i> </h1>
+
   <% data_cal = {} %>
   <% data_cal_ref = {} %>
   <% line_data_cal = [] %>
 
 <!-- plot calories -->
   <% @programs.each do |program| %>
-    <%= link_to "See meals", program_meals_path(program) %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
 
       <% data_cal[day.strftime("%d/%m/%Y")] = meals.map{|meal| calorie(meal)}.sum %>
@@ -14,7 +14,6 @@
 
     <% end %>
   <% end %>
-
   <% data_cal = data_cal.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
   <% data_cal_deux = {} %>
 
@@ -53,7 +52,7 @@
         },
         options: {
           legend: {
-            display: true,
+            display: false,
             position: 'right',
             labels: {
                 fontColor: 'rgba(0, 0, 0,1)'
@@ -74,19 +73,20 @@
               unit: 'day',
               unitStepSize: 1,
               displayFormats: {
-                'day': 'DD/MM/YYYY'
+                'day': 'DD/MM'
                 }
               },
               ticks: {
                 autoSkip: true,
-                maxTicksLimit: 20
+                maxTicksLimit: 20,
+                beginAtZero: true,
               }
             }], // XAxes ends
             yAxes: [{
                 scaleLabel: {
-                  display: true,
+                  display: false,
                   labelString: 'value'
-                }
+                },
             }]
           }
         }
@@ -111,7 +111,10 @@
       <% data_p[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.proteins}.sum %>
       <% data_l[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.fats}.sum %>
       <% data_c[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.carbs}.sum  %>
+
+
     <% end %>
+    <% max_scale = [data_p.values.max, data_l.values.max, data_c.values.max].max.round(-2) + 100 %>
 
     <!-- proteins -->
     <% data_p = data_p.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
@@ -137,10 +140,12 @@
       <% data_c_deux[day] = meal  %>
     <% end %>
 
-  <div class="macrograph">
-    <canvas style = "  background-color: white;" id = "proteins" > </canvas>
-    <canvas style = "  background-color: white;" id = "carbs"> </canvas>
-    <canvas style = "  background-color: white;" id = "fats" > </canvas>
+  <div class="bowshadow" >
+    <div class="macrograph">
+      <canvas style = "background-color: white; padding: 10px;" id = "proteins" > </canvas>
+      <canvas style = "background-color: white; padding: 10px;" id = "carbs"> </canvas>
+      <canvas style = "background-color: white; padding: 10px;" id = "fats" > </canvas>
+    </div>
   </div>
 
     <script>
@@ -165,7 +170,7 @@
         },
         options: {
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
             labels: {
                 fontColor: 'rgba(0, 0, 0,1)'
@@ -187,7 +192,7 @@
               unit: 'day',
               unitStepSize: 1,
               displayFormats: {
-                'day': 'DD/MM/YYYY'
+                'day': 'DD/MM'
                 }
               },
               ticks: {
@@ -197,8 +202,12 @@
             }], // XAxes ends
             yAxes: [{
                 scaleLabel: {
-                  display: false,
-                  labelString: 'value'
+                  display: true,
+                  labelString: 'Mass (Gr)'
+                },
+                ticks: {
+                  max: <%= max_scale %>,
+                  min: 0,
                 }
             }]
           }
@@ -226,7 +235,7 @@
         },
         options: {
           legend: {
-            display: true,
+            display: false,
             position: 'bottom',
             labels: {
                 fontColor: 'rgba(0, 0, 0,1)'
@@ -248,7 +257,7 @@
               unit: 'day',
               unitStepSize: 1,
               displayFormats: {
-                'day': 'DD/MM/YYYY'
+                'day': 'DD/MM'
                 }
               },
               ticks: {
@@ -260,6 +269,10 @@
                 scaleLabel: {
                   display: false,
                   labelString: 'value'
+                },
+                ticks: {
+                  max: <%= max_scale %>,
+                  min: 0,
                 }
             }]
           }
@@ -287,7 +300,7 @@
         },
         options: {
             legend: {
-            display: true,
+            display: false,
             position: 'bottom',
             labels: {
                 fontColor: 'rgba(0, 0, 0,1)'
@@ -309,7 +322,7 @@
               unit: 'day',
               unitStepSize: 1,
               displayFormats: {
-                'day': 'DD/MM/YYYY'
+                'day': 'DD/MM'
                 }
               },
               ticks: {
@@ -321,6 +334,10 @@
                 scaleLabel: {
                   display: false,
                   labelString: 'value'
+                },
+                ticks: {
+                  max: <%= max_scale %>,
+                  min: 0,
                 }
             }]
           }
