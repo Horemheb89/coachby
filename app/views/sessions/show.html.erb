@@ -15,34 +15,35 @@
       </div>
       <div class="exercice-row">
         <i class="fas fa-meteor"></i>
-        <p>exercise name</p>
+        <p>Exercise Name</p>
         <%= exercise.name %>
       </div>
       <div class="exercice-row">
         <i class="fas fa-plus"></i>
-        <p>rounds</p>
+        <p>Rounds</p>
         <%= exercise.rounds %>
       </div>
       <div class="exercice-row">
         <i class="fas fa-redo-alt"></i>
-        <p>reps</p>
+        <p>Reps</p>
         <%= exercise.reps %>
       </div>
       <div class="exercice-row">
         <i class="fas fa-balance-scale"></i>
-        <p>weight</p>
+        <p>Weight</p>
         <%= exercise.weight %>
       </div>
       <div class="exercice-row">
         <i class="far fa-hourglass"></i>
-        <p>rest time</p>
+        <p>Rest Time</p>
         <%= exercise.rest_time %>
       </div>
     </div>
   <% end %>
 
-
-  <button>  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
+  <div class="button-exercises-container">
+    <button class="btn-main">  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
+  </div>
 </div>
 
 <%# @sessions.each do |session| %>

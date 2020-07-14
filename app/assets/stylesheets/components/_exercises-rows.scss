@@ -25,3 +25,13 @@
 .exercise-arrow .fas {
   color: #ef4a2a;
 }
+
+.button-exercises-container {
+  display: flex;
+  height: 100px ;
+  padding: 20px 50px;
+  margin: 30px auto;
+  justify-content: space-around;
+  align-items: center;
+}
+

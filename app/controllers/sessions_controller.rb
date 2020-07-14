@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
 
   def index
-    @session = Session.find(params[:program_id])
-    @sessions = policy_scope(Session).includes(:exercises)
-    @sessions = Session.where(program_id: @program)
+    #@session = Session.find(params[:program_id])
+    #@sessions = policy_scope(Session).includes(:exercises)
+    @sessions = policy_scope(Session).where(program_id: params[:program_id])
+    #@sessions = Session.find(params[:program_id])
   end
 
   def show

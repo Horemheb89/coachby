@@ -8,15 +8,14 @@
 <div class="container">
   <div class="category-padding">
     <% @sessions.each do |session| %>
-      <div class="session-card">
-        <div class="session-card-date">
-          <img src="https://lmimirror3pvr.azureedge.net/static/media/1769/a871b582-b5ee-4585-9115-81a3ae2f099d/ww_32-288x288_reebok_lesmills_ss16_d3_bodypump_02_053-1_f1.jpg" />
-          <h3><%= session.start_time %></h3>
+      <%= link_to session_path(session) do %>
+        <div class="session-card">
+          <div class="session-card-date">
+            <img src="https://lmimirror3pvr.azureedge.net/static/media/1769/a871b582-b5ee-4585-9115-81a3ae2f099d/ww_32-288x288_reebok_lesmills_ss16_d3_bodypump_02_053-1_f1.jpg" />
+            <h3>Session Date : <%= session.start_time %></h3>
+          </div>
         </div>
-        <div class="session-card-btn">
-          <%= link_to "see exercises", program_session_path(@session) %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 <div>
