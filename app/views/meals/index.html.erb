@@ -21,36 +21,36 @@
         <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
         <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_prot > 1.2 %>" > <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
+          <p style="color: <%= "red" if ratio_prot > 1.2 %>;font-weight: <%= "bold" if ratio_prot > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
         </div>
       </div>
 
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.fats}.sum() %> g</h2>
-        <p> Fats </p>
+        <p> <i class="fas fa-cheese"></i> Fats </p>
         <% ratio_fat = (@meals_date.map { |meal| meal.fats}.sum())/@program.fats_target.to_f %>
         <div id = "fat-bar" data-macro= <%= ratio_fat > 1 ? 1 : ratio_fat %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_fat > 1.2 %>" > <%= (@meals_date.map { |meal| meal.fats}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
+          <p style="color: <%= "red" if ratio_fat > 1.2 %>;font-weight: <%= "bold" if ratio_fat > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.fats}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
         </div>
       </div>
 
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.carbs}.sum() %> g</h2>
-        <p> Carbs </p>
+        <p> <i class="fas fa-bread-slice"></i> Carbs </p>
         <% ratio_carb = (@meals_date.map { |meal| meal.carbs}.sum())/@program.carbs_target.to_f %>
         <div id = "carb-bar" data-macro= <%= ratio_carb > 1 ? 1 : ratio_carb %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_carb > 1.2 %>" > <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> </p>/ <p> <%= @program.carbs_target %> </p>
+          <p style="color: <%= "red" if ratio_carb > 1.2 %>;font-weight: <%= "bold" if ratio_carb > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> </p>/ <p> <%= @program.carbs_target %> </p>
         </div>
       </div>
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| calorie(meal)}.sum() %> </h2>
-        <p> Calories </p>
+        <p> <i class="fas fa-burn"></i> Calories </p>
         <% ratio_cal = (@meals_date.map { |meal|calorie(meal)}.sum())/@program.calorie_target.to_f %>
         <div id = "carb-cal" data-macro= <%= ratio_cal > 1 ? 1 : ratio_cal %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_cal > 1.2 %>" > <%= (@meals_date.map { |meal| calorie(meal)}.sum()) %> </p>/ <p> <%= @program.calorie_target %> </p>
+          <p style="color: <%= "red" if ratio_cal > 1.2 %>;font-weight: <%= "bold" if ratio_cal > 1.2 %>;" > <%= (@meals_date.map { |meal| calorie(meal)}.sum()) %> </p>/ <p> <%= @program.calorie_target %> </p>
         </div>
       </div>
     </div>
