@@ -29,81 +29,68 @@
   <% data_cal_ref_deux[day] = meal  %>
   <% end %>
 
-
-
   <div class = "meal-graph">
-
     <canvas id="calorie"></canvas>
     <script>
-        const config = {
-            type:'line',
-            data:{
-              labels: <%= data_cal_deux.keys.to_json.html_safe %>,
-              datasets: [{
-                    label: "Calories",
-                    data: <%= data_cal_deux.values.to_json.html_safe %>,
-                    fill:  false,
-                    borderColor: 'blue'
-                  },{
-                    label: "Goal",
-                    data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
-                    fill:  false,
-                    borderColor: 'red'
-                  }
-                ],
-            },
-            options: {
-                responsive: true,
-                title:{
-                    display: true,
-                    text:"Chart.js Time Scale"
-                },
-                scales:{
-                  xAxes: [{
-                    type: 'time',
-                    //
-                     time: {
-                      parser: 'DD/MM/YYYY',
-                      tooltipFormat: 'DD/MM/YYYY',
-                      unit: 'day',
-                      unitStepSize: 1,
-                      displayFormats: {
-                        'day': 'DD/MM/YYYY'
-                      }
-                    },
-                    ticks: {
-                      autoSkip: true,
-                      maxTicksLimit: 20
-                    }
-                }], // XAxes ends
-                  yAxes: [{
-                      scaleLabel: {
-                          display: true,
-                          labelString: 'value'
-                      }
-                  }]
+      new Chart(document.getElementById("calorie").getContext("2d"), {
+        type:'line',
+        data:{
+          labels: <%= data_cal_deux.keys.to_json.html_safe %>,
+          datasets: [{
+            label: "Calories",
+            data: <%= data_cal_deux.values.to_json.html_safe %>,
+            fill:  false,
+            borderColor: 'blue'
+            },{
+            label: "Goal",
+            data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
+            fill:  false,
+            borderColor: 'red'
+          }],
+        },
+        options: {
+          responsive: true,
+          title:{
+              display: true,
+              text:"Chart.js Time Scale"
+          },
+          scales:{
+            xAxes: [{
+              type: 'time',
+              //
+              time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                'day': 'DD/MM/YYYY'
+                }
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 20
               }
-            }
-        };
+            }], // XAxes ends
+            yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'value'
+                }
+            }]
+          }
+        }
+    });
 
-    window.onload = function () {
-        const ctx = document.getElementById("calorie").getContext("2d");
-        window.myLine = new Chart(ctx, config);
-    };
 </script>
-  </div>
-<!-- plot macro -->
-  <% line_data_p = [] %>
-  <% line_data_c = [] %>
-  <% line_data_f = [] %>
 
+  </div>
+
+
+<!-- plot macro -->
   <% data_p = {} %>
   <% data_l = {} %>
   <% data_c = {} %>
-
-  <% data_p_ref = {} %>
-  <% data_l_ref = {} %>
-  <% data_c_ref = {} %>
 
   <% @programs.each do |program| %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
@@ -111,39 +98,220 @@
       <% sum_p = 0 %>
       <% sum_c = 0 %>
       <% sum_l = 0 %>
-
-      <% sum_p = meals.map{|meal| meal.proteins}.sum  %>
-      <% sum_l = meals.map{|meal| meal.fats}.sum  %>
-      <% sum_c = meals.map{|meal| meal.carbs}.sum  %>
-
-      <% data_p[day.strftime("%m/%d/%Y")] = sum_p %>
-      <% data_l[day.strftime("%m/%d/%Y")] = sum_l %>
-      <% data_c[day.strftime("%m/%d/%Y")] = sum_c %>
-
-      <% data_p_ref[day.strftime("%m/%d/%Y")] = program.proteins_target %>
-      <% data_l_ref[day.strftime("%m/%d/%Y")] = program.fats_target %>
-      <% data_c_ref[day.strftime("%m/%d/%Y")] = program.carbs_target %>
-
+      <% data_p[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.proteins}.sum %>
+      <% data_l[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.fats}.sum %>
+      <% data_c[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.carbs}.sum  %>
     <% end %>
-    <div>
-      <% line_data_p << {:name => "protein", :data => data_p } %>
-      <% line_data_p << {:name => "proteins_target", :data => data_p_ref } %>
-    </div>
-    <div>
-      <% line_data_f << {:name => "fats", :data => data_l } %>
-      <% line_data_f << {:name => "fats_target", :data => data_l_ref } %>
-    </div>
-    <div>
-      <% line_data_c << {:name => "carbs", :data => data_c } %>
-      <% line_data_c << {:name => "carbs_target", :data => data_c_ref } %>
-    </div>
+
+    <!-- proteins -->
+    <% data_p = data_p.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
+    <% data_p_deux = {} %>
+
+    <% data_p.each do |day,meal| %>
+      <% data_p_deux[day] = meal  %>
+    <% end %>
+
+    <!-- fats -->
+    <% data_l = data_l.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
+    <% data_l_deux = {} %>
+
+    <% data_l.each do |day,meal| %>
+      <% data_l_deux[day] = meal  %>
+    <% end %>
+
+    <!-- carbs -->
+    <% data_c = data_c.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
+    <% data_c_deux = {} %>
+
+    <% data_c.each do |day,meal| %>
+      <% data_c_deux[day] = meal  %>
+    <% end %>
+
+  <div class="macrograph">
+    <canvas id = "proteins" > </canvas>
+    <canvas id = "carbs"> </canvas>
+    <canvas id = "fats" > </canvas>
+  </div>
+
+    <script>
+     new Chart(document.getElementById("proteins").getContext("2d"), {
+        type:'line',
+        data:{
+          labels: <%= data_p_deux.keys.to_json.html_safe %>,
+          datasets: [{
+            label: "proteins",
+            data: <%= data_p_deux.values.to_json.html_safe %>,
+            fill:  false,
+            borderColor: 'blue'
+            },{
+            label: "Goal",
+            data: <%= data_p_deux.map { |day,value| [day, program.proteins_target]}.to_h.values %>,
+            fill:  false,
+            borderColor: 'red'
+          }],
+        },
+        options: {
+          responsive: true,
+          title:{
+              display: true,
+              text:"Chart.js Time Scale"
+          },
+          scales:{
+            xAxes: [{
+              type: 'time',
+              //
+              time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                'day': 'DD/MM/YYYY'
+                }
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 20
+              }
+            }], // XAxes ends
+            yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'value'
+                }
+            }]
+          }
+        }
+    });
+
+    new Chart(document.getElementById("carbs").getContext("2d"), {
+        type:'line',
+        data:{
+          labels: <%= data_c_deux.keys.to_json.html_safe %>,
+          datasets: [{
+            label: "carbs",
+            data: <%= data_c_deux.values.to_json.html_safe %>,
+            fill:  false,
+            borderColor: 'blue'
+            },{
+            label: "Goal",
+            data: <%= data_c_deux.map { |day,value| [day, program.carbs_target]}.to_h.values %>,
+            fill:  false,
+            borderColor: 'red'
+          }],
+        },
+        options: {
+          responsive: true,
+          title:{
+              display: true,
+              text:"Chart.js Time Scale"
+          },
+          scales:{
+            xAxes: [{
+              type: 'time',
+              //
+              time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                'day': 'DD/MM/YYYY'
+                }
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 20
+              }
+            }], // XAxes ends
+            yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'value'
+                }
+            }]
+          }
+        }
+    });
+
+    new Chart(document.getElementById("fats").getContext("2d"), {
+        type:'line',
+        data:{
+          labels: <%= data_l_deux.keys.to_json.html_safe %>,
+          datasets: [{
+            label: "fats",
+            data: <%= data_l_deux.values.to_json.html_safe %>,
+            fill:  false,
+            borderColor: 'blue'
+            },{
+            label: "Goal",
+            data: <%= data_l_deux.map { |day,value| [day, program.fats_target]}.to_h.values %>,
+            fill:  false,
+            borderColor: 'red'
+          }],
+        },
+        options: {
+          responsive: true,
+          title:{
+              display: true,
+              text:"Chart.js Time Scale"
+          },
+          scales:{
+            xAxes: [{
+              type: 'time',
+              //
+              time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                'day': 'DD/MM/YYYY'
+                }
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 20
+              }
+            }], // XAxes ends
+            yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'value'
+                }
+            }]
+          }
+        }
+    });
+    </script>
+
   <% end %>
 
-  <div class = "meal-graph_macro">
-    <%= line_chart line_data_p, ytitle: "Protein", width: "400px" %>
-    <%= line_chart line_data_f, ytitle: "Fats", width: "400px" %>
-    <%= line_chart line_data_c, ytitle: "Carbs", width: "400px" %>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -180,23 +348,4 @@
       </table>
   <% end %>
 
-
-  <!-- [
-    {:name=>"MR", :data=>{day=> sum protein, Wed, 01 Mar 2017=>66, Sat, 01 Apr 2017=>73, Sun, 01 Jan 2017=>44}},
-    {:name=>"CT", :data=>{Wed, 01 Feb 2017=>4, Wed, 01 Mar 2017=>6, Sat, 01 Apr 2017=>8, Sun, 01 Jan 2017=>52}},
-    {:name=>"XR", :data=>{Wed, 01 Mar 2017=>1}},
-  ]
-   -->
-
-
-
-
-
-
-  <!-- better with activerecords request ? -->
-  <!--  <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("(carbs*4)+(proteins*4)+(fats*9)"), ytitle: "Calorie" %>
-   <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("proteins"), ytitle: "proteins" %>
-   <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("fats"), ytitle: "fats" %>
-   <%= line_chart Meal.group_by_day(:start_time).joins(:doses).joins(:ingredients).sum("carbs"), ytitle: "carbs" %>
-   -->
 </div>

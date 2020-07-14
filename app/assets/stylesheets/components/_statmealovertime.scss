@@ -1,3 +1,15 @@
+
+.macrograph {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom:30px;
+}
+
+.meal-graph_macro div {
+  background-color: white;
+}
+
+
 .nutri-table-meal {
   text-align:center;
   width:70%;
@@ -50,12 +62,4 @@
   background-color: white;
 }
 
-.meal-graph_macro {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom:30px;
-}
 
-.meal-graph_macro div {
-  background-color: white;
-}
