@@ -1,28 +1,38 @@
-
 <div class="banner-main">
   <div class="container">
-    <h1><%= @contract.athlete.first_name.capitalize %>'s profile</h1>
+    <h1><span class="gray-text"><%= icon('fas', 'user') %> </span><%= @contract.athlete.first_name %> <%= @contract.athlete.last_name %></h1>
     <p>Manage your athlete</p>
   </div>
 </div>
 
 <div class="container">
 
-  <%  if current_user = @contract.coach %>
-    <h1 class="greeting"> Hello, <%= @contract.coach.first_name.capitalize %> ! </h1>
-  <%  else %>
-    <h1 class="greeting"> Hello, <%= @contract.athlete.first_name.capitalize %> ! </h1>
-  <%  end %>
+  <!-- Meal Alert -->
+  <% if @meals_today.count > 0 %>
+    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %>meal(s) scheduled for today.</p>
+  <% else %>
+    <p>No meals scheduled for today.</p>
+  <% end %>
+
+  <!-- Session Alert -->
+  <% if @meals_today.count > 0 %>
+    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %>meal(s) scheduled for today.</p>
+  <% else %>
+    <p>No meals scheduled for today.</p>
+  <% end %>
 
   <div class="athlete-card">
     <%= image_tag "avatar_athlete_1.jpg", class: "avatar-large" %>
     <div class="athlete-card-infos">
-      <h2 class="athlete-name"> <%= @contract.athlete.full_name.capitalize %> </h2>s
-      <h2> Coach: <%= @contract.coach.first_name.capitalize %> </h2>
-      <h3> Height: <%= @contract.athlete.height %> cm </h3>
-      <h3> Weight: <%= @contract.athlete.weight %> kg </h3>
-      <h3> Date of Birth: <%= @contract.athlete.dob %> </h3>
-      <h3> Email address: <%= @contract.athlete.email %> </h3>
+      <h3>Goal</h3>
+      <p>My #1 fitness goal for 2020 is to get back into a regular gym routine. I used to go 4–5 days a week, but I stopped doing that when I had to start commuting 3 hours/day to and from work. I want to create a new routine that includes at least 3 days per week of gym time.</p>
+      <h3>Information</h3>
+      <p>Height: <%= @contract.athlete.height %> cm</p>
+      <p>Weight: <%= @contract.athlete.weight %> kg</p>
+      <!-- <p>Date of Birth: <%= @contract.athlete.dob %></p> -->
+      <!-- <p>Email address: <%= @contract.athlete.email %></p> -->
+      <h3>Activity</h3>
+
     </div>
   </div>
 

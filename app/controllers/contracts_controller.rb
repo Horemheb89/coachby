@@ -23,6 +23,11 @@ class ContractsController < ApplicationController
 
   def show
     authorize @contract
+    @meals = Meal.joins(program: [:contract]).where(programs: { contract_id: @contract.id })
+    @meals_today = @meals.select { |meal| meal.start_time == Date.today }
+
+    @sessions = Session.joins(program: [:contract]).where(programs: { contract_id: @contract.id })
+    @sessions_today = @sessions.select {|sessions| session.start_time = Date.today }
   end
 
   private
