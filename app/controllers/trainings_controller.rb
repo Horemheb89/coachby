@@ -3,13 +3,16 @@ class TrainingsController < ApplicationController
   def index
     #@training = Training.find(params[:program_id])
     #@trainings = policy_scope(Training).includes(:exercises)
+    #@program = Program.find(params[:program_id])
     @trainings = policy_scope(Training).where(program_id: params[:program_id])
+
     #@trainings = Training.find(params[:program_id])
   end
 
   def show
     @training = Training.find(params[:id])
-    @trainings = policy_scope(Training).includes(:exercises)
+    @program = @training.program
+    @trainings = policy_scope(Training).where(program_id: @program)
     authorize @trainings
     @exercises = Exercise.where(training: @training)
   end
