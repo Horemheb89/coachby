@@ -1,7 +1,7 @@
 <div class="banner-main">
   <div class="container">
     <h1><span class="gray-text"><%= icon('fas', 'user') %> </span><%= @contract.athlete.first_name %> <%= @contract.athlete.last_name %></h1>
-    <p>Manage your athlete</p>
+    <!-- <p>Manage your athlete</p> -->
   </div>
 </div>
 
@@ -9,16 +9,16 @@
 
   <!-- Meal Alert -->
   <% if @meals_today.count > 0 %>
-    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %> meal(s) scheduled for today.</p>
+    <p><%= @contract.athlete.first_name %> has <%= @meals_today.count %> meal<%= @meals_today.count == 1 ? "" : "s" %> scheduled for today.</p>
   <% else %>
-    <p>No meal scheduled for today.</p>
+    <p>No meal scheduled for today. <%= link_to "Add a new meal.", index_path %></p>
   <% end %>
 
   <!-- Session Alert -->
-  <% if @meals_today.count > 0 %>
-    <p><%= @contract.athlete.first_name %> has <%= @sessions_today.count %> session(s) scheduled for today.</p>
+  <% if @sessions_today.count > 0 %>
+    <p><%= @contract.athlete.first_name %> has <%= @sessions_today.count %> session<%= @sessions_today.count == 1 ? "" : "s" %> scheduled for today.</p>
   <% else %>
-    <p>No session scheduled for today.</p>
+    <p>No session scheduled for today. <%= link_to "Add a new session.", index_path %></p>
   <% end %>
 
   <div class="athlete-card">
@@ -29,9 +29,8 @@
       <h3>Information</h3>
       <p>Height: <%= @contract.athlete.height %> cm</p>
       <p>Weight: <%= @contract.athlete.weight %> kg</p>
-      <!-- <p>Date of Birth: <%= @contract.athlete.dob %></p> -->
-      <!-- <p>Email address: <%= @contract.athlete.email %></p> -->
-      <h3>Activity</h3>
+      <p>Date of Birth: <%= @contract.athlete.dob %></p>
+      <p>Email address: <%= @contract.athlete.email %></p>
 
     </div>
   </div>

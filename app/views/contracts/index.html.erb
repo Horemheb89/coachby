@@ -2,7 +2,7 @@
 <div class="banner-main">
   <div class="container">
     <h1><span class="gray-text"><%= icon('fas', 'list') %> </span>Athletes</h1>
-    <p>Manage your <%= @contracts.count %> athlete(s).</p>
+    <p>Manage your <%= @contracts.count %> athlete<%= @contracts.count == 1 ? "" : "s" %>.</p>
   </div>
 </div>
 
