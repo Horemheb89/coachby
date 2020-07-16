@@ -9,7 +9,7 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new(exercise_params)
     authorize @exercise
     if @exercise.save
-      redirect_to program_sessions_path(@exercise)
+      redirect_to program_trainings_path(@exercise)
     end
   end
 

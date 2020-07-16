@@ -83,12 +83,12 @@
         <!-- Sessions -->
         <div class="sidebar-category">
 
-          <%= link_to program_sessions_path(program) do %>
+          <%= link_to program_trainings_path(program) do %>
             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Program | Sessions">
               <p class="nav-link" href="#"><%= icon('fas', 'dumbbell') %></p>
             </li>
           <% end %>
-          <%= link_to new_program_session_path(program) do %>
+          <%= link_to new_program_training_path(program) do %>
             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Program | New Session">
               <p class="nav-link" href="#"><%= icon('fas', 'plus') %></p>
             </li>

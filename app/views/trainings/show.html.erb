@@ -42,16 +42,6 @@
   <% end %>
 
   <div class="button-exercises-container">
-    <button class="btn-main">  <%= link_to "Back to session's list", program_sessions_path(@session) %></button>
+    <button class="btn-main">  <%= link_to "Back to session's list", program_trainings_path(@program) %></button>
   </div>
 </div>
-
-<%# @sessions.each do |session| %>
-    <%#= session.start_time %>
-      <%# session.exercises.each do |exercise| %>
-        <%#= exercise.name %>
-        <%#= exercise.rounds %>
-        <%#= exercise.reps %>
-        <%#= exercise.weight %>
-        <%#= exercise.rest_time %>
-    <%# end %>
