@@ -6,6 +6,9 @@
 </div>
 
 <div class="container">
+
+
+  <!-- Alerts -->
   <div class="contract-alert-wrapper">
     <!-- Meal Alert -->
     <% if @meals_today.count > 0 %>
@@ -22,6 +25,8 @@
     <% end %>
   </div>
 
+
+  <!-- Athlete info -->
   <div class="athlete-card">
     <% n = rand(1..5) %>
     <%= image_tag "avatar_athlete_#{n}.jpg" %>
@@ -33,16 +38,31 @@
     </div>
   </div>
 
+
+  <!-- Athlete links -->
   <div class="category-padding ">
     <%= link_to index_clients_path(@contract) do %>
-      <h3><span class="gray-text"><%= icon('fas', 'chart-line') %> </span> Dashboard</h3>
-      <p>Monitor <%= @contract.athlete.first_name %>'s performance.</p>
-      <p><%= icon('fas', 'chevron-right') %></p>
+      <div class="card-link">
+          <div class="card-link-info">
+            <h3></span> Dashboard</h3>
+            <p><%= @contract.athlete.first_name %>'s dietary data.</p>
+          </div>
+          <div class="card-link-btn">
+            <p><%= icon('fas', 'chevron-right') %></p>
+          </div>
+      </div>
     <% end %>
+
     <%= link_to index_path do %>
-      <h3><span class="gray-text"><%= icon('fas', 'calendar') %> </span> Programs</h3>
-      <p>See current dietary and workout programs.</p>
-      <p><%= icon('fas', 'chevron-right') %></p>
+      <div class="card-link">
+          <div class="card-link-info">
+            <h3>Programs</h3>
+            <p><%= @contract.athlete.first_name %>'s dietary and workout programs.</p>
+          </div>
+          <div class="card-link-btn">
+            <p><%= icon('fas', 'chevron-right') %></p>
+          </div>
+      </div>
     <% end %>
   </div>
 
