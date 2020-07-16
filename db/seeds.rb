@@ -9,6 +9,14 @@ puts "\n🌱 Seeding Starts 🌱"
 
 
 # Destroying previous instances
+puts "\n🗑  Destroying Exercise instances."
+Exercise.destroy_all
+puts "Success!"
+
+puts "\n🗑  Destroying Training instances."
+Training.destroy_all
+puts "Success!"
+
 puts "\n🗑  Destroying Dose instances."
 Dose.destroy_all
 puts "Success!"

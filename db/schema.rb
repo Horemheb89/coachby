@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_184720) do
+ActiveRecord::Schema.define(version: 2020_07_16_174944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 2020_07_07_184720) do
     t.text "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "training_id"
     t.index ["session_id"], name: "index_exercises_on_session_id"
+    t.index ["training_id"], name: "index_exercises_on_training_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -75,12 +77,12 @@ ActiveRecord::Schema.define(version: 2020_07_07_184720) do
     t.index ["contract_id"], name: "index_programs_on_contract_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
+  create_table "trainings", force: :cascade do |t|
     t.date "start_time"
     t.bigint "program_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["program_id"], name: "index_sessions_on_program_id"
+    t.index ["program_id"], name: "index_trainings_on_program_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -104,7 +106,8 @@ ActiveRecord::Schema.define(version: 2020_07_07_184720) do
 
   add_foreign_key "doses", "ingredients"
   add_foreign_key "doses", "meals"
-  add_foreign_key "exercises", "sessions"
+  add_foreign_key "exercises", "trainings"
+  add_foreign_key "exercises", "trainings", column: "session_id"
   add_foreign_key "meals", "programs"
-  add_foreign_key "sessions", "programs"
+  add_foreign_key "trainings", "programs"
 end

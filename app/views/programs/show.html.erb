@@ -12,15 +12,15 @@
 
 <h3>Exercises</h3>
 
-<%= week_calendar number_of_weeks: 1, events: @sessions do |date, sessions| %>
-    <% sessions.each do |session| %>
+<%= week_calendar number_of_weeks: 1, events: @trainings do |date, trainings| %>
+    <% trainings.each do |training| %>
     <div class = "session-list">
       <ul>
-        <li> <%= link_to date, program_session_path(@program, session) %> </li>
+        <li> <%= link_to date, training_path(training) %> </li>
       </ul>
     </div>
     <% end %>
   <% end %>
 
-<%= link_to "see exercises", program_sessions_path(@program) %>
+<%= link_to "see exercises", program_trainings_path(@program) %>
 

@@ -20,7 +20,7 @@ class ProgramsController < ApplicationController
     # @contract = Contract.find(params[:contract_id])
     @program = Program.find(params[:id])
     authorize @program
-    @sessions = Session.all
+    @trainings = Training.all
   end
 
   def index
