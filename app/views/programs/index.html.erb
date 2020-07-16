@@ -18,7 +18,7 @@
             <% n = rand(1..4) %>
             <%= image_tag "workout_#{n}.jpg" %>
             <div class="d-flex flex-column">
-              <p>Your next workout is scheduled for: program.session.date </p>
+              <p>Your next workout is scheduled for: program.training.date </p>
               <p><%= link_to "See exercise program", program_path(program) %></p>
             </div>
           </div>
