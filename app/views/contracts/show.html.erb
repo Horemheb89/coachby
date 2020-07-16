@@ -1,34 +1,76 @@
-
 <div class="banner-main">
   <div class="container">
-    <h1><%= @contract.athlete.first_name.capitalize %>'s profile</h1>
-    <p>Manage your athlete</p>
+    <h1><span class="gray-text"><%= icon('fas', 'user') %> </span><%= @contract.athlete.first_name %> <%= @contract.athlete.last_name %></h1>
+    <p>Manage your athlete.</p>
   </div>
 </div>
 
 <div class="container">
+  <div class="contract-alert-wrapper">
+    <!-- Meal Alert -->
+    <% if @meals_today.count > 0 %>
+      <p class="contract-alert-success"><%= icon('fas', 'check') %> <%= @contract.athlete.first_name %> has <%= @meals_today.count %> meal<%= @meals_today.count == 1 ? "" : "s" %> scheduled for today.</p>
+    <% else %>
+      <p class="contract-alert-warning"><span class="red-text"><%= icon('fas', 'bell') %></span> No meal scheduled for today. <%= link_to "Add a new one.", index_path %></p>
+    <% end %>
 
-  <%  if current_user = @contract.coach %>
-    <h1 class="greeting"> Hello, <%= @contract.coach.first_name.capitalize %> ! </h1>
-  <%  else %>
-    <h1 class="greeting"> Hello, <%= @contract.athlete.first_name.capitalize %> ! </h1>
-  <%  end %>
+    <!-- Session Alert -->
+    <% if @sessions_today.count > 0 %>
+      <p class="contract-alert-success"><%= icon('fas', 'check') %> <%= @contract.athlete.first_name %> has <%= @sessions_today.count %> session<%= @sessions_today.count == 1 ? "" : "s" %> scheduled for today.</p>
+    <% else %>
+      <p class="contract-alert-warning"><span class="red-text"><%= icon('fas', 'bell') %></span> No session scheduled for today. <%= link_to "Add a new one.", index_path %></p>
+    <% end %>
+  </div>
 
   <div class="athlete-card">
-    <%= image_tag "avatar_athlete_1.jpg", class: "avatar-large" %>
-    <div class="athlete-card-infos">
-      <h2 class="athlete-name"> <%= @contract.athlete.full_name.capitalize %> </h2>s
-      <h2> Coach: <%= @contract.coach.first_name.capitalize %> </h2>
-      <h3> Height: <%= @contract.athlete.height %> cm </h3>
-      <h3> Weight: <%= @contract.athlete.weight %> kg </h3>
-      <h3> Date of Birth: <%= @contract.athlete.dob %> </h3>
-      <h3> Email address: <%= @contract.athlete.email %> </h3>
+    <% n = rand(1..5) %>
+    <%= image_tag "avatar_athlete_#{n}.jpg" %>
+    <div class="athlete-card-info">
+      <p>Height: <%= @contract.athlete.height %> cm</p>
+      <p>Weight: <%= @contract.athlete.weight %> kg</p>
+      <p>Birthday: <%= @contract.athlete.dob.strftime("%B %d") %></p>
+      <p>Contact: <%= @contract.athlete.email %></p>
     </div>
   </div>
 
-  <div class="redirect_links">
-    <h3> <%= link_to "See #{@contract.athlete.first_name.capitalize}'s Program", index_path %> </h3>
-    <h3> <%= link_to "Create program for #{@contract.athlete.first_name.capitalize}", new_contract_program_path(@contract) %> </h3>
-    <h3> <%= link_to "See data for #{@contract.athlete.first_name.capitalize}", index_clients_path(@contract) %> </h3>
+  <div class="category-padding ">
+    <%= link_to index_clients_path(@contract) do %>
+      <h3><span class="gray-text"><%= icon('fas', 'chart-line') %> </span> Dashboard</h3>
+      <p>Monitor <%= @contract.athlete.first_name %>'s performance.</p>
+      <p><%= icon('fas', 'chevron-right') %></p>
+    <% end %>
+    <%= link_to index_path do %>
+      <h3><span class="gray-text"><%= icon('fas', 'calendar') %> </span> Programs</h3>
+      <p>See current dietary and workout programs.</p>
+      <p><%= icon('fas', 'chevron-right') %></p>
+    <% end %>
+  </div>
+
+</div>
+
+<!-- Create a new program -->
+<div class="white-background">
+  <div class="container">
+
+    <div class="category-padding">
+      <div class="category-content category-content-picture-right">
+        <div class="row">
+
+          <div class="col-12 col-xl-6">
+            <%= image_tag "banner_content_1.jpg" %>
+          </div>
+
+          <div class="col-12 col-xl-6 category-content-text">
+            <h3>Getting Started</h3>
+            <p>Your athlete doesn't have a program yet?</p>
+            <%= link_to new_contract_program_path(@contract), class: "btn-main" do %>
+              <p>NEW PROGRAM</p>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

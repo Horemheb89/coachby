@@ -1,8 +1,8 @@
 <!-- Banner Main -->
 <div class="banner-main">
   <div class="container">
-    <h1>Athletes</h1>
-    <p>Manage your <%= @contracts.count %> athlete(s).</p>
+    <h1><span class="gray-text"><%= icon('fas', 'list') %> </span>Athletes</h1>
+    <p>Manage your <%= @contracts.count %> athlete<%= @contracts.count == 1 ? "" : "s" %>.</p>
   </div>
 </div>
 
@@ -45,7 +45,7 @@
             <h3>Getting Started</h3>
             <p>Need to add a new contract? Congratulations!</p>
             <%= link_to new_contract_path, class: "btn-main" do %>
-              <p>ADD ATHLETE</p>
+              <p>NEW ATHLETE</p>
             <% end %>
           </div>
 
