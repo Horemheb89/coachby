@@ -1,48 +1,173 @@
 <div class="banner-main">
   <div class="container">
-    <h1><%= @contract.athlete.first_name.capitalize %>'s program</h1>
+    <h1><span class="gray-text"><%= icon('fas', 'calendar') %> </span>Program<%= @programs.count == 1 ? "" : "s" %></h1>
+    <p><%= @contract.athlete.first_name %>'s dietary and workout program<%= @programs.count == 1 ? "" : "s" %>.</p>
   </div>
 </div>
 
 <div class="container">
+  <div class="category-padding">
 
-  <h2> current program </h2>
+    <h3 class="mb-4">Latest Program</h3>
 
-  <div class="container">
+      <%= link_to program_path(@latest_program) do %>
+        <div class="card-program">
 
-    <div class="card-padding">
-      <div class="container card-index">
-      <% @programs.each do |program| %>
-        <div class="card-program-index">
-          <div class="card-program-index-info">
-            <% n = rand(1..4) %>
-            <%= image_tag "workout_#{n}.jpg" %>
-            <div class="d-flex flex-column">
-              <p>Your next workout is scheduled for: program.training.date </p>
-              <p><%= link_to "See exercise program", program_path(program) %></p>
+          <div class="card-program-info">
+
+            <div class="data-wrapper">
+
+              <div class="data">
+                <div class="data-type">
+                  <p>Proteins (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= @latest_program.proteins_target %></h2>
+                </div>
+              </div>
+              <!-- <p>Proteins: <%= @latest_program.proteins_target %> g/day</p> -->
+
+              <div class="data data-border">
+                <div class="data-type">
+                  <p>Fats (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= @latest_program.fats_target %></h2>
+                </div>
+              </div>
+              <!-- <p>Fats: <%= @latest_program.fats_target %> g/day</p> -->
+
+              <div class="data">
+                <div class="data-type">
+                  <p>Carbs (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= @latest_program.carbs_target %></h2>
+                </div>
+              </div>
+              <!-- <p>Carbs: <%= @latest_program.carbs_target %> g/day</p> -->
+
+            </div>
+            <div class="date">
+              <p><em>Program created on <%= @latest_program.created_at.strftime("%B %d, %Y, %l%p") %></em></p>
             </div>
           </div>
-        </div>
-        <div class="card-program-index">
-          <div class="card-program-index-info">
-            <% n = rand(1..4) %>
-            <%= image_tag "food_#{n}.jpg" %>
-            <div class="d-flex flex-column program-info">
-              <p><u>Daily targets: </u></p>
-              <ul>
-                <li><p>Proteins: <%= program.proteins_target %> g</p></li>
-                <li><p>Fats: <%= program.fats_target %> g</p></li>
-                <li><p>Carbs: <%= program.carbs_target %> g</p></li>
-              </ul>
-              <p><%= link_to "Go to diet plan", program_meals_path(program) %></p>
-            </div>
+
+          <div class="card-program-btn">
+            <p><%= icon('fas', 'chevron-right') %></p>
           </div>
+
         </div>
       <% end %>
+
+  </div>
+</div>
+
+<% if @programs.count > 1 %>
+
+<div class="white-background">
+  <div class="container">
+
+    <div class="category-padding">
+
+      <h3 class="mb-4">All Programs</h3>
+
+      <% @programs.each do |program| %>
+        <%= link_to program_path(program) do %>
+        <div class="card-program">
+
+          <div class="card-program-info">
+
+            <div class="data-wrapper">
+
+              <div class="data">
+                <div class="data-type">
+                  <p>Proteins (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= program.proteins_target %></h2>
+                </div>
+              </div>
+
+              <div class="data data-border">
+                <div class="data-type">
+                  <p>Fats (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= program.fats_target %></h2>
+                </div>
+              </div>
+
+              <div class="data">
+                <div class="data-type">
+                  <p>Carbs (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= program.carbs_target %></h2>
+                </div>
+              </div>
+
+            </div>
+            <div class="date">
+              <p><em>Program created on <%= program.created_at.strftime("%B %d, %Y, %l%p") %></em></p>
+            </div>
+          </div>
+
+          <div class="card-program-btn">
+            <p><%= icon('fas', 'chevron-right') %></p>
+          </div>
+
+        </div>
+        <% end %>
+      <% end %>
+
     </div>
   </div>
-
-  <h2> previous programs </h2>
-
 </div>
+
+<% end %>
+
+
+
+
+
+
+
+<!--
+     <div class="card-padding">
+        <div class="container card-index">
+        <% @programs.each do |program| %>
+          <div class="card-program-index">
+            <div class="card-program-index-info">
+              <% n = rand(1..4) %>
+              <%= image_tag "workout_#{n}.jpg" %>
+              <div class="d-flex flex-column">
+                <p>Your next workout is scheduled for: program.training.date </p>
+                <p><%= link_to "See exercise program", program_path(program) %></p>
+              </div>
+            </div>
+          </div>
+          <div class="card-program-index">
+            <div class="card-program-index-info">
+              <% n = rand(1..4) %>
+              <%= image_tag "food_#{n}.jpg" %>
+              <div class="d-flex flex-column program-info">
+                <p><u>Daily targets: </u></p>
+                <ul>
+                  <li><p>Proteins: <%= program.proteins_target %> g</p></li>
+                  <li><p>Fats: <%= program.fats_target %> g</p></li>
+                  <li><p>Carbs: <%= program.carbs_target %> g</p></li>
+                </ul>
+                <p><%= link_to "Go to diet plan", program_meals_path(program) %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div> -->
+
+      <!-- <h2> previous programs </h2> -->
+
+
+
 
