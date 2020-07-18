@@ -1,13 +1,101 @@
-<h1>Programs#new</h1>
-<p>Find me in app/views/programs/create.html.erb</p>
-
-<div class="container">
-
-  <%= simple_form_for [@contract, @program] do |f| %>
-    <%= f.input :proteins_target %>
-    <%= f.input :fats_target %>
-    <%= f.input :carbs_target %>
-    <%= f.button :submit, class: 'main-btn ' %>
-  <% end %>
-
+<div class="banner-main">
+  <div class="container">
+    <h1><span class="gray-text"><%= icon('fas', 'calendar-plus') %> </span>New Program</h1>
+    <p>Create a new program for <%= @contract.athlete.first_name %>.</p>
+  </div>
 </div>
+
+<!-- Form -->
+<div class="container">
+  <div class="category-padding">
+    <%= simple_form_for [@contract, @program] do |f| %>
+      <div class="form-program-new">
+        <div class="form-program-input-wrapper">
+          <div class="form-program-input">
+            <%= f.input :proteins_target, label: "Proteins (g/day)", placeholder: "0" %>
+          </div>
+
+          <div class="form-program-input input-border">
+            <%= f.input :fats_target, label: "Fats (g/day)", placeholder: "0" %>
+          </div>
+
+          <div class="form-program-input">
+            <%= f.input :carbs_target, label: "Carbs (g/day)", placeholder: "0" %>
+          </div>
+        </div>
+
+        <%= f.button :submit, class: "btn-main", value: "NEW PROGRAM" %>
+
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Latest program -->
+<% if @programs.count > 0 %>
+<div class="white-background">
+  <div class="container">
+    <div class="category-padding">
+
+      <h3>Latest Program</h3>
+      <p>Create a new program based on <%= @contract.athlete.first_name %>'s latest one.</p>
+
+      <%= link_to program_path(@latest_program) do %>
+        <div class="card-program">
+
+          <div class="card-program-info">
+
+            <div class="data-wrapper">
+
+              <div class="data">
+                <div class="data-type">
+                  <p>Proteins (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= @latest_program.proteins_target %></h2>
+                </div>
+              </div>
+              <!-- <p>Proteins: <%= @latest_program.proteins_target %> g/day</p> -->
+
+              <div class="data data-border">
+                <div class="data-type">
+                  <p>Fats (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= @latest_program.fats_target %></h2>
+                </div>
+              </div>
+              <!-- <p>Fats: <%= @latest_program.fats_target %> g/day</p> -->
+
+              <div class="data">
+                <div class="data-type">
+                  <p>Carbs (g/day)</p>
+                </div>
+                <div class="data-number">
+                  <h2><%= @latest_program.carbs_target %></h2>
+                </div>
+              </div>
+              <!-- <p>Carbs: <%= @latest_program.carbs_target %> g/day</p> -->
+
+            </div>
+            <div class="date">
+              <p><em>Program created on <%= @latest_program.created_at.strftime("%B %d, %Y, %l%p") %></em></p>
+            </div>
+          </div>
+
+          <div class="card-program-btn">
+            <p><%= icon('fas', 'chevron-right') %></p>
+          </div>
+
+        </div>
+      <% end %>
+
+      <div class="card-program-links">
+        <%= link_to "See Meals", program_meals_path(@latest_program)%>
+        <%= link_to "See Sessions", program_trainings_path(@latest_program)%>
+      </div>
+
+    </div>
+  </div>
+</div>
+<% end %>

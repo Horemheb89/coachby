@@ -31,7 +31,9 @@
   <% end %>
 
   <div class="button-exercises-container">
-    <button class="btn-main">  <%= link_to "Back to session's list", program_trainings_path(@program) %></button>
+    <%= link_to program_trainings_path(@program), class: "btn-main" do %>
+      <p>Back to session'list</p>
+    <% end %>
   </div>
 
 </div>
