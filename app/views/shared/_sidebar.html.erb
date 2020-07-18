@@ -23,13 +23,13 @@
 
 
       <%= link_to contracts_path do %>
-        <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
+        <li class="nav-item <%= 'active' if params[:controller] == 'contracts' && params[:action] == 'show' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
           <p class="nav-link"><%= icon('fas', 'list') %></p>
         </li>
       <% end %>
 
       <%= link_to new_contract_path do %>
-        <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Athlete">
+        <li class="nav-item <%= 'active' if params[:controller] == 'programs' && params[:action] == 'new' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="New Athlete">
           <p class="nav-link" href="#"><%= icon('fas', 'user-plus') %></p>
         </li>
       <% end %>
@@ -40,25 +40,28 @@
         <div class="sidebar-category">
 
           <%= link_to contract_path(contract) do %>
-             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Profile">
+             <li class="nav-item <%= 'active' if params[:controller] == 'contracts' && params[:action] == 'show' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Profile">
               <p class="nav-link" href="#"><%= icon('fas', 'user') %></p>
             </li>
           <% end %>
 
+          <!-- active -->
           <%= link_to index_clients_path(contract) do %>
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Dashboard">
+            <li class="nav-item  <%= 'active' if params[:controller] == 'programs' && params[:action] == 'index_clients' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Dashboard">
               <p class="nav-link" href="#"><%= icon('fas', 'chart-line') %></p>
             </li>
           <% end %>
 
+          <!-- active -->
           <%= link_to index_path(contract) do %>
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Programs">
+            <li class="nav-item <%= 'active' if params[:controller] == 'programs' && params[:action] == 'index' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | Programs">
               <p class="nav-link" href="#"><%= icon('fas', 'calendar') %></p>
             </li>
           <% end %>
 
+          <!-- active -->
           <%= link_to new_contract_program_path(contract) do %>
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | New Program">
+            <li class="nav-item nc <%= 'active' if params[:controller] == 'programs' && params[:action] == 'new' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %> | New Program">
               <p class="nav-link" href="#"><%= icon('fas', 'calendar-plus') %></p>
             </li>
           <% end %>
@@ -111,14 +114,15 @@
 
 
       <!-- Contract -->
+      <!-- active -->
       <% if contract != nil %>
         <%= link_to contract_path(contract) do %>
-           <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %>'s Profile">
+           <li class="nav-item active-tab <%= 'active' if current_page?(contract_path) %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="<%= contract.athlete.first_name.capitalize %>'s Profile">
             <p class="nav-link" href="#"><%= icon('fas', 'user') %></p>
           </li>
         <% end %>
         <%= link_to index_clients_path(contract) do %>
-          <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Dashboard">
+          <li class="nav-item active-tab <%= 'active' if current_page?(index_clients_path) %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Dashboard">
             <p class="nav-link" href="#"><%= icon('fas', 'columns') %></p>
           </li>
         <% end %>
