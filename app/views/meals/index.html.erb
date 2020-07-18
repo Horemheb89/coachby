@@ -57,7 +57,7 @@
 
     <%= render "form", meal: @meal %>
 
-
+<div data-meal-ids="<%= @meals.pluck(:id) %>"></div>
   <% @meals_date.each do |meal| %>
     <div class = meal>
       <div>
