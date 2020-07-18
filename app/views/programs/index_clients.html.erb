@@ -3,15 +3,16 @@
 
   <% data_cal = {} %>
   <% data_cal_ref = {} %>
-  <% line_data_cal = [] %>
 
-<!-- plot calories -->
-  <% @programs.first(1).each do |program| %>
+
+  <% @programs.each do |program| %>
+    <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
       <% data_cal[day.strftime("%d/%m/%Y")] = meals.map{|meal| calorie(meal)}.sum %>
       <% data_cal_ref[day.strftime("%d/%m/%Y")] = program.calorie_target %>
     <% end %>
   <% end %>
+
 
 
   <% data_cal = data_cal.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
@@ -28,7 +29,6 @@
   <% data_cal_ref_deux[day] = meal  %>
   <% end %>
 
-
   <div class = "meal-graph">
     <canvas id="calorie"></canvas>
     <script>
@@ -44,6 +44,7 @@
             borderColor: ['rgba(186, 0, 251,1)'],
             },{
             label: "Goal",
+            lineTension: 0,
             data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
             fill:  true,
             borderColor: ['rgba(0, 0, 0, 0.4)'],
@@ -53,7 +54,7 @@
         },
         options: {
           legend: {
-            display: false,
+            display: true,
             position: 'right',
             labels: {
                 fontColor: 'rgba(0, 0, 0,1)'
@@ -99,46 +100,44 @@
 
 
 <!-- plot macro -->
+
   <% data_p = {} %>
   <% data_l = {} %>
   <% data_c = {} %>
 
-  <% @programs.first(1).each do |program| %>
+<!-- create my macro/date object -->
+  <% @programs.each do |program| %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
-
-      <% sum_p = 0 %>
-      <% sum_c = 0 %>
-      <% sum_l = 0 %>
-      <% data_p[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.proteins}.sum %>
-      <% data_l[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.fats}.sum %>
-      <% data_c[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.carbs}.sum  %>
-
+      <% data_p[day] = meals.map{|meal| meal.proteins}.sum %>
+      <% data_l[day] = meals.map{|meal| meal.fats}.sum %>
+      <% data_c[day] = meals.map{|meal| meal.carbs}.sum  %>
     <% end %>
-    <% max_scale = [data_p.map {|array| array[1]}.max, data_l.map {|array| array[1]}.max, data_c.map {|array| array[1]}.max].max.round(-2) + 100 %>
+  <% end %>
 
-    <!-- proteins -->
-    <% data_p = data_p.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
-    <% data_p_deux = {} %>
 
-    <% data_p.each do |day,meal| %>
-      <% data_p_deux[day] = meal  %>
+  <% data_p_ref = {} %>
+  <% data_l_ref = {} %>
+  <% data_c_ref = {} %>
+
+  <!-- create my reference/date object -->
+  <% @programs.each do |program| %>
+    <% program.meals.group_by(&:start_time).each do |day, meals| %>
+      <% data_p_ref[day] = program.proteins_target %>
+      <% data_l_ref[day] = program.fats_target %>
+      <% data_c_ref[day] = program.carbs_target %>
     <% end %>
+  <% end %>
 
-    <!-- fats -->
-    <% data_l = data_l.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
-    <% data_l_deux = {} %>
 
-    <% data_l.each do |day,meal| %>
-      <% data_l_deux[day] = meal  %>
-    <% end %>
+  <% max_scale = [data_p.map {|array| array[1]}.max,
+                  data_l.map {|array| array[1]}.max,
+                  data_c.map {|array| array[1]}.max,
+                  data_p_ref.map {|array| array[1]}.max,
+                  data_l_ref.map {|array| array[1]}.max,
+                  data_c_ref.map {|array| array[1]}.max].max.round(-2) + 100  %>
 
-    <!-- carbs -->
-    <% data_c = data_c.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
-    <% data_c_deux = {} %>
 
-    <% data_c.each do |day,meal| %>
-      <% data_c_deux[day] = meal  %>
-    <% end %>
+<!-- on sort par les dates -->
 
   <div class="bowshadow" >
     <div class="macrograph">
@@ -148,203 +147,242 @@
     </div>
   </div>
 
-    <script>
-     new Chart(document.getElementById("proteins").getContext("2d"), {
-        type:'line',
-        data:{
-          labels: <%= data_p_deux.keys.to_json.html_safe %>,
-          datasets: [{
-            label: "Proteins",
-            data: <%= data_p_deux.values.to_json.html_safe %>,
-            fill:  true,
-            borderColor: ['rgba(251, 19, 0, 1)'],
-            backgroundColor: ['rgba(251, 19, 0, 0.2)'],
-            },{
-            label: "Goal",
-            data: <%= data_p_deux.map { |day,value| [day, program.proteins_target]}.to_h.values %>,
-            fill:  true,
-            borderColor: ['rgba(0, 0, 0, 0.4)'],
-            borderDash: [5, 5],
-                pointRadius: 0
-          }],
-        },
-        options: {
-          legend: {
-            display: false,
-            position: 'bottom',
-            labels: {
-                fontColor: 'rgba(0, 0, 0,1)'
-            }
-          },
-          maintainAspectRatio:false,
-          responsive: true,
-          title:{
-              display: true,
-              text:"Proteins"
-          },
-          scales:{
-            xAxes: [{
-              type: 'time',
-              //
-              time: {
-              parser: 'DD/MM/YYYY',
-              tooltipFormat: 'DD/MM/YYYY',
-              unit: 'day',
-              unitStepSize: 1,
-              displayFormats: {
-                'day': 'DD/MM'
-                }
-              },
-              ticks: {
-                autoSkip: true,
-                maxTicksLimit: 20
-              }
-            }], // XAxes ends
-            yAxes: [{
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Mass (Gr)'
-                },
-                ticks: {
-                  max: <%= max_scale %>,
-                  min: 0,
-                }
-            }]
-          }
-        }
-    });
+  <% sorted_p_dates = data_p.keys.sort %>
+  <% sorted_l_dates = data_l.keys.sort %>
+  <% sorted_c_dates = data_c.keys.sort %>
 
-    new Chart(document.getElementById("fats").getContext("2d"), {
-        type:'line',
-        data:{
-          labels: <%= data_l_deux.keys.to_json.html_safe %>,
-          datasets: [{
-            label: "Fats",
-            data: <%= data_l_deux.values.to_json.html_safe %>,
-            fill:  true,
-            borderColor: ['rgba(251, 240, 0, 1)'],
-            backgroundColor: ['rgba(251, 240, 0, 0.4)'],
-            },{
-            label: "Goal",
-            data: <%= data_l_deux.map { |day,value| [day, program.fats_target]}.to_h.values %>,
-            fill:  true,
-            borderColor: ['rgba(0, 0, 0, 0.4)'],
-            borderDash: [5, 5],
-            pointRadius: 0
-          }],
+
+  <script>
+   new Chart(document.getElementById("proteins").getContext("2d"), {
+      type:'line',
+      data:{
+        labels: <%= sorted_p_dates.map {|date| date.strftime("%d/%m/%Y") }.to_json.html_safe %>,
+        datasets: [{
+          label: "Proteins",
+          data: <%= sorted_p_dates.map {|date| data_p[date]} %>,
+          fill:  true,
+          borderColor: ['rgba(251, 19, 0, 1)'],
+          backgroundColor: ['rgba(251, 19, 0, 0.2)'],
+          },{
+          label: "Goal",
+          lineTension: 0,
+          data: <%= data_p_ref.values.to_json.html_safe %>,
+          fill:  true,
+          borderColor: ['rgba(0, 0, 0, 0.4)'],
+          borderDash: [5, 5],
+              pointRadius: 0
+        }],
+      },
+      options: {
+        legend: {
+          display: false,
+          position: 'bottom',
+          labels: {
+              fontColor: 'rgba(0, 0, 0,1)'
+          }
         },
-        options: {
-          legend: {
-            display: false,
-            position: 'bottom',
-            labels: {
-                fontColor: 'rgba(0, 0, 0,1)'
+        maintainAspectRatio:false,
+        responsive: true,
+        title:{
+            display: true,
+            text:"Proteins"
+        },
+        scales:{
+          xAxes: [{
+            type: 'time',
+            //
+            time: {
+            parser: 'DD/MM/YYYY',
+            tooltipFormat: 'DD/MM/YYYY',
+            unit: 'day',
+            unitStepSize: 1,
+            displayFormats: {
+              'day': 'DD/MM'
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 20
             }
-          },
-          maintainAspectRatio:false,
-          responsive: true,
-          title:{
-              display: true,
-              text:"Fats"
-          },
-          scales:{
-            xAxes: [{
-              type: 'time',
-              //
-              time: {
-              parser: 'DD/MM/YYYY',
-              tooltipFormat: 'DD/MM/YYYY',
-              unit: 'day',
-              unitStepSize: 1,
-              displayFormats: {
-                'day': 'DD/MM'
-                }
+          }], // XAxes ends
+          yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Mass (Gr)'
               },
               ticks: {
-                autoSkip: true,
-                maxTicksLimit: 20
+                max: <%=  max_scale %>,
+                min: 0,
               }
-            }], // XAxes ends
-            yAxes: [{
-                scaleLabel: {
-                  display: false,
-                  labelString: 'value'
-                },
-                ticks: {
-                  max: <%= max_scale %>,
-                  min: 0,
-                }
-            }]
-          }
+          }]
         }
-    });
+      }
+  });
 
     new Chart(document.getElementById("carbs").getContext("2d"), {
-        type:'line',
-        data:{
-          labels: <%= data_c_deux.keys.to_json.html_safe %>,
-          datasets: [{
-            label: "Carbs",
-            data: <%= data_c_deux.values.to_json.html_safe %>,
-            fill:  true,
-            borderColor: ['rgba(0, 221, 251, 1)'],
-            backgroundColor: ['rgba(0, 221, 251, 0.2)'],
-            },{
-            label: "Goal",
-            data: <%= data_c_deux.map { |day,value| [day, program.carbs_target]}.to_h.values %>,
-            fill:  true,
-            borderColor: ['rgba(0, 0, 0, 0.4)'],
-            borderDash: [5, 5],
-            pointRadius: 0
-          }],
+      type:'line',
+      data:{
+        labels: <%= sorted_c_dates.map {|date| date.strftime("%d/%m/%Y") }.to_json.html_safe %>,
+        datasets: [{
+          label: "Carbs",
+          data: <%= sorted_c_dates.map {|date| data_c[date]} %>,
+          fill:  true,
+          borderColor: ['rgba(0, 221, 251, 1)'],
+          backgroundColor: ['rgba(0, 221, 251, 0.2)'],
+          },{
+          label: "Goal",
+          lineTension: 0,
+          data: <%= data_c_ref.values.to_json.html_safe %>,
+          fill:  true,
+          borderColor: ['rgba(0, 0, 0, 0.4)'],
+          borderDash: [5, 5],
+              pointRadius: 0
+        }],
+      },
+      options: {
+        legend: {
+          display: false,
+          position: 'bottom',
+          labels: {
+              fontColor: 'rgba(0, 0, 0,1)'
+          }
         },
-        options: {
-            legend: {
-            display: false,
-            position: 'bottom',
-            labels: {
-                fontColor: 'rgba(0, 0, 0,1)'
+        maintainAspectRatio:false,
+        responsive: true,
+        title:{
+            display: true,
+            text:"Proteins"
+        },
+        scales:{
+          xAxes: [{
+            type: 'time',
+            //
+            time: {
+            parser: 'DD/MM/YYYY',
+            tooltipFormat: 'DD/MM/YYYY',
+            unit: 'day',
+            unitStepSize: 1,
+            displayFormats: {
+              'day': 'DD/MM'
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 20
             }
-          },
-          maintainAspectRatio:false,
-          responsive: true,
-          title:{
-              display: true,
-              text:"Carbs"
-          },
-          scales:{
-            xAxes: [{
-              type: 'time',
-              //
-              time: {
-              parser: 'DD/MM/YYYY',
-              tooltipFormat: 'DD/MM/YYYY',
-              unit: 'day',
-              unitStepSize: 1,
-              displayFormats: {
-                'day': 'DD/MM'
-                }
+          }], // XAxes ends
+          yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Mass (Gr)'
               },
               ticks: {
-                autoSkip: true,
-                maxTicksLimit: 20
+                max: <%=  max_scale %>,
+                min: 0,
               }
-            }], // XAxes ends
-            yAxes: [{
-                scaleLabel: {
-                  display: false,
-                  labelString: 'value'
-                },
-                ticks: {
-                  max: <%= max_scale %>,
-                  min: 0,
-                }
-            }]
-          }
+          }]
         }
-    });
-    </script>
-  <% end %>
+      }
+  });
+
+
+  new Chart(document.getElementById("fats").getContext("2d"), {
+      type:'line',
+      data:{
+        labels: <%= sorted_l_dates.map {|date| date.strftime("%d/%m/%Y") }.to_json.html_safe %>,
+        datasets: [{
+          label: "Fats",
+          data: <%= sorted_l_dates.map {|date| data_p[date]} %>,
+          fill:  true,
+          borderColor: ['rgba(251, 240, 0, 1)'],
+          backgroundColor: ['rgba(251, 240, 0, 0.4)'],
+          },{
+          label: "Goal",
+          lineTension: 0,
+          data: <%= data_l_ref.values.to_json.html_safe %>,
+          fill:  true,
+          borderColor: ['rgba(0, 0, 0, 0.4)'],
+          borderDash: [5, 5],
+              pointRadius: 0
+        }],
+      },
+      options: {
+        legend: {
+          display: false,
+          position: 'bottom',
+          labels: {
+              fontColor: 'rgba(0, 0, 0,1)'
+          }
+        },
+        maintainAspectRatio:false,
+        responsive: true,
+        title:{
+            display: true,
+            text:"Proteins"
+        },
+        scales:{
+          xAxes: [{
+            type: 'time',
+            //
+            time: {
+            parser: 'DD/MM/YYYY',
+            tooltipFormat: 'DD/MM/YYYY',
+            unit: 'day',
+            unitStepSize: 1,
+            displayFormats: {
+              'day': 'DD/MM'
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 20
+            }
+          }], // XAxes ends
+          yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Mass (Gr)'
+              },
+              ticks: {
+                max: <%=  max_scale %>,
+                min: 0,
+              }
+          }]
+        }
+      }
+  });
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Table -->

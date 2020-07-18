@@ -20,7 +20,7 @@
 
     <div class="macro_card">
       <div class = "macro">
-        <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> g</h2>
+        <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> <span style="color:gray";> g </span></h2>
         <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>
         <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
         <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
@@ -28,7 +28,6 @@
           <p style="color: <%= "red" if ratio_prot > 1.2 %>;font-weight: <%= "bold" if ratio_prot > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
         </div>
       </div>
-
       <div class = "macro">
         <h2> <%=   @meals_date.map { |meal| meal.fats}.sum() %> g</h2>
         <p> <i class="fas fa-cheese"></i> Fats </p>
