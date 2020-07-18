@@ -10,6 +10,9 @@
     <h2>TRAIN BETTER. <span class="red-text">BE GREATER.</span></h2>
     <% if user_signed_in? %>
       <p>Welcome back <%= current_user.first_name %>.</p>
+      <%= link_to contracts_path, class: "banner-landing-btn" do %>
+        <p>YOUR ATHLETES</p>
+      <% end %>
     <% else %>
       <%= link_to "/users/sign_up", class: "banner-landing-btn" do %>
         <p>SIGN UP</p>
