@@ -32,6 +32,10 @@
   <div class = "meal-graph">
     <canvas id="calorie"></canvas>
     <script>
+
+      Chart.defaults.global.defaultFontSize = 20;
+
+
       new Chart(document.getElementById("calorie").getContext("2d"), {
         type:'line',
         data:{
@@ -57,7 +61,8 @@
             display: true,
             position: 'right',
             labels: {
-                fontColor: 'rgba(0, 0, 0,1)'
+              fontColor: 'rgba(0, 0, 0,1)',
+              fontSize : 18,
             }
           },
           responsive: true,
@@ -251,7 +256,7 @@
         responsive: true,
         title:{
             display: true,
-            text:"Proteins"
+            text:"Carbs"
         },
         scales:{
           xAxes: [{
@@ -273,7 +278,7 @@
           }], // XAxes ends
           yAxes: [{
               scaleLabel: {
-                display: true,
+                display: false,
                 labelString: 'Mass (Gr)'
               },
               ticks: {
@@ -284,7 +289,6 @@
         }
       }
   });
-
 
   new Chart(document.getElementById("fats").getContext("2d"), {
       type:'line',
@@ -311,14 +315,14 @@
           display: false,
           position: 'bottom',
           labels: {
-              fontColor: 'rgba(0, 0, 0,1)'
+            fontColor: 'rgba(0, 0, 0,1)'
           }
         },
         maintainAspectRatio:false,
         responsive: true,
         title:{
             display: true,
-            text:"Proteins"
+            text:"Fats"
         },
         scales:{
           xAxes: [{
@@ -340,7 +344,7 @@
           }], // XAxes ends
           yAxes: [{
               scaleLabel: {
-                display: true,
+                display: false,
                 labelString: 'Mass (Gr)'
               },
               ticks: {
