@@ -1,12 +1,7 @@
-<div class="banner-main">
-  <div class="container">
-    <h1>Sessions#show</h1>
-    <p>Exercises Details</p>
-  </div>
-</div>
-
-
 <div class="container">
+  <h1 class = page-title> Exercises <i class="fas fa-running"></i> </h1>
+
+
   <% @exercises.each do |exercise| %>
     <div class="exercise-container">
       <div class="exercise-arrow">
@@ -43,4 +38,5 @@
   <div class="button-exercises-container">
     <button class="btn-main">  <%= link_to "Back to session's list", program_trainings_path(@program) %></button>
   </div>
+
 </div>
