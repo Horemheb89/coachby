@@ -15,4 +15,30 @@
   </div>
 </div>
 
+<div class="white-background">
+  <div class="container">
+
+    <div class="category-padding">
+      <div class="category-content category-content-picture-right">
+        <div class="row">
+
+          <div class="col-12 col-xl-6">
+            <%= image_tag "banner_foot-image.jpg" %>
+          </div>
+
+          <div class="col-12 col-xl-6 category-content-text">
+            <h3>Training Continues Here</h3>
+            <p>Your athlete needs a new session?</p>
+            <%= link_to new_program_training_path(@program), class: "btn-main" do %>
+              <p>NEW SESSION</p>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
