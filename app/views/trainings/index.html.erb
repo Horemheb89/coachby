@@ -7,7 +7,7 @@
         <div class="session-card">
           <div class="session-card-date">
             <img src="https://lmimirror3pvr.azureedge.net/static/media/1769/a871b582-b5ee-4585-9115-81a3ae2f099d/ww_32-288x288_reebok_lesmills_ss16_d3_bodypump_02_053-1_f1.jpg" />
-            <h3>Session Date : <%= training.start_time %></h3>
+            <h3>Session Date : <%= training.start_time.strftime("%B %d, %Y") %></h3>
           </div>
         </div>
       <% end %>
