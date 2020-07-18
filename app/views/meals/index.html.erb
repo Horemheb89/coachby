@@ -1,7 +1,11 @@
-
+<div class="banner-main">
+  <div class="container">
+    <h1><span class="gray-text"><%= icon('fas', 'utensils') %> </span>meal plan</h1>
+    <p>Breakdown of meals</p>
+  </div>
+</div>
 
 <div class="container">
-  <h1 class = page-title> Meal plan <i class="fas fa-utensils"></i> </h1>
 
     <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
       <span class = "datedays"> <%= link_to date.strftime("%d/%m/%Y"), program_meals_path(@program, date: date) %> </span>
@@ -16,7 +20,7 @@
 
     <div class="macro_card">
       <div class = "macro">
-        <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> g</h2>
+        <h2> <%= @meals_date.map { |meal| meal.proteins}.sum() %> g</h2>
         <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>
         <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
         <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
