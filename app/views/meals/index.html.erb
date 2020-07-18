@@ -59,14 +59,19 @@
       </div>
     </div>
 
-    <%= render "form", meal: @meal %>
+    <% if @meals_date.size < 4 %>
+      <div class="add-meal">
+        <h3>Create a new meal entry</h3>
+        <%= render "form", meal: @meal %>
+      </div>
+    <% end %>
 
 <div data-meal-ids="<%= @meals.pluck(:id) %>"></div>
   <% @meals_date.each do |meal| %>
     <div class = meal>
       <div>
         <h3> <%=  link_to meal.name.capitalize(),program_meal_path(meal.program_id,meal) %> </h3>
-        <span> <%= (meal.start_time.strftime("%m/%d/%Y")) %></span>
+        <span> <%= (meal.start_time.strftime("%d/%m/%Y")) %></span>
       </div>
       <div class = "meal-stat">
         <div class = "nutri-table">
