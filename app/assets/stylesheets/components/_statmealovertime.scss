@@ -4,32 +4,30 @@
   margin: 30px 0px;
  }
 
-.bowshadow {
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius: 5px;
-}
 
 .meal-graph {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-around;
   background-color: white;
-  width: 100%;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   padding:10px;
   border-radius: 5px;
 }
 
 .macrograph {
-  position: relative;
-  display: flex;
   margin-bottom:60px;
-  height:300px;
-  width:370px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  width:100%;
+  display:flex;
+  width: auto;
 }
 
 .meal-graph_macro div {
   background-color: white;
+  height:300px;
+  width:370px;
 }
 
 

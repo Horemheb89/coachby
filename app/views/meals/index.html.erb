@@ -20,7 +20,7 @@
 
     <div class="macro_card">
       <div class = "macro">
-        <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> <span style="color:gray";> g </span></h2>
+        <h2> <%=   @meals_date.map { |meal| meal.proteins}.sum() %> <span style="color:gray;font-size:16px;"> g </span> </h2>
         <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>
         <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
         <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class = "macro">
-        <h2> <%=   @meals_date.map { |meal| meal.fats}.sum() %> g</h2>
+        <h2> <%=   @meals_date.map { |meal| meal.fats}.sum() %> <span style="color:gray;font-size:16px;"> g </span></h2>
         <p> <i class="fas fa-cheese"></i> Fats </p>
         <% ratio_fat = (@meals_date.map { |meal| meal.fats}.sum())/@program.fats_target.to_f %>
         <div id = "fat-bar" data-macro= <%= ratio_fat > 1 ? 1 : ratio_fat %> ></div>
@@ -39,7 +39,7 @@
       </div>
 
       <div class = "macro">
-        <h2> <%=   @meals_date.map { |meal| meal.carbs}.sum() %> g</h2>
+        <h2> <%=   @meals_date.map { |meal| meal.carbs}.sum() %> <span style="color:gray;font-size:16px;"> g </span></h2>
         <p> <i class="fas fa-bread-slice"></i> Carbs </p>
         <% ratio_carb = (@meals_date.map { |meal| meal.carbs}.sum())/@program.carbs_target.to_f %>
         <div id = "carb-bar" data-macro= <%= ratio_carb > 1 ? 1 : ratio_carb %> ></div>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class = "macro">
-        <h2> <%=   @meals_date.map { |meal| calorie(meal)}.sum() %> </h2>
+        <h2> <%=   @meals_date.map { |meal| calorie(meal)}.sum() %> <span style="color:gray;font-size:16px;"> kcal </span> </h2>
         <p> <i class="fas fa-burn"></i> Calories </p>
         <% ratio_cal = (@meals_date.map { |meal|calorie(meal)}.sum())/@program.calorie_target.to_f %>
         <div id = "carb-cal" data-macro= <%= ratio_cal > 1 ? 1 : ratio_cal %> ></div>
@@ -74,10 +74,10 @@
                 <tr>
                   <th > Ingredient</th>
                   <th > Quantity</th>
-                  <th style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> Proteins</th>
-                  <th style="background-color: rgba(251, 240, 0, 0.4);border-radius: 25px"> Fats</th>
-                  <th style="background-color: rgba(0, 221, 251, 0.4);border-radius: 25px"> Carbs</th>
-                  <th style="background-color: rgba(186, 0, 251,0.4);border-radius: 25px" > Calories</th>
+                  <th > <p style="background-color: rgba(251, 19, 0, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"> Proteins </p></th>
+                  <th > <p style="background-color: rgba(251, 240, 0, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;">Fats</p></th>
+                  <th > <p style="background-color: rgba(0, 221, 251, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"> Carbs</p></th>
+                  <th > <p style="background-color: rgba(186, 0, 251,0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;">Calories</p></th>
                 </tr>
             </thead>
             <tbody>
@@ -102,10 +102,10 @@
                     <tr>
                       <td> Totaux:  </td>
                       <td> <%=  %> </td>
-                      <td style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> <%= meal.proteins %> </td>
-                      <td style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px"> <%= meal.fats %> </td>
-                      <td style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px"> <%= meal.carbs %> </td>
-                      <td style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px"> <%= sum_cal %> </td>
+                      <td> <p style="background-color: rgba(251, 19, 0, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"><%= meal.proteins %></p></td>
+                      <td> <p style="background-color: rgba(251, 240, 0, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"><%= meal.fats %></p></td>
+                      <td> <p style="background-color: rgba(0, 221, 251, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"><%= meal.carbs %></p> </td>
+                      <td> <p style="background-color: rgba(186, 0, 251,0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"><%= sum_cal %></p></td>
                       <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
                     </tr>
                   <% end %>

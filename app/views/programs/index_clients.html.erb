@@ -33,8 +33,6 @@
     <canvas id="calorie"></canvas>
     <script>
 
-      Chart.defaults.global.defaultFontSize = 20;
-
 
       new Chart(document.getElementById("calorie").getContext("2d"), {
         type:'line',
@@ -144,13 +142,17 @@
 
 <!-- on sort par les dates -->
 
-  <div class="bowshadow" >
     <div class="macrograph">
-      <canvas style = "background-color: white; padding: 10px;" id = "proteins" > </canvas>
-      <canvas style = "background-color: white; padding: 10px;" id = "carbs"> </canvas>
-      <canvas style = "background-color: white; padding: 10px;" id = "fats" > </canvas>
+      <div>
+        <canvas style = "background-color: white; padding: 10px;" id = "proteins" > </canvas>
+      </div>
+      <div>
+        <canvas style = "background-color: white; padding: 10px;" id = "carbs"> </canvas>
+      </div>
+      <div>
+        <canvas style = "background-color: white; padding: 10px;" id = "fats" > </canvas>
+      </div>
     </div>
-  </div>
 
   <% sorted_p_dates = data_p.keys.sort %>
   <% sorted_l_dates = data_l.keys.sort %>
