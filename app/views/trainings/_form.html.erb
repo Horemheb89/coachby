@@ -1,13 +1,15 @@
-<%= simple_form_for([@program, @training]) do |f| %>
-  <%= f.input :start_time %>
-  <h3>Exercises</h3>
-  <div id='exercises'>
-    <%= f.simple_fields_for :exercises do |exercise| %>
-      <%= render 'exercise_fields', :f => exercise %>
-    <% end %>
-    <div class='links'>
-      <%= link_to_add_association 'add exercise', f, :exercises %>
+<div class="container">
+  <%= simple_form_for([@program, @training]) do |f| %>
+    <%= f.input :start_time %>
+    <h3>Exercises</h3>
+    <div id='exercises'>
+      <%= f.simple_fields_for :exercises do |exercise| %>
+        <%= render 'exercise_fields', :f => exercise %>
+      <% end %>
+      <div class='links'>
+        <%= link_to_add_association 'add exercise', f, :exercises %>
+      </div>
     </div>
-  </div>
-  <%= f.submit 'Save' %>
-<% end %>
+    <%= f.submit 'Save' %>
+  <% end %>
+</div>
