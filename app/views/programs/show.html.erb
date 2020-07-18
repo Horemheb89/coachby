@@ -22,7 +22,9 @@
 
 
   <div class="button-exercises-container">
-    <button class="btn-main">  <%= link_to "See Meals", program_meals_path(@program) %></button>
+    <%= link_to program_meals_path(@program), class: "btn-main" do %>
+      <p>See Meals</p>
+    <% end %>
   </div>
 
 
@@ -43,7 +45,9 @@
       <% end %>
     <% end %>
   <div class="button-exercises-container">
-    <button class="btn-main">  <%= link_to "All Sessions", program_trainings_path(@program) %></button>
+    <%= link_to program_trainings_path(@program), class: "btn-main" do %>
+      <p>All Sessions</p>
+    <% end %>
   </div>
 
 </div>
