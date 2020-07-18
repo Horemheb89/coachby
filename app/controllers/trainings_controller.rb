@@ -2,6 +2,7 @@ class TrainingsController < ApplicationController
 
   def index
     @trainings = policy_scope(Training).where(program_id: params[:program_id])
+    @program = Program.find(params[:program_id])
   end
 
   def show
