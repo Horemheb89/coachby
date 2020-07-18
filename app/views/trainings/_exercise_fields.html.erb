@@ -1,8 +1,19 @@
-<div class='nested-fields'  >
+<div class="container">
+<div class='nested-fields form-container'  >
+  <div class="form-row">
     <%= f.input :name, :collection => %w(air-squat alligator-walk barbell-thrusters bench-press box-jump burpees clean-and-jerk deadlift-dips double-under front-squat handstand-pushup hip-raise hollow-rock/hold kettlebell-swing knees-to-elbows lunges muscle-up overhead-squat power-clean pistol-squat pulls-up push-ups push-press rose-climb sumo-deadlift squat-shoulder-press snatch wall-ball) %>
+  </div>
+  <div class="form-row">
     <%= f.input :reps %>
+  </div>
+  <div class="form-row">
     <%= f.input :rounds %>
+  </div>
     <%= f.input :weight %>
+  <div class="form-row">
     <%= f.input :rest_time %>
-    <%= link_to_remove_association "remove exercise", f %>
+  </div>
+
+</div>
+  <%= link_to_remove_association "remove exercise", f %>
 </div>
