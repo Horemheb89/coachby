@@ -1,14 +1,20 @@
 <% if user_signed_in? %>
   <ul class="nav nav-pills flex-column">
 
-    <!-- Set contract and program variables. -->
+    <!-- Set variables. -->
+    <% if @contract != nil && @contract.id != nil %>
+      <% contract = @contract %>
+    <% end %>
+
     <% if @program !=nil && @program.id != nil %>
       <% program = @program %>
       <% contract = @program.contract %>
     <% end %>
 
-    <% if @contract != nil && @contract.id != nil %>
-      <% contract = @contract %>
+    <% if @meal !=nil && @meal.id !=nil %>
+      <% meal = @meal %>
+      <% program = meal.program %>
+      <% contract = program.contract %>
     <% end %>
 
 
