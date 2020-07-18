@@ -1,11 +1,8 @@
-<div class="banner-main">
-  <div class="container">
-    <h1>Sessions#index</h1>
-    <p>Session <%= current_user %></p>
-  </div>
-</div>
-
 <div class="container">
+  <h1 class = page-title> Sessions list <i class="fas fa-dumbbell"></i> </h1>
+
+
+
   <div class="category-padding">
     <% @trainings.each do |training| %>
       <%= link_to training_path(training) do %>
@@ -18,7 +15,6 @@
       <% end %>
     <% end %>
   </div>
-<div>
-
+</div>
 
 
