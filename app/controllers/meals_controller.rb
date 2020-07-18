@@ -27,6 +27,7 @@ class MealsController < ApplicationController
       else
         @meals_date = @meals
       end
+
     # @contract = Contract.find(params[:contract_id])
     @labels = ["Proteins", "Fats", "Carbs", "Calorie"]
     # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
