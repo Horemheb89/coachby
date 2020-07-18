@@ -1,0 +1,27 @@
+.form-program-new {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  background-color: $white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+  .form-program-input-wrapper {
+    display: flex;
+
+    .form-program-input {
+      text-align: center;
+      padding: 0px 32px;
+    }
+
+    .input-border {
+      border-left: solid 2px $light-gray;
+      border-right: solid 2px $light-gray;
+    }
+  }
+
+  .btn-main {
+    margin-top: 32px;
+    // width: 80px;
+  }
+}

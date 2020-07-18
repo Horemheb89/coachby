@@ -9,12 +9,24 @@
 <div class="container">
   <div class="category-padding">
     <%= simple_form_for [@contract, @program] do |f| %>
-      <div>
-        <%= f.input :proteins_target, label: "Proteins (g/day)", placeholder: "0" %>
-        <%= f.input :fats_target, label: "Fats (g/day)", placeholder: "0" %>
-        <%= f.input :carbs_target, label: "Carbs (g/day)", placeholder: "0" %>
+      <div class="form-program-new">
+        <div class="form-program-input-wrapper">
+          <div class="form-program-input">
+            <%= f.input :proteins_target, label: "Proteins (g/day)", placeholder: "0" %>
+          </div>
+
+          <div class="form-program-input input-border">
+            <%= f.input :fats_target, label: "Fats (g/day)", placeholder: "0" %>
+          </div>
+
+          <div class="form-program-input">
+            <%= f.input :carbs_target, label: "Carbs (g/day)", placeholder: "0" %>
+          </div>
+        </div>
+
+        <%= f.button :submit, class: "btn-main", value: "NEW PROGRAM" %>
+
       </div>
-      <%= f.button :submit, class: 'main-btn ' %>
     <% end %>
   </div>
 </div>
