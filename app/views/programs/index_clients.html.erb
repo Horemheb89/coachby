@@ -6,14 +6,14 @@
   <% line_data_cal = [] %>
 
 <!-- plot calories -->
-  <% @programs.each do |program| %>
+  <% @programs.first(1).each do |program| %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
-
       <% data_cal[day.strftime("%d/%m/%Y")] = meals.map{|meal| calorie(meal)}.sum %>
       <% data_cal_ref[day.strftime("%d/%m/%Y")] = program.calorie_target %>
-
     <% end %>
   <% end %>
+
+
   <% data_cal = data_cal.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
   <% data_cal_deux = {} %>
 
@@ -45,7 +45,8 @@
             },{
             label: "Goal",
             data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
-            fill:  false,
+            fill:  true,
+            borderColor: ['rgba(0, 0, 0, 0.4)'],
             borderDash: [5, 5],
             pointRadius: 0
           }],
@@ -102,7 +103,7 @@
   <% data_l = {} %>
   <% data_c = {} %>
 
-  <% @programs.each do |program| %>
+  <% @programs.first(1).each do |program| %>
     <% program.meals.group_by(&:start_time).each do |day, meals| %>
 
       <% sum_p = 0 %>
@@ -112,9 +113,8 @@
       <% data_l[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.fats}.sum %>
       <% data_c[day.strftime("%d/%m/%Y")] = meals.map{|meal| meal.carbs}.sum  %>
 
-
     <% end %>
-    <% max_scale = [data_p.values.max, data_l.values.max, data_c.values.max].max.round(-2) + 100 %>
+    <% max_scale = [data_p.map {|array| array[1]}.max, data_l.map {|array| array[1]}.max, data_c.map {|array| array[1]}.max].max.round(-2) + 100 %>
 
     <!-- proteins -->
     <% data_p = data_p.sort_by { |k,_| Date.strptime(k,"%d/%m/%Y") } %>
@@ -162,7 +162,7 @@
             },{
             label: "Goal",
             data: <%= data_p_deux.map { |day,value| [day, program.proteins_target]}.to_h.values %>,
-            fill:  false,
+            fill:  true,
             borderColor: ['rgba(0, 0, 0, 0.4)'],
             borderDash: [5, 5],
                 pointRadius: 0
@@ -227,7 +227,7 @@
             },{
             label: "Goal",
             data: <%= data_l_deux.map { |day,value| [day, program.fats_target]}.to_h.values %>,
-            fill:  false,
+            fill:  true,
             borderColor: ['rgba(0, 0, 0, 0.4)'],
             borderDash: [5, 5],
             pointRadius: 0
@@ -292,7 +292,7 @@
             },{
             label: "Goal",
             data: <%= data_c_deux.map { |day,value| [day, program.carbs_target]}.to_h.values %>,
-            fill:  false,
+            fill:  true,
             borderColor: ['rgba(0, 0, 0, 0.4)'],
             borderDash: [5, 5],
             pointRadius: 0
@@ -344,7 +344,6 @@
         }
     });
     </script>
-
   <% end %>
 
 
