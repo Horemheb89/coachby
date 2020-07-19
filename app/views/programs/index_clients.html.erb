@@ -44,12 +44,14 @@
             fill:  true,
             backgroundColor: ['rgba(186, 0, 251,0.2)'],
             borderColor: ['rgba(186, 0, 251,1)'],
+            steppedLine: true
             },{
             label: "Goal",
             lineTension: 0,
             data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
             fill:  true,
             borderColor: ['rgba(0, 0, 0, 0.4)'],
+            steppedLine: true,
             borderDash: [5, 5],
             pointRadius: 0
           }],
@@ -170,14 +172,16 @@
           fill:  true,
           borderColor: ['rgba(251, 19, 0, 1)'],
           backgroundColor: ['rgba(251, 19, 0, 0.2)'],
+          steppedLine: true,
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_p_ref.values.to_json.html_safe %>,
           fill:  true,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          steppedLine: true,
           borderDash: [5, 5],
-              pointRadius: 0
+          pointRadius: 0
         }],
       },
       options: {
@@ -236,12 +240,14 @@
           fill:  true,
           borderColor: ['rgba(0, 221, 251, 1)'],
           backgroundColor: ['rgba(0, 221, 251, 0.2)'],
+          steppedLine: true,
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_c_ref.values.to_json.html_safe %>,
           fill:  true,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          steppedLine: true,
           borderDash: [5, 5],
               pointRadius: 0
         }],
@@ -302,12 +308,14 @@
           fill:  true,
           borderColor: ['rgba(251, 240, 0, 1)'],
           backgroundColor: ['rgba(251, 240, 0, 0.4)'],
+          steppedLine: true,
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_l_ref.values.to_json.html_safe %>,
           fill:  true,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          steppedLine: true,
           borderDash: [5, 5],
               pointRadius: 0
         }],
