@@ -6,12 +6,11 @@
 </div>
 
 <div class="container">
-
-  <%= simple_form_for @contract do |f| %>
-    <%= f.input :athlete_id, :collection => User.where(:is_coach => false).map { |user| [user.full_name, user.id]} %>
-<!--     <%= f.input :coach_id %>
- -->    <%= f.button :submit, class: 'main-btn ' %>
-  <% end %>
-
+  <div class="category-padding">
+    <%= simple_form_for @contract do |f| %>
+      <%= f.input :athlete_id, :collection => User.where(:is_coach => false).map { |user| [user.full_name, user.id]} %>
+      <%= f.button :submit, value: "NEW ATHLETE", class: "btn-main" %>
+    <% end %>
+  </div>
 </div>
 

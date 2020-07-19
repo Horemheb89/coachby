@@ -6,41 +6,39 @@
 </div>
 
 <div class="container">
+  <div class="category-padding-bottom">
 
+    <!-- Alerts -->
+    <div class="contract-alert-wrapper">
+      <!-- Meal Alert -->
+      <% if @meals_today.count > 0 %>
+        <p class="contract-alert-success"><%= icon('fas', 'check') %> <%= @contract.athlete.first_name %> has <%= @meals_today.count %> meal<%= @meals_today.count == 1 ? "" : "s" %> scheduled for today.</p>
+      <% else %>
+        <p class="contract-alert-warning"><span class="red-text"><%= icon('fas', 'bell') %></span> No meal scheduled for today. <%= link_to "Add a new one.", index_path %></p>
+      <% end %>
 
-  <!-- Alerts -->
-  <div class="contract-alert-wrapper">
-    <!-- Meal Alert -->
-    <% if @meals_today.count > 0 %>
-      <p class="contract-alert-success"><%= icon('fas', 'check') %> <%= @contract.athlete.first_name %> has <%= @meals_today.count %> meal<%= @meals_today.count == 1 ? "" : "s" %> scheduled for today.</p>
-    <% else %>
-      <p class="contract-alert-warning"><span class="red-text"><%= icon('fas', 'bell') %></span> No meal scheduled for today. <%= link_to "Add a new one.", index_path %></p>
-    <% end %>
-
-    <!-- Session Alert -->
-    <% if @sessions_today.count > 0 %>
-      <p class="contract-alert-success"><%= icon('fas', 'check') %> <%= @contract.athlete.first_name %> has <%= @sessions_today.count %> session<%= @sessions_today.count == 1 ? "" : "s" %> scheduled for today.</p>
-    <% else %>
-      <p class="contract-alert-warning"><span class="red-text"><%= icon('fas', 'bell') %></span> No session scheduled for today. <%= link_to "Add a new one.", index_path %></p>
-    <% end %>
-  </div>
-
-
-  <!-- Athlete info -->
-  <div class="athlete-card">
-    <% n = rand(1..5) %>
-    <%= image_tag "avatar_athlete_#{n}.jpg" %>
-    <div class="athlete-card-info">
-      <p>Height: <%= @contract.athlete.height %> cm</p>
-      <p>Weight: <%= @contract.athlete.weight %> kg</p>
-      <p>Birthday: <%= @contract.athlete.dob.strftime("%B %d") %></p>
-      <p>Contact: <%= @contract.athlete.email %></p>
+      <!-- Session Alert -->
+      <% if @sessions_today.count > 0 %>
+        <p class="contract-alert-success"><%= icon('fas', 'check') %> <%= @contract.athlete.first_name %> has <%= @sessions_today.count %> session<%= @sessions_today.count == 1 ? "" : "s" %> scheduled for today.</p>
+      <% else %>
+        <p class="contract-alert-warning"><span class="red-text"><%= icon('fas', 'bell') %></span> No session scheduled for today. <%= link_to "Add a new one.", index_path %></p>
+      <% end %>
     </div>
-  </div>
 
 
-  <!-- Athlete links -->
-  <div class="category-padding ">
+    <!-- Athlete info -->
+    <div class="athlete-card">
+      <% n = rand(1..5) %>
+      <%= image_tag "avatar_athlete_#{n}.jpg" %>
+      <div class="athlete-card-info">
+        <p>Height: <%= @contract.athlete.height %> cm</p>
+        <p>Weight: <%= @contract.athlete.weight %> kg</p>
+        <p>Birthday: <%= @contract.athlete.dob.strftime("%B %d") %></p>
+        <p>Contact: <%= @contract.athlete.email %></p>
+      </div>
+    </div>
+
+    <!-- Athlete links -->
     <%= link_to index_clients_path(@contract) do %>
       <div class="card-link">
           <div class="card-link-info">
@@ -64,33 +62,9 @@
           </div>
       </div>
     <% end %>
-  </div>
 
-</div>
-
-<!-- Create a new program -->
-<div class="white-background">
-  <div class="container">
-
-    <div class="category-padding">
-      <div class="category-content category-content-picture-right">
-        <div class="row">
-
-          <div class="col-12 col-xl-6">
-            <%= image_tag "banner_content_1.jpg" %>
-          </div>
-
-          <div class="col-12 col-xl-6 category-content-text">
-            <h3>Getting Started</h3>
-            <p>Your athlete doesn't have a program yet?</p>
-            <%= link_to new_contract_program_path(@contract), class: "btn-main" do %>
-              <p>NEW PROGRAM</p>
-            <% end %>
-          </div>
-
-        </div>
-      </div>
-    </div>
 
   </div>
+
+
 </div>

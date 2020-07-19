@@ -4,6 +4,8 @@ class ProgramsController < ApplicationController
     @program = Program.new
     authorize @program
     @contract = Contract.find(params[:contract_id])
+    @programs = Program.where(contract: @contract).sort_by { |program| program.created_at }
+    @latest_program = @programs[-1]
   end
 
   def create
@@ -27,7 +29,8 @@ class ProgramsController < ApplicationController
     @programs = policy_scope(Program)
     @meals = Meal.all
     @contract = Contract.find(params[:id])
-    @programs = Program.where(contract: @contract)
+    @programs = Program.where(contract: @contract).sort_by { |program| program.created_at }
+    @latest_program = @programs[-1]
   end
 
   def index_clients

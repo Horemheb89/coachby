@@ -23,7 +23,14 @@
 .sidebar-category {
   border-top: solid 1px $dark-gray;
   padding: 1.5rem 0rem 0rem 0rem;
-  margin: 1.5rem 0rem 0rem 0rem;;
+  margin: 1.5rem 0rem 0rem 0rem;
+  li {
+    &.active {
+      i {
+        color: $red;
+      }
+    }
+  }
 }
 
 // Links
@@ -52,4 +59,8 @@
   &:hover .sidebar-item-text {
     visibility: visible;
   }
+}
+
+.active {
+  color: green;
 }

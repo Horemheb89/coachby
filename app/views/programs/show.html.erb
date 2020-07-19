@@ -1,26 +1,53 @@
-<h1>Program of the day</h3>
-<h3>Meals</h3>
+<div class="container">
+  <h1 class = page-title> Week's Program <i class="fas fa-calendar"></i> </h1>
 
-<p> You have to eat :</p>
+    <!-- Meals -->
 
-<p> <%= @program.proteins_target%> g proteins/day</p>
-<p> <%= @program.carbs_target%> g carbs/day </p>
-<p> <%= @program.fats_target%> g fats/day </p>
+    <h3 class="underlined-subtitle" >Week's Meals</h3>
 
-
-<%= link_to "see meals", program_meals_path(@program) %>
-
-<h3>Exercises</h3>
-
-<%= week_calendar number_of_weeks: 1, events: @trainings do |date, trainings| %>
-    <% trainings.each do |training| %>
-    <div class = "session-list">
-      <ul>
-        <li> <%= link_to date, training_path(training) %> </li>
-      </ul>
+    <div class="macro_card_program">
+      <div class = "macro_program">
+        <h2> <%= @program.proteins_target%>g / day</h2>
+        <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>
+      </div>
+      <div class = "macro_program">
+        <h2> <%= @program.carbs_target%>g / day</h2>
+        <p> <i class="fas fa-bread-slice"></i>  Carbs </p>
+      </div>
+      <div class = "macro_program">
+        <h2> <%= @program.fats_target%>g / day</h2>
+        <p> <i class="fas fa-cheese"></i>  Fats </p>
+      </div>
     </div>
+
+
+  <div class="button-exercises-container">
+    <%= link_to program_meals_path(@program), class: "btn-main" do %>
+      <p>See Meals</p>
     <% end %>
-  <% end %>
+  </div>
 
-<%= link_to "see exercises", program_trainings_path(@program) %>
 
+  <!-- Exercises -->
+
+  <h3 class="underlined-subtitle">Week's Exercises</h3>
+  <p>Select the session's date for more details</p>
+
+
+
+  <%= week_calendar number_of_weeks: 1, events: @trainings do |date, trainings| %>
+      <% trainings.each do |training| %>
+      <div class = "session-list">
+        <ul>
+          <li> <%= link_to date, training_path(training) %> </li>
+        </ul>
+      </div>
+      <% end %>
+    <% end %>
+  <div class="button-exercises-container">
+    <%= link_to program_trainings_path(@program), class: "btn-main" do %>
+      <p>All Sessions</p>
+    <% end %>
+  </div>
+
+</div>

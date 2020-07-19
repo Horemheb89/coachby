@@ -1,47 +1,60 @@
-<div class="banner-main">
-  <div class="container">
-    <h1>Sessions#show</h1>
-    <p>Exercises Details</p>
-  </div>
-</div>
-
-<%# raise %>
-
 <div class="container">
+  <h1 class = page-title> Exercises <i class="fas fa-running"></i> </h1>
+
+
   <% @exercises.each do |exercise| %>
     <div class="exercise-container">
       <div class="exercise-arrow">
         <i class="fas fa-arrow-right" style="font-size: 2.5em;"></i>
       </div>
       <div class="exercice-row">
-        <i class="fas fa-meteor"></i>
         <p>Exercise Name</p>
-        <%= exercise.name %>
+          <h3><%= exercise.name.capitalize! %></h3>
       </div>
       <div class="exercice-row">
-        <i class="fas fa-plus"></i>
         <p>Rounds</p>
-        <%= exercise.rounds %>
+          <h3><%= exercise.rounds %></h3>
       </div>
       <div class="exercice-row">
-        <i class="fas fa-redo-alt"></i>
         <p>Reps</p>
-        <%= exercise.reps %>
+          <h3><%= exercise.reps %></h3>
       </div>
       <div class="exercice-row">
-        <i class="fas fa-balance-scale"></i>
         <p>Weight</p>
-        <%= exercise.weight %>
+          <h3><%= exercise.weight %>kg</h3>
       </div>
       <div class="exercice-row">
-        <i class="far fa-hourglass"></i>
         <p>Rest Time</p>
-        <%= exercise.rest_time %>
+          <h3><%= exercise.rest_time %>'</h3>
       </div>
     </div>
   <% end %>
 
   <div class="button-exercises-container">
-    <button class="btn-main">  <%= link_to "Back to session's list", program_trainings_path(@program) %></button>
+    <%= link_to program_trainings_path(@program), class: "btn-main" do %>
+      <p>Back to session'list</p>
+    <% end %>
+  </div>
+</div>
+
+<div></div>
+<div class="white-background">
+  <div class="container">
+
+    <div class="category-padding">
+      <div class="category-content category-content-picture-right">
+        <div class="row">
+
+          <div class="col-12 col-xl-6">
+            <%= image_tag "exercise_banner_1.jpg" %>
+          </div>
+
+          <div class="col-12 col-xl-6">
+            <%= image_tag "exercise_banner_2.jpg" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -1,6 +1,17 @@
-
+<!--
 <h1>Meals#new</h1>
 <p>Find me in app/views/meals/new.html.erb</p>
 
-<%= render "form", meal: @meal %>
+<%#= render "form", meal: @meal %> -->
 
+<div class="banner-main">
+  <div class="container">
+    <h1>New meal</h1>
+    <p>Enter data for a new meal</p>
+  </div>
+</div>
+
+<div class="container add-meal", style="margin-top: 30px">
+  <h3>Create a new meal entry</h3>
+  <%= render "form", meal: @meal %>
+</div>

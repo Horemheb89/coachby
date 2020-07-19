@@ -1,53 +1,105 @@
-.card-padding {
-  padding: 24px 0px;
-}
-
-.card-index {
-  border-style: solid;
-  border-color: #171717;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #E67E22;
-}
-
-.program-info {
-  margin: 5px 0px;
-}
-
-.card-program-index {
-  //Source for CSS: https://codepen.io/thejamespower/pen/OVNYLL?editors=0100
-
-  //Variable to size the avatar and button
-  $height: 152px;
-
-  //Card
+.card-program {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  margin: 8px;
+  margin-top: 8px;
   background-color: $white;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 
-  //Content - Left Side
-
-
-  .card-program-index-info {
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
+  .card-program-info {
+    padding: 16px 24px;
+    flex-grow:1;
 
     p {
-      align-items: column;
       margin: 0px;
-      padding: 0px 24px;
     }
 
-    img {
-      width: $height;
-      height: $height;
-      object-fit: cover;
+    .data-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-grow: 1;
+      // background-color: $light-red;
+
+      .data {
+        // padding: 0px 40px;
+        flex:1 0 140px;
+        text-align: center;
+
+        .data-type p {
+          color: $gray;
+          padding-bottom: 8px;
+        }
+      }
+
+      .data-border {
+        border-left: solid 2px $light-gray;
+        border-right: solid 2px $light-gray;
+      }
+    }
+
+    .date {
+      // background-color: $light-green;
+      padding-top: 16px;
+      p {
+        color: $gray;
+        opacity: 0.5;
+      }
+    }
+
+  }
+
+  .card-program-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex: 0 0 80px;
+    width: 80px;
+    height: 156px;
+    background-color: $black;
+
+    position: relative;
+    overflow:hidden;
+    transition: .4s;
+
+    p {
+      margin: 0px;
+      color: $white;
+      z-index: 1;
+    }
+
+    &:after {
+      position: absolute;
+      transition: .4s;
+      content: '';
+      width: 0;
+      left: -40%;
+      bottom: 0;
+      height: 120%;
+      background: $red;
+      transform: skewX(15deg);
+    }
+
+  }
+
+  &:hover .card-program-btn {
+    cursor: pointer;
+    &:after {
+      left: -40%;
+      width: 170%;
     }
   }
 }
 
+.card-program-links {
+  padding: 8px;
+  display:flex;
+  flex-direction: column;
+  a {
+    padding: 8px 8px 0px 0px;
+  }
+
+
+}
