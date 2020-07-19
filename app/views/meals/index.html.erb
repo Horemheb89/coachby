@@ -7,8 +7,6 @@
 
 <div class="container">
 
-
-
     <%= week_calendar number_of_weeks: 1, events: @meals do |date, meals| %>
       <div class = "date">
         <span class = "datedays"> <%= link_to date.strftime("%d/%m"), program_meals_path(@program, date: date) %> </span>
@@ -225,58 +223,245 @@
   <% end %>
 
 
+
+<% meal_type_p = {} %>
+<% meal_type_l = {} %>
+<% meal_type_c = {} %>
+<% meal_type_cal = {} %>
+
+
   <% @meals_date.map do |meal| %>
-    <% if meal.name.downcase ==  "petit-dejeuner" %>
-      <% @meal_type["petit-dejeuner"] += calorie(meal) %>
-    <% elsif meal.name.downcase == "dejeuner" %>
-      <% @meal_type["dejeuner"] += calorie(meal) %>
-    <% elsif meal.name.downcase == "gouter" %>
-      <% @meal_type["gouter"] += calorie(meal) %>
-    <% elsif meal.name.downcase == "diner" %>
-      <% @meal_type["diner"] += calorie(meal) %>
-    <% end %>
+    <% meal_type_p[meal.name.capitalize] = meal.proteins %>
+    <% meal_type_l[meal.name.capitalize] = meal.fats %>
+    <% meal_type_c[meal.name.capitalize] = meal.carbs %>
+    <% meal_type_cal[meal.name.capitalize] = calorie(meal) %>
   <% end %>
 
-<canvas id= "week"></canvas>
-        <script>
-            new Chart(document.getElementById("week").getContext('2d'), {
-                type: 'horizontalBar',
-                data: {
-                    labels: <%= @meal_type_labels.to_json.html_safe %>,
-                    datasets: [{
-                        label: "Calories",
-                        data: <%= @meal_type.values %>,
-                        backgroundColor: [
-                            'rgba(251, 19, 0, 0.6)',
-                            'rgba(251, 240, 0, 0.6)',
-                            'rgba(0, 221, 251, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 0.6)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                  legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                      fontColor: 'rgb(255, 99, 132)'
-                    }
-                  },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+
+
+  <div class="macrographmeal">
+      <div class="meal-graph_macromeal">
+      <p> Proteins </p>
+      <canvas id= "mealprotein"></canvas>
+      </div>
+      <div class="meal-graph_macromeal">
+        <p> Fats </p>
+        <canvas id= "mealfats"></canvas>
+      </div>
+      <div class="meal-graph_macromeal">
+        <p> Carbs </p>
+        <canvas id= "mealcarbs"></canvas>
+      </div>
+      <div class="meal-graph_macromeal">
+        <p> Calories </p>
+        <canvas id= "mealcalorie"></canvas>
+      </div>
+  </div>
+
+
+
+  <script>
+     new Chart(document.getElementById("mealprotein").getContext('2d'), {
+          type: 'pie',
+          data: {
+              labels: <%= @meal_type_labels.to_json.html_safe %>,
+              datasets: [{
+                  label: "Proteins",
+                  data: <%= meal_type_p.values %>,
+                  backgroundColor: [
+                      'rgba(251, 19, 0, 0.6)',
+                      'rgba(251, 240, 0, 0.6)',
+                      'rgba(0, 221, 251, 0.6)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(54, 162, 235, 0.6)',
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+            legend: {
+              display: true,
+              position: 'right',
+              labels: {
+                fontColor: 'rgb(0, 0, 0)'
+              }
+            },
+             scales: {
+              xAxes: [{
+                 gridLines: {
+                  display: false
+                 },
+                 ticks: {
+                  display: false //this will remove only the label
                 }
-            });
-        </script>
+              }],
+              yAxes: [{
+                 gridLines: {
+                    display: false
+                 },
+                  ticks: {
+                    display: false //this will remove only the label
+                }
+              }]
+            }
+          }
+      });
+
+      new Chart(document.getElementById("mealfats").getContext('2d'), {
+          type: 'pie',
+          data: {
+              labels: <%= @meal_type_labels.to_json.html_safe %>,
+              datasets: [{
+                  label: "Fats",
+                  data: <%= meal_type_l.values %>,
+                  backgroundColor: [
+                      'rgba(251, 19, 0, 0.6)',
+                      'rgba(251, 240, 0, 0.6)',
+                      'rgba(0, 221, 251, 0.6)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(54, 162, 235, 0.6)',
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+            legend: {
+              display: true,
+              position: 'right',
+              labels: {
+                fontColor: 'rgb(0, 0, 0)'
+              }
+            },
+             scales: {
+              xAxes: [{
+                 gridLines: {
+                  display: false
+                 },
+                 ticks: {
+                  display: false //this will remove only the label
+                }
+              }],
+              yAxes: [{
+                 gridLines: {
+                    display: false
+                 },
+                  ticks: {
+                    display: false //this will remove only the label
+                }
+              }]
+            }
+          }
+      });
+
+
+      new Chart(document.getElementById("mealcarbs").getContext('2d'), {
+          type: 'pie',
+          data: {
+              labels: <%= @meal_type_labels.to_json.html_safe %>,
+              datasets: [{
+                  label: "Carbs",
+                  data: <%= meal_type_c.values %>,
+                  backgroundColor: [
+                      'rgba(251, 19, 0, 0.6)',
+                      'rgba(251, 240, 0, 0.6)',
+                      'rgba(0, 221, 251, 0.6)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(54, 162, 235, 0.6)',
+                  ],
+                  borderWidth: 1
+              }]
+          },
+           options: {
+            legend: {
+              display: true,
+              position: 'right',
+              labels: {
+                fontColor: 'rgb(0, 0, 0)'
+              }
+            },
+             scales: {
+              xAxes: [{
+                 gridLines: {
+                  display: false
+                 },
+                 ticks: {
+                  display: false //this will remove only the label
+                }
+              }],
+              yAxes: [{
+                 gridLines: {
+                    display: false
+                 },
+                  ticks: {
+                    display: false //this will remove only the label
+                }
+              }]
+            }
+          }
+      });
+
+      new Chart(document.getElementById("mealcalorie").getContext('2d'), {
+          type: 'pie',
+          data: {
+              labels: <%= @meal_type_labels.to_json.html_safe %>,
+              datasets: [{
+                  label: "Calories",
+                  data: <%= meal_type_cal.values %>,
+                  backgroundColor: [
+                      'rgba(251, 19, 0, 0.6)',
+                      'rgba(251, 240, 0, 0.6)',
+                      'rgba(0, 221, 251, 0.6)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(54, 162, 235, 0.6)',
+                  ],
+                  borderWidth: 1
+              }]
+          },
+           options: {
+            responsive: true,
+            legend: {
+              display: true,
+              position: 'right',
+              fullWidth: false,
+              labels: {
+                fontColor: 'rgb(0, 0, 0)'
+              }
+            },
+             scales: {
+              xAxes: [{
+                 gridLines: {
+                  display: false
+                 },
+                 ticks: {
+                  display: false //this will remove only the label
+                }
+              }],
+              yAxes: [{
+                 gridLines: {
+                    display: false
+                 },
+                  ticks: {
+                    display: false //this will remove only the label
+                }
+              }]
+            }
+          }
+      });
+
+
+  </script>
 
 
 </div>

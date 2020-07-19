@@ -19,18 +19,20 @@
   margin-bottom:60px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
-  width:100%;
-  display:flex;
-  justify-content: space-around;
-  padding:10px 0px;
+  // width:100%;
+  padding:10px 30px;
   background-color: white;
 
+  display: flex;
+  // justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .meal-graph_macro {
   background-color: white;
   height:300px;
-  width:370px;
+  width:300px;
 }
 
 
@@ -38,7 +40,6 @@
   text-align:center;
   width:100%;
   color: black;
-  margin-bottom: 60px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   padding:20px;
 
@@ -47,23 +48,25 @@
   }
 
   thead, tfoot {
+    tr:first-child {
+      border-bottom:1px solid gray;
+    }
   }
 
   tbody {
     background-color:white;
 
-    tr:nth-child(even) {
+    tr:nth-child(odd) {
       background-color: #f2f2f2;
-    }
-    tr:first-child {
-      background:white;
     }
   }
 
   th {
+    margin: 25px;
     background:white;
     font-weight: bold;
-    height:40px;
+    padding: 0px 50px;
+    height:60px;
     width: 20%;
   }
 
@@ -80,5 +83,54 @@
 
 
 
+// responsive behavior to table
 
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
 
+  /* Force table to not be like tables anymore */
+  .nutri-table-meal {
+
+   table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr { border: 1px solid #ccc; }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  /*
+  Label the data
+  */
+  td:nth-of-type(1):before { content: "Date"; }
+  td:nth-of-type(2):before { content: "Proteins"; }
+  td:nth-of-type(3):before { content: "Fats"; }
+  td:nth-of-type(4):before { content: "Carbs"; }
+  td:nth-of-type(5):before { content: "Calories"; }
+  }
+}
