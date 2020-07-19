@@ -21,10 +21,13 @@
   border-radius: 5px;
   width:100%;
   display:flex;
-  width: auto;
+  justify-content: space-around;
+  padding:10px 0px;
+  background-color: white;
+
 }
 
-.meal-graph_macro div {
+.meal-graph_macro {
   background-color: white;
   height:300px;
   width:370px;

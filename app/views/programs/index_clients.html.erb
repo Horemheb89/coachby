@@ -94,6 +94,9 @@
                   display: false,
                   labelString: 'value'
                 },
+                ticks: {
+                min: 0
+              }
             }]
           }
         }
@@ -102,6 +105,11 @@
 </script>
 
   </div>
+
+
+
+
+
 
 
 <!-- plot macro -->
@@ -145,14 +153,14 @@
 <!-- on sort par les dates -->
 
     <div class="macrograph">
-      <div>
-        <canvas style = "background-color: white; padding: 10px;" id = "proteins" > </canvas>
+      <div class="meal-graph_macro">
+        <canvas id = "proteins" > </canvas>
       </div>
-      <div>
-        <canvas style = "background-color: white; padding: 10px;" id = "carbs"> </canvas>
+      <div class="meal-graph_macro">
+        <canvas id = "carbs"> </canvas>
       </div>
-      <div>
-        <canvas style = "background-color: white; padding: 10px;" id = "fats" > </canvas>
+      <div class="meal-graph_macro">
+        <canvas id = "fats" > </canvas>
       </div>
     </div>
 
