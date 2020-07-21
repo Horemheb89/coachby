@@ -1,10 +1,12 @@
 <div class="banner-main">
   <div class="container">
-    <h1>New session</h1>
-    <p>Add a new exercise session to your athlete's program</p>
+    <h1><span class="gray-text"><%= icon('fas', 'plus') %></span>New session</h1>
+    <p>Create a new session for <%= @program.contract.athlete.first_name %>.</p>
   </div>
 </div>
 
 <div class="container">
-<%= render "form", training: @training, program: @program %>
+  <div class="category-padding">
+    <%= render "form", training: @training, program: @program %>
+  </div>
 </div>
