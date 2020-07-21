@@ -31,73 +31,78 @@
 
   <div class = "meal-graph">
     <canvas id="calorie"></canvas>
-    <script>
 
-
-      new Chart(document.getElementById("calorie").getContext("2d"), {
-        type:'line',
-        data:{
-          labels: <%= data_cal_deux.keys.to_json.html_safe %>,
-          datasets: [{
-            label: "Calories",
-            data: <%= data_cal_deux.values.to_json.html_safe %>,
-            fill:  true,
-            backgroundColor: ['rgba(186, 0, 251,0.2)'],
-            borderColor: ['rgba(186, 0, 251,1)'],
-            },{
-            label: "Goal",
-            lineTension: 0,
-            data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
-            fill:  true,
-            borderColor: ['rgba(0, 0, 0, 0.4)'],
-            borderDash: [5, 5],
-            pointRadius: 0
-          }],
-        },
-        options: {
-          legend: {
-            display: true,
-            position: 'right',
-            labels: {
-              fontColor: 'rgba(0, 0, 0,1)',
-              fontSize : 18,
-            }
+      <script>
+        Chart.defaults.global.title.display = false;
+        Chart.defaults.global.title.fontSize = 16;
+        new Chart(document.getElementById("calorie").getContext("2d"), {
+          type:'line',
+          data:{
+            labels: <%= data_cal_deux.keys.to_json.html_safe %>,
+            datasets: [{
+              label: "Calories",
+              data: <%= data_cal_deux.values.to_json.html_safe %>,
+              fill:  true,
+              backgroundColor: ['rgba(186, 0, 251,0.2)'],
+              borderColor: ['rgba(186, 0, 251,1)'],
+              steppedLine: true
+              },{
+              label: "Goal",
+              lineTension: 0,
+              data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
+              fill:  true,
+              borderColor: ['rgba(0, 0, 0, 0.4)'],
+              steppedLine: true,
+              borderDash: [5, 5],
+              pointRadius: 0
+            }],
           },
-          responsive: true,
-          title:{
+          options: {
+            legend: {
               display: true,
-              text:"Calories"
-          },
-          scales:{
-            xAxes: [{
-              type: 'time',
-              //
-              time: {
-              parser: 'DD/MM/YYYY',
-              tooltipFormat: 'DD/MM/YYYY',
-              unit: 'day',
-              unitStepSize: 1,
-              displayFormats: {
-                'day': 'DD/MM'
-                }
-              },
-              ticks: {
-                autoSkip: true,
-                maxTicksLimit: 20,
-                beginAtZero: true,
+              position: 'right',
+              labels: {
+                fontColor: 'rgba(0, 0, 0,1)',
+                fontSize : 12,
               }
-            }], // XAxes ends
-            yAxes: [{
-                scaleLabel: {
-                  display: false,
-                  labelString: 'value'
+            },
+            responsive: true,
+            title:{
+                display: true,
+                text:"Calories"
+            },
+            scales:{
+              xAxes: [{
+                type: 'time',
+                //
+                time: {
+                parser: 'DD/MM/YYYY',
+                tooltipFormat: 'DD/MM/YYYY',
+                unit: 'day',
+                unitStepSize: 1,
+                displayFormats: {
+                  'day': 'DD/MM'
+                  }
                 },
-            }]
+                ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 20,
+                  beginAtZero: true,
+                }
+              }], // XAxes ends
+              yAxes: [{
+                  scaleLabel: {
+                    display: false,
+                    labelString: 'value'
+                  },
+                  ticks: {
+                  min: 0
+                }
+              }]
+            }
           }
-        }
-    });
-
-</script>
+      });
+    </script>
 
   </div>
 
@@ -143,14 +148,14 @@
 <!-- on sort par les dates -->
 
     <div class="macrograph">
-      <div>
-        <canvas style = "background-color: white; padding: 10px;" id = "proteins" > </canvas>
+      <div class="meal-graph_macro">
+        <canvas id = "proteins" > </canvas>
       </div>
-      <div>
-        <canvas style = "background-color: white; padding: 10px;" id = "carbs"> </canvas>
+      <div class="meal-graph_macro">
+        <canvas id = "carbs"> </canvas>
       </div>
-      <div>
-        <canvas style = "background-color: white; padding: 10px;" id = "fats" > </canvas>
+      <div class="meal-graph_macro">
+        <canvas id = "fats" > </canvas>
       </div>
     </div>
 
@@ -160,6 +165,11 @@
 
 
   <script>
+
+    Chart.defaults.global.title.display = false;
+    Chart.defaults.global.title.fontSize = 16;
+
+
    new Chart(document.getElementById("proteins").getContext("2d"), {
       type:'line',
       data:{
@@ -170,14 +180,16 @@
           fill:  true,
           borderColor: ['rgba(251, 19, 0, 1)'],
           backgroundColor: ['rgba(251, 19, 0, 0.2)'],
+          steppedLine: true,
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_p_ref.values.to_json.html_safe %>,
           fill:  true,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          steppedLine: true,
           borderDash: [5, 5],
-              pointRadius: 0
+          pointRadius: 0
         }],
       },
       options: {
@@ -236,12 +248,14 @@
           fill:  true,
           borderColor: ['rgba(0, 221, 251, 1)'],
           backgroundColor: ['rgba(0, 221, 251, 0.2)'],
+          steppedLine: true,
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_c_ref.values.to_json.html_safe %>,
           fill:  true,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          steppedLine: true,
           borderDash: [5, 5],
               pointRadius: 0
         }],
@@ -280,8 +294,8 @@
           }], // XAxes ends
           yAxes: [{
               scaleLabel: {
-                display: false,
-                labelString: 'Mass (Gr)'
+                display: true,
+                labelString: ''
               },
               ticks: {
                 max: <%=  max_scale %>,
@@ -302,12 +316,14 @@
           fill:  true,
           borderColor: ['rgba(251, 240, 0, 1)'],
           backgroundColor: ['rgba(251, 240, 0, 0.4)'],
+          steppedLine: true,
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_l_ref.values.to_json.html_safe %>,
           fill:  true,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          steppedLine: true,
           borderDash: [5, 5],
               pointRadius: 0
         }],
@@ -346,8 +362,8 @@
           }], // XAxes ends
           yAxes: [{
               scaleLabel: {
-                display: false,
-                labelString: 'Mass (Gr)'
+                display: true,
+                labelString: ''
               },
               ticks: {
                 max: <%=  max_scale %>,
@@ -361,66 +377,45 @@
   </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Table -->
-  <% @programs.each do |program| %>
+  <div class = "table-nutri">
+
+    <% @programs.each do |program| %>
     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
         <table class = "nutri-table-meal">
-            <thead>
-              <tr>
-                <th style="background-color: rgba(245, 243, 242, 0.4) ;border-radius: 25px"> Date </th>
-                <th style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px"> Protein</th>
-                <th style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px"> Fats</th>
-                <th style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px"> Carbs</th>
-                <th style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px"> Calories</th>
-              </tr>
-            </thead>
-          <tbody>
-          <% program.meals.group_by(&:start_time).each do |day, meals| %>
-          <% col_protein = pickcolor(meals.map{|meal| meal.proteins}.sum(), program.proteins_target) %>
-          <% col_fats = pickcolor(meals.map{|meal| meal.fats}.sum(), program.fats_target) %>
-          <% col_carbs = pickcolor(meals.map{|meal| meal.carbs}.sum(), program.carbs_target) %>
-          <% col_calorie = pickcolor(meals.map{|meal| calorie(meal)}.sum(), program.calorie_target) %>
+          <thead>
             <tr>
-              <td> <%= link_to meals.last.start_time.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %>  </td>
-              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| meal.proteins}.sum() %> </td>
-              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| meal.fats}.sum() %> </td>
-              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| meal.carbs}.sum() %> </td>
-              <td style="color: <%= col_protein %>;font-size:16px;font-weight: bold;" > <%= meals.map{|meal| calorie(meal)}.sum() %> </td>
-              <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+              <th> <p></p>  </th>
+              <th> <div class = "header"> <p style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px">Proteins</p>  <span> <%= (program.proteins_target * 0.8).to_i %> - <%= (program.proteins_target* 1.2).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px">Fats</p>  <span> <%= (program.fats_target * 0.8).to_i %> - <%= (program.fats_target* 1.2).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px">Carbs</p>  <span> <%= (program.carbs_target * 0.8).to_i %> - <%= (program.carbs_target* 1.2).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px">Calories</p>  <span> <%= (program.calorie_target * 0.8).to_i %> - <%= (program.calorie_target* 1.2).to_i %></span></div>  </th>
             </tr>
-          <% end %>
+          </thead>
+        <tbody>
+          <% program.meals.group_by(&:start_time).each do |day, meals| %>
+            <% col_protein = pickcolor(meals.map{|meal| meal.proteins}.sum(), program.proteins_target) %>
+            <% col_fats = pickcolor(meals.map{|meal| meal.fats}.sum(), program.fats_target) %>
+            <% col_carbs = pickcolor(meals.map{|meal| meal.carbs}.sum(), program.carbs_target) %>
+            <% col_calorie = pickcolor(meals.map{|meal| calorie(meal)}.sum(), program.calorie_target) %>
+          <tr>
+            <td> <%= link_to meals.last.start_time.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %> </td>
+            <td> <p style="color: <%= col_protein %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.proteins}.sum() %> </p> </td>
+            <td> <p style="color: <%= col_fats %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.fats}.sum() %> </p> </td>
+            <td> <p style="color: <%= col_carbs %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.carbs}.sum() %> </p> </td>
+            <td> <p style="color: <%= col_calorie %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| calorie(meal)}.sum() %> </p> </td>
+            <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+          </tr>
+        <% end %>
         </tbody>
       </table>
   <% end %>
+
+
+  </div>
+
+
+
+
 
 </div>

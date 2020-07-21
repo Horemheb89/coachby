@@ -33,7 +33,7 @@ class MealsController < ApplicationController
     # ORDER = %w[Petit-dejeuner dejeuner gouter diner]
     # <%= column_chart @meals_date.map { |meal| [meal.name, calorie(meal)].values_at(*ORDER) } %>
     @meal_type = { "petit-dejeuner" => 0, "dejeuner" => 0, "gouter" => 0, "diner" => 0 }
-    @meal_type_labels = ["petit-dejeuner", "dejeuner", "gouter", "diner"]
+    @meal_type_labels = ["Petit-dejeuner", "Dejeuner", "Gouter", "Diner"]
     # create a new meal
     @meal = Meal.new
     @meal.start_time = params["date"]

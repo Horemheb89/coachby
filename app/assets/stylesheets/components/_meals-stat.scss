@@ -5,7 +5,6 @@
   margin-bottom: 30px;
   padding:20px;
   border-radius: 5px;
-
 }
 
 .meal-stat {
@@ -20,12 +19,6 @@
     display: flex;
     justify-content: space-around;
   }
-}
-
-
-#week {
-  height: 300px;
-  width: 80%;
 }
 
 .nutri-table{
@@ -93,3 +86,24 @@
 }
 
 
+.macrographmeal {
+  margin-bottom:60px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  width:100%;
+  padding:10px 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+.meal-graph_macromeal {
+  background-color: white;
+  width:400px;
+
+  p {
+    padding-left: 115px;
+  }
+}
