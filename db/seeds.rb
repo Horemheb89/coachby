@@ -96,7 +96,7 @@ puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | pass
 weight = [55,80,90,100,70,80]
 height = [180,155,160,170,170,175]
 
-5.times do
+4.times do
   athlete = User.new(email: Faker::Internet.email,
                   password: "123456",
                   is_coach: false,
