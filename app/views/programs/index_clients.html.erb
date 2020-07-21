@@ -378,7 +378,9 @@
 
 
 <!-- Table -->
-  <% @programs.each do |program| %>
+  <div class = "table-nutri">
+
+    <% @programs.each do |program| %>
     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
         <table class = "nutri-table-meal">
           <thead>
@@ -408,4 +410,12 @@
         </tbody>
       </table>
   <% end %>
+
+
+  </div>
+
+
+
+
+
 </div>
