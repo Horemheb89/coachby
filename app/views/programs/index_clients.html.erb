@@ -1,5 +1,13 @@
+<div class="banner-main">
+  <div class="container">
+    <h1><span class="gray-text"><%= icon('fas', 'chart-line') %> </span>Dashboard</h1>
+    <p><%= @contract.athlete.first_name %>'s dietary dashboard.</p>
+  </div>
+</div>
+
 <div class="container">
-  <h1 class = page-title> diet dashboard <i class="fas fa-chart-line"></i> </h1>
+  <div class="category-padding">
+
 
   <% data_cal = {} %>
   <% data_cal_ref = {} %>
@@ -418,4 +426,5 @@
 
 
 
+  </div>
 </div>

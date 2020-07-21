@@ -1,7 +1,7 @@
 <div class="banner-main">
   <div class="container">
-    <h1><span class="gray-text"><%= icon('fas', 'utensils') %> </span>meal plan</h1>
-    <p>Breakdown of meals</p>
+    <h1><span class="gray-text"><%= icon('fas', 'utensils') %> </span>Meals</h1>
+    <p>Breakdown of <%= @program.contract.athlete.first_name %>'s meal<%= @meals.count == 1 ? "" : "s" %>.</p>
   </div>
 </div>
 
