@@ -60,7 +60,7 @@ xlsx.each(category: 'alim_ssssgrp_nom_fr',
                 # sel: 'Sel chlorure de sodium (g/100g)')
   tab << a
   # Smaller ingredients table
-  tab = tab.sample(500)
+  # tab = tab.sample(500) so I can pick specific ingredient
 end
 
 tab.each_with_index do |item, index|
@@ -120,36 +120,75 @@ height = [180,155,160,170,170,175]
   fats = [200, 220, 180]
   carbs = [300, 320, 280]
 
-  program = Program.new(proteins_target: proteins.sample,
-    fats_target: fats.sample,
-    carbs_target: carbs.sample,
+  program1 = Program.new(proteins_target: 160,
+    fats_target: 60,
+    carbs_target: 300,
     contract_id: contract.id)
-  puts "Program created." if program.save
+  puts "Program1 created." if program1.save
+
+
+   # on cree un 2er program
+  program2 = Program.new(proteins_target: 180,
+    fats_target: 80,
+    carbs_target: 320,
+    contract_id: contract.id)
+  puts "Program2 created." if program2.save
 
 
 
   # Seeding Meals
   name_meals = ["petit-dejeuner" ,"dejeuner" ,"gouter" ,"diner"]
-  d = Date.today
+  d = Date.today - 60
 
-  rand(15..30).times do
+  30.times do
     d += 1
-    name_meals.sample(rand(1..3)).each do |name_meal|
-      mealday = Meal.new(name: name_meal,
+      mealday = Meal.new(name: "petit-dejeuner",
                       start_time: (d))
-      mealday.program = program
-      puts "\n    ⚪️  Meal created - #{name_meal.capitalize} (#{d})" if mealday.save
+      mealday.program = program1
+      puts "\n    ⚪️  Meal created - #{"petit-dejeuner".capitalize} (#{d}) for program1" if mealday.save
 
-      quantity = [50,100,150,200]
+      poulet = Ingredient.where(name:"Poulet, poitrine, viande et peau, cru")
 
-      rand(2..4).times do
-        rand_id = rand(Ingredient.count)
-        dosemeal = Dose.create(quantity: quantity.sample ,
-                        ingredient_id: Ingredient.order(Arel.sql('RANDOM()')).first.id)
-        dosemeal.meal = mealday
-        puts "    🔸  Dose created" if dosemeal.save
-      end
+      random = [20,-20,2,5,-10,10]
+
+      dosemeat = Dose.create(quantity: 800 + rand(-10..10) ,
+                      ingredient_id: poulet.ids.sample)
+      dosemeat.meal = mealday
+      puts "    🔸  Dose created" if dosemeat.save
+
+      sugar = Ingredient.where(name:"Sucre vanillé")
+
+      sugardose = Dose.create(quantity: 300 + rand(-25..20) ,
+                      ingredient_id: sugar.ids.sample)
+      sugardose.meal = mealday
+      puts "    🔸  Dose created" if sugardose.save
     end
+
+  # Seeding Meals du program 2
+  d = Date.today - 29
+
+  30.times do
+    d += 1
+      mealday = Meal.new(name: "petit-dejeuner",
+                      start_time: (d))
+      mealday.program = program2
+      puts "\n    ⚪️  Meal created - #{"petit-dejeuner".capitalize} (#{d}) for program2" if mealday.save
+
+      poulet = Ingredient.where(name:"Poulet, poitrine, viande et peau, cru")
+
+      random = [20,-20,2,5,-10,10]
+
+      dosemeat = Dose.create(quantity: 900 + rand(-10..20) ,
+                      ingredient_id: poulet.ids.sample)
+      dosemeat.meal = mealday
+      puts "    🔸  Dose created" if dosemeat.save
+
+      sugar = Ingredient.where(name:"Sucre vanillé")
+
+      sugardose = Dose.create(quantity: 320 + rand(-25..20) ,
+                      ingredient_id: sugar.ids.sample)
+      sugardose.meal = mealday
+      puts "    🔸  Dose created" if sugardose.save
   end
 end
 
