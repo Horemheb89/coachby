@@ -4,15 +4,14 @@
   margin: 30px 0px;
  }
 
-
-.meal-graph {
+ .meal-graph {
   margin-bottom: 20px;
-  display: flex;
   justify-content: space-around;
   background-color: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   padding:10px;
   border-radius: 5px;
+  text-align:center;
 }
 
 .macrograph {
@@ -27,13 +26,20 @@
   // justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
+  min-height:380px;
 }
 
 .meal-graph_macro {
   background-color: white;
-  height:300px;
-  width:300px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align:center;
+  width: 300px;
+  height: 300px;
 }
+
 
 
 
@@ -100,7 +106,7 @@
   td {
     font-family:sans-serif;
     font-size:80%;
-    padding:5px;
+    padding-top:10px;
   }
 
   a {
