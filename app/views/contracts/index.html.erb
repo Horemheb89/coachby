@@ -16,6 +16,8 @@
             <div class="card-contract-info">
               <% if contract.athlete.profile_photo %>
                 <%= cl_image_tag contract.athlete.profile_photo %>
+              <% else %>
+                <%= cl_image_tag("qp5xhltcjnrncmz1kryw") %>
               <% end %>
               <p><%= contract.athlete.full_name %></p>
             </div>
