@@ -30,7 +30,8 @@
 
 
   <div class="button-exercises-container">
-    <%= link_to program_meals_path(@program), class: "btn-main" do %>
+    <% date = Date.today %>
+    <%= link_to program_meals_path(@program, date: date), class: "btn-main" do %>
       <p>See Meals</p>
     <% end %>
   </div>
