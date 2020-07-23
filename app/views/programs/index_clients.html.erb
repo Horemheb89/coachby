@@ -30,8 +30,8 @@
   <% end %>
 
   <div class = "meal-graph">
-    <p>Calorie</p>
-    <canvas id="calorie"></canvas>
+<!--     <p>Calorie</p>
+ -->    <canvas id="calorie"></canvas>
   </div>
 
       <script>
@@ -70,7 +70,7 @@
             },
             responsive: true,
             title:{
-                display: false,
+                display: true,
                 text:"Calories"
             },
             scales:{
@@ -98,6 +98,7 @@
                     labelString: 'value'
                   },
                   ticks: {
+                  max: 4000,
                   min: 0
                 }
               }]
@@ -151,16 +152,16 @@
 
     <div class="macrograph">
       <div class="meal-graph_macro">
-        <p> Protein</p>
-        <canvas id = "proteins" style = "width:330;height:330" > </canvas>
+<!--         <p> Protein</p>
+ -->        <canvas id = "proteins" style = "width:330;height:330" > </canvas>
       </div>
       <div class="meal-graph_macro">
-          <p> Fats</p>
-        <canvas id = "fats" style = "width:330;height:330"> </canvas>
+<!--           <p> Fats</p>
+ -->        <canvas id = "fats" style = "width:330;height:330"> </canvas>
       </div>
       <div class="meal-graph_macro">
-        <p> Carbs</p>
-        <canvas id = "carbs" style = "width:330;height:330"> </canvas>
+<!--         <p> Carbs</p>
+ -->        <canvas id = "carbs" style = "width:330;height:330"> </canvas>
       </div>
     </div>
 
@@ -207,7 +208,7 @@
         maintainAspectRatio:false,
         responsive: true,
         title:{
-            display: false,
+            display: true,
             text:"Proteins"
         },
         scales:{
@@ -275,7 +276,7 @@
         maintainAspectRatio:false,
         responsive: true,
         title:{
-            display: false,
+            display: true,
             text:"Fats"
         },
         scales:{
@@ -343,7 +344,7 @@
         maintainAspectRatio:false,
         responsive: true,
         title:{
-            display: false,
+            display: true,
             text:"Carbs"
         },
         scales:{
