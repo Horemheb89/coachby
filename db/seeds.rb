@@ -178,7 +178,7 @@ height = [180,155,160,170,170,175]
 
       random = [20,-20,2,5,-10,10]
 
-      dosemeat = Dose.create(quantity: 900 + rand(-10..20) ,
+      dosemeat = Dose.create(quantity: 900 + rand(-15..25) ,
                       ingredient_id: poulet.ids.sample)
       dosemeat.meal = mealday
       puts "    🔸  Dose created" if dosemeat.save

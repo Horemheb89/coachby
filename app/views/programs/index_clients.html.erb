@@ -71,11 +71,11 @@
         },
         options: {
           elements: {
-                    point:{
-                        radius: 1,
-                        backgroundColor:['rgba(186, 0, 251,1)']
-                    }
-                },
+            point:{
+              radius: 1,
+              backgroundColor:['rgba(186, 0, 251,1)']
+            }
+          },
           legend: {
             display: true,
             position: 'right',
@@ -92,31 +92,38 @@
           scales:{
             xAxes: [{
               type: 'time',
-              //
               time: {
               parser: 'DD/MM/YYYY',
               tooltipFormat: 'DD/MM/YYYY',
-              unit: 'week',
-              unitStepSize: 1,
+              unitStepSize: 7,
+              unit: 'day',
               displayFormats: {
-                'week': 'DD/MM'
+                'day': 'DD/MM'
                 }
+              },
+              gridLines: {
+                display: true,
+                lineWidth:1
               },
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 20,
                 beginAtZero: true,
-              }
+              },
             }], // XAxes ends
             yAxes: [{
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Kcal'
-                },
-                ticks: {
+              gridLines: {
+                display: true,
+                lineWidth:1
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Kcal'
+              },
+              ticks: {
                 max: <%= (data_cal_deux.values.max/2000.0).ceil * 2000 %>,
                 min: 0
-              }
+              },
             }]
           }
         }
@@ -247,10 +254,10 @@
             time: {
               parser: 'DD/MM/YYYY',
               tooltipFormat: 'DD/MM/YYYY',
-              unit: 'week',
-              unitStepSize: 1,
+              unitStepSize: 7,
+              unit: 'day',
               displayFormats: {
-                'week': 'DD/MM'
+                'day': 'DD/MM'
                 }
               },
             ticks: {
@@ -331,10 +338,10 @@
             time: {
               parser: 'DD/MM/YYYY',
               tooltipFormat: 'DD/MM/YYYY',
-              unit: 'week',
-              unitStepSize: 1,
+              unit: 'day',
+              unitStepSize: 7,
               displayFormats: {
-                'week': 'DD/MM'
+                'day': 'DD/MM'
                 }
               },
             ticks: {
@@ -413,10 +420,10 @@
             time: {
               parser: 'DD/MM/YYYY',
               tooltipFormat: 'DD/MM/YYYY',
-              unit: 'week',
-              unitStepSize: 1,
+              unit: 'day',
+              unitStepSize: 7,
               displayFormats: {
-                'week': 'DD/MM'
+                'day': 'DD/MM'
               }
             },
             ticks: {
@@ -452,7 +459,7 @@
             <tr>
               <th> <p></p>  </th>
               <th> <div class = "header"> <p style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px">Proteins</p>  <span> <%= (program.proteins_target - 10).to_i %> - <%= (program.proteins_target + 10).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px">Fats</p>  <span> <%= (program.fats_target - 10).to_i %> - <%= (program.fats_target + 10).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px">Fats</p>  <span> <%= (program.fats_target - 5).to_i %> - <%= (program.fats_target + 5).to_i %></span></div>  </th>
               <th> <div class = "header"> <p style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px">Carbs</p>  <span> <%= (program.carbs_target - 10).to_i %> - <%= (program.carbs_target + 10).to_i %></span></div>  </th>
               <th> <div class = "header"> <p style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px">Calories</p>  <span> <%= (program.calorie_target * 0.95).to_i %> - <%= (program.calorie_target* 1.05).to_i %></span></div>  </th>
             </tr>
