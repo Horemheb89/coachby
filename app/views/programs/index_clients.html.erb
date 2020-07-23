@@ -466,10 +466,10 @@
           <thead>
             <tr>
               <th> <p></p>  </th>
-              <th> <div class = "header"> <p style="background-color: rgba(251, 19, 0, 0.4) ;border-radius: 25px">Proteins</p>  <span> <%= (program.proteins_target - 10).to_i %> - <%= (program.proteins_target + 10).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p style="background-color: rgba(251, 240, 0, 0.4) ;border-radius: 25px">Fats</p>  <span> <%= (program.fats_target - 5).to_i %> - <%= (program.fats_target + 5).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p style="background-color: rgba(0, 221, 251, 0.4) ;border-radius: 25px">Carbs</p>  <span> <%= (program.carbs_target - 10).to_i %> - <%= (program.carbs_target + 10).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p style="background-color: rgba(186, 0, 251,0.4) ;border-radius: 25px">Calories</p>  <span> <%= (program.calorie_target * 0.95).to_i %> - <%= (program.calorie_target* 1.05).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>  <span> <%= (program.proteins_target - 10).to_i %> - <%= (program.proteins_target + 10).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p> <i class="fas fa-cheese"></i> Fats </p>  <span> <%= (program.fats_target - 5).to_i %> - <%= (program.fats_target + 5).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p> <i class="fas fa-bread-slice"></i> Carbs </p>  <span> <%= (program.carbs_target - 10).to_i %> - <%= (program.carbs_target + 10).to_i %></span></div>  </th>
+              <th> <div class = "header"> <p> <i class="fas fa-burn"></i> Calories </p>  <span> <%= (program.calorie_target * 0.95).to_i %> - <%= (program.calorie_target* 1.05).to_i %></span></div>  </th>
             </tr>
           </thead>
         <tbody>
