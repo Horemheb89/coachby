@@ -27,7 +27,7 @@
         <% ratio_prot = (@meals_date.map { |meal| meal.proteins}.sum())/@program.proteins_target.to_f %>
         <div id = "protein-bar" data-macro= <%= ratio_prot > 1 ? 1 : ratio_prot %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_prot > 1.2 %>;font-weight: <%= "bold" if ratio_prot > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
+          <p style="color: <%= "red" if (@meals_date.map { |meal| meal.proteins}.sum()) > @program.proteins_target.to_f %>;font-weight: <%= "bold" if (@meals_date.map { |meal| meal.proteins}.sum()) > @program.proteins_target.to_f %>;" > <%= (@meals_date.map { |meal| meal.proteins}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
         </div>
       </div>
       <div class = "macro">
@@ -36,7 +36,7 @@
         <% ratio_fat = (@meals_date.map { |meal| meal.fats}.sum())/@program.fats_target.to_f %>
         <div id = "fat-bar" data-macro= <%= ratio_fat > 1 ? 1 : ratio_fat %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_fat > 1.2 %>;font-weight: <%= "bold" if ratio_fat > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.fats}.sum()) %> </p>/ <p> <%= @program.proteins_target %> </p>
+          <p style="color: <%= "red" if (@meals_date.map { |meal| meal.fats}.sum()) > @program.fats_target.to_f %>;font-weight: <%= "bold" if (@meals_date.map { |meal| meal.fats}.sum()) > @program.fats_target.to_f %>;" > <%= (@meals_date.map { |meal| meal.fats}.sum()) %> </p>/ <p> <%= @program.fats_target %> </p>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
         <% ratio_carb = (@meals_date.map { |meal| meal.carbs}.sum())/@program.carbs_target.to_f %>
         <div id = "carb-bar" data-macro= <%= ratio_carb > 1 ? 1 : ratio_carb %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_carb > 1.2 %>;font-weight: <%= "bold" if ratio_carb > 1.2 %>;" > <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> </p>/ <p> <%= @program.carbs_target %> </p>
+          <p style="color: <%= "red" if (@meals_date.map { |meal| meal.carbs}.sum()) > @program.carbs_target.to_f %>;font-weight: <%= "bold" if (@meals_date.map { |meal| meal.carbs}.sum()) > @program.carbs_target.to_f %>;" > <%= (@meals_date.map { |meal| meal.carbs}.sum()) %> </p>/ <p> <%= @program.carbs_target %> </p>
         </div>
       </div>
       <div class = "macro">
@@ -55,7 +55,7 @@
         <% ratio_cal = (@meals_date.map { |meal|calorie(meal)}.sum())/@program.calorie_target.to_f %>
         <div id = "carb-cal" data-macro= <%= ratio_cal > 1 ? 1 : ratio_cal %> ></div>
         <div>
-          <p style="color: <%= "red" if ratio_cal > 1.2 %>;font-weight: <%= "bold" if ratio_cal > 1.2 %>;" > <%= (@meals_date.map { |meal| calorie(meal)}.sum()) %> </p>/ <p> <%= @program.calorie_target %> </p>
+          <p style="color: <%= "red" if (@meals_date.map { |meal|calorie(meal)}.sum()) > @program.calorie_target.to_f %>;font-weight: <%= "bold" if (@meals_date.map { |meal|calorie(meal)}.sum()) > @program.calorie_target.to_f %>;" > <%= (@meals_date.map { |meal| calorie(meal)}.sum()) %> </p>/ <p> <%= @program.calorie_target %> </p>
         </div>
       </div>
     </div>
@@ -81,10 +81,10 @@
                 <tr>
                   <th > Ingredient</th>
                   <th > Quantity</th>
-                  <th > <p style="background-color: rgba(251, 19, 0, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"> Proteins </p></th>
-                  <th > <p style="background-color: rgba(251, 240, 0, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;">Fats</p></th>
-                  <th > <p style="background-color: rgba(0, 221, 251, 0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;"> Carbs</p></th>
-                  <th > <p style="background-color: rgba(186, 0, 251,0.4);padding:5px;border-radius: 25px;margin-bottom: 0;font-size: 13px;">Calories</p></th>
+                  <th > <i class="fas fa-drumstick-bite"> </th>
+                  <th > <i class="fas fa-cheese"> </th>
+                  <th > <i class="fas fa-bread-slice"></i> </th>
+                  <th > <i class="fas fa-burn"></i> </th>
                 </tr>
             </thead>
             <tbody>
