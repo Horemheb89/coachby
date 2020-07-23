@@ -28,8 +28,7 @@
 
     <!-- Athlete info -->
     <div class="athlete-card">
-      <% n = rand(1..5) %>
-      <%= image_tag "avatar_athlete_#{n}.jpg" %>
+      <%= cl_image_tag @contract.athlete.profile_photo %>
       <div class="athlete-card-info">
         <p><b>Height:</b> <%= @contract.athlete.height %> cm</p>
         <p><b>Weight:</b> <%= @contract.athlete.weight %> kg</p>
