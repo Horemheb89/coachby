@@ -14,8 +14,9 @@
         <%= link_to contract_path(contract) do %>
           <div class="card-contract">
             <div class="card-contract-info">
-              <% n = rand(1..5) %>
-              <%= image_tag "avatar_athlete_#{n}.jpg" %>
+              <% if contract.athlete.profile_photo %>
+                <%= cl_image_tag contract.athlete.profile_photo %>
+              <% end %>
               <p><%= contract.athlete.full_name %></p>
             </div>
             <div class="card-contract-btn">

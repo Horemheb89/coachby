@@ -95,6 +95,8 @@ puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | pass
 # Seeding random Athletes for each Coach
 weight = [55,80,90,100,70,80]
 height = [180,155,160,170,170,175]
+photo_ids = ['zmzkge9yolvqgzkaynuf', 'f9bhlz9gzoxswphjn8an', 'roehhmchrnmn5qe7rrrx', 'cxbugbjk8ukzaaelpx7q']
+count = 0
 
 4.times do
   athlete = User.new(email: Faker::Internet.email,
@@ -104,16 +106,13 @@ height = [180,155,160,170,170,175]
                   first_name: Faker::Name.first_name,
                   weight: weight.sample,
                   height: height.sample,
-                  dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'))
+                  dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'),
+                  profile_photo: photo_ids[count])
   print "\n⚪️  Athlete created - #{athlete.first_name}. " if athlete.save
 
-
-
   # Seeding Contracts for each Coach
-  contract = Contract.new(coach_id: coach.id, athlete_id:athlete.id)
+  contract = Contract.new(coach_id: coach.id, athlete_id: athlete.id)
   print "Contract created (#{athlete.first_name} and #{coach.first_name})." if contract.save
-
-
 
   # Seeding Programs for each Contract
   proteins = [320, 340, 280]
@@ -151,6 +150,7 @@ height = [180,155,160,170,170,175]
       end
     end
   end
+  count +=1
 end
 
 
