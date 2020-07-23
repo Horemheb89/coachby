@@ -478,22 +478,29 @@
             <% col_fats = pickcolor(meals.map{|meal| meal.fats}.sum(), program.fats_target) %>
             <% col_carbs = pickcolor(meals.map{|meal| meal.carbs}.sum(), program.carbs_target) %>
             <% col_calorie = pickcolor(meals.map{|meal| calorie(meal)}.sum(), program.calorie_target) %>
-          <tr>
+          <tr class = <%= (col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green") ? "perfectday" : "badday" %>   >
             <td> <%= link_to day.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %> </td>
-            <td> <p style="color: <%= col_protein %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.proteins}.sum() %> </p> </td>
+            <td> <p style="color: <%= col_protein %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.proteins}.sum() %> </p></td>
             <td> <p style="color: <%= col_fats %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.fats}.sum() %> </p> </td>
             <td> <p style="color: <%= col_carbs %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.carbs}.sum() %> </p> </td>
-            <td> <p style="color: <%= col_calorie %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| calorie(meal)}.sum() %> </p> </td>
+            <td>
+              <div class = "symbol">
+                <p style="color: <%= col_calorie %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| calorie(meal)}.sum() %> </p>
+                <% if col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green" %>
+                  <div><i class="fas fa-check"></i> </div>
+                <% else %>
+                  <div> <i class="fas fa-times"></i> </div>
+                <% end %>
+              </div>
+            </td>
             <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+
           </tr>
         <% end %>
         </tbody>
       </table>
-  <% end %>
-
-
+    <% end %>
   </div>
-
 
 
 

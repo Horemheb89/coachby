@@ -68,6 +68,7 @@
 }
 
 
+
 .nutri-table-meal {
   text-align:center;
   width:100%;
@@ -75,23 +76,51 @@
   padding:20px;
   margin-bottom: 60px;
 
-  table {
-    border-collapse: collapse;
+
+  table, th, td {
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
   }
 
   thead, tfoot {
-    tr:first-child {
-      border-bottom:1px solid gray;
-    }
+    // tr:last-child {
+    //   border-bottom:1px solid gray;
+    // }
   }
+
 
   tbody {
     background-color:white;
 
-    tr:nth-child(odd) {
-      background-color: #f2f2f2;
+    // tr:nth-child(odd) {
+    //   background-color: #f2f2f2;
+    // }
+
+    .perfectday {
+      background-color: rgba(82,208,104,0.2) ;
+      border-left: 5px solid #1FB60B;
+    }
+
+    .badday {
+      background-color: rgba(247, 127, 103,0.2);
+      border-left: 5px solid rgba(246, 51, 12,1);
     }
   }
+
+
+  .symbol {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .fa-check {
+    color: #1FB60B;
+  }
+
+  .fa-times {
+    color:rgba(246, 51, 12,1);
+  }
+
 
   th {
     margin: 25px;
