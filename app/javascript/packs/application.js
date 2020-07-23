@@ -40,11 +40,14 @@ import { initSelect2 } from "../plugins/init_select2"
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-
-  initProgressbarpro()
-  initProgressbarfat()
-  initProgressbarcarb()
-  initProgressbarcalorie()
-  initSelect2()
+  if (document.querySelector(".macro_card")) {
+    initProgressbarpro()
+    initProgressbarfat()
+    initProgressbarcarb()
+    initProgressbarcalorie()
+    initSelect2()
+  }
   $('[data-toggle="tooltip"]').tooltip();
 });
+
+
