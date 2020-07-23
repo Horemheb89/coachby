@@ -54,19 +54,28 @@
             fill:  true,
             backgroundColor: gradientFillcalorie,
             borderColor: ['rgba(186, 0, 251,1)'],
-            steppedLine: true
+            steppedLine: true,
+            borderWidth:2,
             },{
             label: "Goal",
             lineTension: 0,
             data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
             fill:  true,
             borderColor: ['rgba(0, 0, 0, 0.4)'],
+            backgroundColor: ['rgba(255, 255, 255,0)'],
             steppedLine: true,
             borderDash: [5, 5],
-            pointRadius: 0
+            pointRadius: 0,
+            borderWidth:1
           }],
         },
         options: {
+          elements: {
+                    point:{
+                        radius: 1,
+                        backgroundColor:['rgba(186, 0, 251,1)']
+                    }
+                },
           legend: {
             display: true,
             position: 'right',
@@ -101,11 +110,11 @@
             }], // XAxes ends
             yAxes: [{
                 scaleLabel: {
-                  display: false,
-                  labelString: 'value'
+                  display: true,
+                  labelString: 'Kcal'
                 },
                 ticks: {
-                max: 4000,
+                max: <%= (data_cal_deux.values.max/2000.0).ceil * 2000 %>,
                 min: 0
               }
             }]
@@ -182,7 +191,7 @@
     Chart.defaults.global.title.fontSize = 16;
 
     const p = document.getElementById("proteins").getContext("2d").createLinearGradient(0, 0, 0, 400);
-    p.addColorStop(0, 'rgba(251, 19, 0,0.8)');
+    p.addColorStop(0, 'rgba(251, 19, 0,1)');
     p.addColorStop(0.3, 'rgba(251, 19, 0,0.6)');
     p.addColorStop(1, 'rgba(251, 19, 0,0)');
 
@@ -197,18 +206,27 @@
           borderColor: ['rgba(251, 19, 0, 1)'],
           backgroundColor: p,
           steppedLine: true,
+          borderWidth:2
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_p_ref.values.to_json.html_safe %>,
-          fill:  true,
+          fill:  false,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          backgroundColor: ['rgba(255, 255, 255,0)'],
           steppedLine: true,
           borderDash: [5, 5],
-          pointRadius: 0
+          pointRadius: 0,
+          borderWidth:1
         }],
       },
       options: {
+        elements: {
+          point:{
+            radius: 1,
+            backgroundColor:['rgba(251, 19, 0, 1)']
+          }
+        },
         legend: {
           display: false,
           position: 'bottom',
@@ -246,7 +264,7 @@
                 labelString: 'Mass (Gr)'
               },
               ticks: {
-                max: <%=  max_scale %>,
+                max: <%=  (data_p_ref.values.max/100.0).ceil * 150 %>,
                 min: 0,
               }
           }]
@@ -258,7 +276,7 @@
 
     const l = document.getElementById("fats").getContext("2d").createLinearGradient(0, 0, 0, 400);
     l.addColorStop(0, 'rgba(251, 240, 0,1)');
-    l.addColorStop(0.3, 'rgba(251, 240, 0,0.4)');
+    l.addColorStop(0.3, 'rgba(251, 240, 0,0.7)');
     l.addColorStop(1, 'rgba(251, 240, 0,0)');
 
     new Chart(document.getElementById("fats").getContext("2d"), {
@@ -272,18 +290,27 @@
           borderColor: ['rgba(251, 240, 0, 1)'],
           backgroundColor: l,
           steppedLine: true,
+          borderWidth:2
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_l_ref.values.to_json.html_safe %>,
-          fill:  true,
+          fill:  false,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          backgroundColor: ['rgba(255, 255, 255,0)'],
           steppedLine: true,
           borderDash: [5, 5],
-              pointRadius: 0
+          pointRadius: 0,
+          borderWidth:1
         }],
       },
       options: {
+        elements: {
+          point:{
+            radius: 1,
+            backgroundColor:['rgba(251, 240, 0, 1)']
+          }
+        },
         legend: {
           display: false,
           position: 'bottom',
@@ -321,7 +348,7 @@
                 labelString: ''
               },
               ticks: {
-                max: <%=  max_scale %>,
+                max: <%=  (data_l_ref.values.max/100.0).ceil * 100 %>,
                 min: 0,
               }
           }]
@@ -331,7 +358,7 @@
 
 
     const c = document.getElementById("carbs").getContext("2d").createLinearGradient(0, 0, 0, 400);
-    c.addColorStop(0, 'rgba(0, 221, 251,0.6)');
+    c.addColorStop(0, 'rgba(0, 221, 251,0.8)');
     c.addColorStop(0.3, 'rgba(0, 221, 251,0.4)');
     c.addColorStop(1, 'rgba(0, 221, 251,0)');
 
@@ -346,18 +373,26 @@
           borderColor: ['rgba(0, 221, 251, 1)'],
           backgroundColor: c,
           steppedLine: true,
+          borderWidth:2
           },{
           label: "Goal",
           lineTension: 0,
           data: <%= data_c_ref.values.to_json.html_safe %>,
-          fill:  true,
+          fill:  false,
           borderColor: ['rgba(0, 0, 0, 0.4)'],
+          backgroundColor: ['rgba(255, 255, 255,0)'],
           steppedLine: true,
           borderDash: [5, 5],
-              pointRadius: 0
+          pointRadius: 0,
+          borderWidth:1
         }],
       },
       options: {
+        elements: {
+          point:{
+            radius: 1
+          }
+        },
         legend: {
           display: false,
           position: 'bottom',
@@ -395,7 +430,7 @@
                 labelString: ''
               },
               ticks: {
-                max: <%=  max_scale %>,
+                max: <%=   (data_c_ref.values.max/100.0).ceil * 100 %>,
                 min: 0,
               }
           }]
