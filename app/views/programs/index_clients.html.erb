@@ -34,78 +34,85 @@
  -->    <canvas id="calorie"></canvas>
   </div>
 
-      <script>
-        Chart.defaults.global.title.display = false;
-        Chart.defaults.global.title.fontSize = 16;
-        new Chart(document.getElementById("calorie").getContext("2d"), {
-          type:'line',
-          data:{
-            labels: <%= data_cal_deux.keys.to_json.html_safe %>,
-            datasets: [{
-              label: "Calories",
-              data: <%= data_cal_deux.values.to_json.html_safe %>,
-              fill:  true,
-              backgroundColor: ['rgba(186, 0, 251,0.2)'],
-              borderColor: ['rgba(186, 0, 251,1)'],
-              steppedLine: true
-              },{
-              label: "Goal",
-              lineTension: 0,
-              data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
-              fill:  true,
-              borderColor: ['rgba(0, 0, 0, 0.4)'],
-              steppedLine: true,
-              borderDash: [5, 5],
-              pointRadius: 0
-            }],
+    <script>
+
+      Chart.defaults.global.title.display = false;
+      Chart.defaults.global.title.fontSize = 16;
+
+      const gradientFillcalorie = document.getElementById("calorie").getContext("2d").createLinearGradient(0, 0, 0, 400);
+      gradientFillcalorie.addColorStop(0, 'rgba(186, 0, 251,0.8)');
+      gradientFillcalorie.addColorStop(0.3, 'rgba(186, 0, 251,0.4)');
+      gradientFillcalorie.addColorStop(1, 'rgba(186, 0, 251,0)');
+
+      new Chart(document.getElementById("calorie").getContext("2d"), {
+        type:'line',
+        data:{
+          labels: <%= data_cal_deux.keys.to_json.html_safe %>,
+          datasets: [{
+            label: "Calories",
+            data: <%= data_cal_deux.values.to_json.html_safe %>,
+            fill:  true,
+            backgroundColor: gradientFillcalorie,
+            borderColor: ['rgba(186, 0, 251,1)'],
+            steppedLine: true
+            },{
+            label: "Goal",
+            lineTension: 0,
+            data: <%= data_cal_ref_deux.values.to_json.html_safe %>,
+            fill:  true,
+            borderColor: ['rgba(0, 0, 0, 0.4)'],
+            steppedLine: true,
+            borderDash: [5, 5],
+            pointRadius: 0
+          }],
+        },
+        options: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              fontColor: 'rgba(0, 0, 0,1)',
+              fontSize : 12,
+            }
           },
-          options: {
-            legend: {
+          responsive: true,
+          title:{
               display: true,
-              position: 'right',
-              labels: {
-                fontColor: 'rgba(0, 0, 0,1)',
-                fontSize : 12,
+              text:"Calories"
+          },
+          scales:{
+            xAxes: [{
+              type: 'time',
+              //
+              time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'week',
+              unitStepSize: 1,
+              displayFormats: {
+                'week': 'DD/MM'
+                }
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 20,
+                beginAtZero: true,
               }
-            },
-            responsive: true,
-            title:{
-                display: true,
-                text:"Calories"
-            },
-            scales:{
-              xAxes: [{
-                type: 'time',
-                //
-                time: {
-                parser: 'DD/MM/YYYY',
-                tooltipFormat: 'DD/MM/YYYY',
-                unit: 'week',
-                unitStepSize: 1,
-                displayFormats: {
-                  'week': 'DD/MM'
-                  }
+            }], // XAxes ends
+            yAxes: [{
+                scaleLabel: {
+                  display: false,
+                  labelString: 'value'
                 },
                 ticks: {
-                  autoSkip: true,
-                  maxTicksLimit: 20,
-                  beginAtZero: true,
-                }
-              }], // XAxes ends
-              yAxes: [{
-                  scaleLabel: {
-                    display: false,
-                    labelString: 'value'
-                  },
-                  ticks: {
-                  max: 4000,
-                  min: 0
-                }
-              }]
-            }
+                max: 4000,
+                min: 0
+              }
+            }]
           }
-      });
-    </script>
+        }
+    });
+  </script>
 
 
 
@@ -174,6 +181,10 @@
     Chart.defaults.global.title.display = false;
     Chart.defaults.global.title.fontSize = 16;
 
+    const p = document.getElementById("proteins").getContext("2d").createLinearGradient(0, 0, 0, 400);
+    p.addColorStop(0, 'rgba(251, 19, 0,0.8)');
+    p.addColorStop(0.3, 'rgba(251, 19, 0,0.6)');
+    p.addColorStop(1, 'rgba(251, 19, 0,0)');
 
    new Chart(document.getElementById("proteins").getContext("2d"), {
       type:'line',
@@ -184,7 +195,7 @@
           data: <%= sorted_p_dates.map {|date| data_p[date]} %>,
           fill:  true,
           borderColor: ['rgba(251, 19, 0, 1)'],
-          backgroundColor: ['rgba(251, 19, 0, 0.2)'],
+          backgroundColor: p,
           steppedLine: true,
           },{
           label: "Goal",
@@ -243,6 +254,13 @@
       }
     });
 
+
+
+    const l = document.getElementById("fats").getContext("2d").createLinearGradient(0, 0, 0, 400);
+    l.addColorStop(0, 'rgba(251, 240, 0,1)');
+    l.addColorStop(0.3, 'rgba(251, 240, 0,0.4)');
+    l.addColorStop(1, 'rgba(251, 240, 0,0)');
+
     new Chart(document.getElementById("fats").getContext("2d"), {
       type:'line',
       data:{
@@ -252,7 +270,7 @@
           data: <%= sorted_l_dates.map {|date| data_l[date]} %>,
           fill:  true,
           borderColor: ['rgba(251, 240, 0, 1)'],
-          backgroundColor: ['rgba(251, 240, 0, 0.4)'],
+          backgroundColor: l,
           steppedLine: true,
           },{
           label: "Goal",
@@ -311,6 +329,12 @@
       }
     });
 
+
+    const c = document.getElementById("carbs").getContext("2d").createLinearGradient(0, 0, 0, 400);
+    c.addColorStop(0, 'rgba(0, 221, 251,0.6)');
+    c.addColorStop(0.3, 'rgba(0, 221, 251,0.4)');
+    c.addColorStop(1, 'rgba(0, 221, 251,0)');
+
     new Chart(document.getElementById("carbs").getContext("2d"), {
       type:'line',
       data:{
@@ -320,7 +344,7 @@
           data: <%= sorted_c_dates.map {|date| data_c[date]} %>,
           fill:  true,
           borderColor: ['rgba(0, 221, 251, 1)'],
-          backgroundColor: ['rgba(0, 221, 251, 0.2)'],
+          backgroundColor: c,
           steppedLine: true,
           },{
           label: "Goal",
