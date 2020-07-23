@@ -3,9 +3,11 @@
     <%= video_tag "banner_landing_video.mp4", autoplay: :autoplay, loop: :loop, muted: :muted, class: "home-video" %>
   </div>
   <div class="container">
-    <div class="category-padding">
+    <div class="category-padding-bottom">
       <h1>COACH<span class="red-text">BY</span></h1>
-      <p>Helping over 15 000 trainers and athletes connect.</p>
+      <% if !user_signed_in? %>
+        <p>Helping over 15 000 trainers and athletes connect.</p>
+      <% end %>
     </div>
     <h2>TRAIN BETTER. <span class="red-text">BE GREATER.</span></h2>
     <% if user_signed_in? %>

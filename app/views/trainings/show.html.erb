@@ -1,38 +1,36 @@
 <div class="container">
   <h1 class = page-title> Exercises <i class="fas fa-running"></i> </h1>
 
-
+  <div class="exercise-header">
+    <p>Exercise Name</p>
+    <p>Rounds</p>
+    <p>Reps</p>
+    <p>Weight</p>
+    <p>Rest Time</p>
+  </div>
   <% @exercises.each do |exercise| %>
     <div class="exercise-container">
-      <div class="exercise-arrow">
-        <i class="fas fa-arrow-right" style="font-size: 2.5em;"></i>
+      <div class="exercice-row">
+        <h3><%= exercise.name.capitalize! %></h3>
       </div>
       <div class="exercice-row">
-        <p>Exercise Name</p>
-          <h3><%= exercise.name.capitalize! %></h3>
+        <h3><%= exercise.rounds %></h3>
       </div>
       <div class="exercice-row">
-        <p>Rounds</p>
-          <h3><%= exercise.rounds %></h3>
+        <h3><%= exercise.reps %></h3>
       </div>
       <div class="exercice-row">
-        <p>Reps</p>
-          <h3><%= exercise.reps %></h3>
+        <h3><%= exercise.weight %>kg</h3>
       </div>
       <div class="exercice-row">
-        <p>Weight</p>
-          <h3><%= exercise.weight %>kg</h3>
-      </div>
-      <div class="exercice-row">
-        <p>Rest Time</p>
-          <h3><%= exercise.rest_time %>'</h3>
+        <h3><%= exercise.rest_time %>'</h3>
       </div>
     </div>
   <% end %>
 
   <div class="button-exercises-container">
     <%= link_to program_trainings_path(@program), class: "btn-main" do %>
-      <p>Back to scheduled sessions</p>
+      <p>Back to all sessions</p>
     <% end %>
   </div>
 </div>
