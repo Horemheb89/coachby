@@ -47,7 +47,7 @@
       Chart.defaults.global.title.display = false;
       Chart.defaults.global.title.fontSize = 16;
 
-      const gradientFillcalorie = document.getElementById("calorie").getContext("2d").createLinearGradient(0, 0, 0, 400);
+      var gradientFillcalorie = document.getElementById("calorie").getContext("2d").createLinearGradient(0, 0, 0, 400);
       gradientFillcalorie.addColorStop(0, 'rgba(186, 0, 251,0.8)');
       gradientFillcalorie.addColorStop(0.3, 'rgba(186, 0, 251,0.4)');
       gradientFillcalorie.addColorStop(1, 'rgba(186, 0, 251,0)');
@@ -205,7 +205,7 @@
     Chart.defaults.global.title.display = false;
     Chart.defaults.global.title.fontSize = 16;
 
-    const p = document.getElementById("proteins").getContext("2d").createLinearGradient(0, 0, 0, 400);
+    var p = document.getElementById("proteins").getContext("2d").createLinearGradient(0, 0, 0, 400);
     p.addColorStop(0, 'rgba(251, 19, 0, 1)');
     p.addColorStop(0.4, 'rgba(251, 19, 0, 0.5)');
     p.addColorStop(1, 'rgba(251, 19, 0, 0)');
@@ -289,7 +289,7 @@
 
 
 
-    const l = document.getElementById("fats").getContext("2d").createLinearGradient(0, 0, 0, 400);
+    var l = document.getElementById("fats").getContext("2d").createLinearGradient(0, 0, 0, 400);
     l.addColorStop(0, 'rgba(251, 240, 0,1)');
     l.addColorStop(0.3, 'rgba(251, 240, 0,0.7)');
     l.addColorStop(1, 'rgba(251, 240, 0,0)');
@@ -372,7 +372,7 @@
     });
 
 
-    const c = document.getElementById("carbs").getContext("2d").createLinearGradient(0, 0, 0, 400);
+    var c = document.getElementById("carbs").getContext("2d").createLinearGradient(0, 0, 0, 400);
     c.addColorStop(0, 'rgba(0, 221, 251,0.8)');
     c.addColorStop(0.3, 'rgba(0, 221, 251,0.4)');
     c.addColorStop(1, 'rgba(0, 221, 251,0)');
