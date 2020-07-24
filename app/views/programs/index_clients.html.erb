@@ -453,57 +453,58 @@
       }
     });
 
-
   </script>
 
 
 <!-- Table -->
   <div class = "table-nutri">
-
     <% @programs.each do |program| %>
     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-        <table class = "nutri-table-meal">
-          <thead>
-            <tr>
-              <th> <p></p>  </th>
-              <th> <div class = "header"> <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>  <span> <%= (program.proteins_target - 10).to_i %> - <%= (program.proteins_target + 10).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p> <i class="fas fa-cheese"></i> Fats </p>  <span> <%= (program.fats_target - 5).to_i %> - <%= (program.fats_target + 5).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p> <i class="fas fa-bread-slice"></i> Carbs </p>  <span> <%= (program.carbs_target - 10).to_i %> - <%= (program.carbs_target + 10).to_i %></span></div>  </th>
-              <th> <div class = "header"> <p> <i class="fas fa-burn"></i> Calories </p>  <span> <%= (program.calorie_target * 0.95).to_i %> - <%= (program.calorie_target* 1.05).to_i %></span></div>  </th>
-            </tr>
-          </thead>
+      <table class = "nutri-table-meal">
+        <thead>
+          <tr>
+            <th> <p></p>  </th>
+            <th> <div class = "header"> <p> <i class="fas fa-drumstick-bite"></i>  Protein </p>  <span> <%= (program.proteins_target - 10).to_i %> - <%= (program.proteins_target + 10).to_i %></span></div>  </th>
+            <th> <div class = "header"> <p> <i class="fas fa-cheese"></i> Fats </p>  <span> <%= (program.fats_target - 5).to_i %> - <%= (program.fats_target + 5).to_i %></span></div>  </th>
+            <th> <div class = "header"> <p> <i class="fas fa-bread-slice"></i> Carbs </p>  <span> <%= (program.carbs_target - 20).to_i %> - <%= (program.carbs_target + 10).to_i %></span></div>  </th>
+            <th> <div class = "header"> <p> <i class="fas fa-burn"></i> Calories </p>  <span> <%= (program.calorie_target - 200).to_i %> - <%= (program.calorie_target + 200).to_i %></span></div>  </th>
+            <th>  </th>
+          </tr>
+        </thead>
         <tbody>
           <% program.meals.group_by(&:start_time).sort.each do |day, meals| %>
-            <% col_protein = pickcolor(meals.map{|meal| meal.proteins}.sum(), program.proteins_target) %>
-            <% col_fats = pickcolor(meals.map{|meal| meal.fats}.sum(), program.fats_target) %>
-            <% col_carbs = pickcolor(meals.map{|meal| meal.carbs}.sum(), program.carbs_target) %>
-            <% col_calorie = pickcolor(meals.map{|meal| calorie(meal)}.sum(), program.calorie_target) %>
-          <tr class = <%= (col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green") ? "perfectday" : "badday" %>   >
-            <td> <%= link_to day.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %> </td>
-            <td> <p style="color: <%= col_protein %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.proteins}.sum() %> </p></td>
-            <td> <p style="color: <%= col_fats %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.fats}.sum() %> </p> </td>
-            <td> <p style="color: <%= col_carbs %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.carbs}.sum() %> </p> </td>
-            <td>
-              <div class = "symbol">
+            <% col_protein = (meals.map{|meal| meal.proteins}.sum() - program.proteins_target).abs > 10 ? "red" : "green" %>
+            <% col_fats = (meals.map{|meal| meal.fats}.sum() - program.fats_target).abs > 5 ? "red" : "green" %>
+            <% col_carbs = (meals.map{|meal| meal.carbs}.sum() - program.carbs_target).abs > 20 ? "red" : "green" %>
+            <% col_calorie = (meals.map{|meal| calorie(meal)}.sum() - program.calorie_target).abs > 200 ? "red" : "green" %>
+            <tr class = <%= (col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green") ? "perfectday" : "badday" %>   >
+              <td> <div class = <%= (col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green") ? "bargreen" : "barred" %>> <%= link_to day.strftime("%d/%m/%Y"), program_meals_path(program, date:meals.last.start_time) %> </div> </td>
+              <td> <p style="color: <%= col_protein %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.proteins}.sum() %> </p></td>
+              <td> <p style="color: <%= col_fats %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.fats}.sum() %> </p> </td>
+              <td> <p style="color: <%= col_carbs %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| meal.carbs}.sum() %> </p> </td>
+              <td>
                 <p style="color: <%= col_calorie %>;font-size:16px;font-weight: bold;">  <%= meals.map{|meal| calorie(meal)}.sum() %> </p>
-                <% if col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green" %>
-                  <div><i class="fas fa-check"></i> </div>
-                <% else %>
-                  <div> <i class="fas fa-times"></i> </div>
-                <% end %>
-              </div>
-            </td>
-            <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
-
-          </tr>
-        <% end %>
+              </td>
+              <td>
+                <div class = "symbol">
+                  <% if col_protein == "green" and col_fats == "green" and col_carbs == "green" and col_calorie == "green" %>
+                    <p><i class="fas fa-check"></i> </p>
+                  <% else %>
+                    <p> <i class="fas fa-times"></i> </p>
+                  <% end %>
+                </div>
+              </td>
+              <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     <% end %>
   </div>
-
-
-
-
   </div>
+
+
+
+
+
 </div>

@@ -157,7 +157,7 @@ count = 0
 
       sugar = Ingredient.where(name:"Sucre vanillé")
 
-      sugardose = Dose.create(quantity: 300 + rand(-25..20) ,
+      sugardose = Dose.create(quantity: 310 + rand(-25..20) ,
                       ingredient_id: sugar.ids.sample)
       sugardose.meal = mealday
       puts "    🔸  Dose created" if sugardose.save
@@ -177,19 +177,29 @@ count = 0
 
       random = [20,-20,2,5,-10,10]
 
-      dosemeat = Dose.create(quantity: 900 + rand(-15..25) ,
+      dosemeat = Dose.create(quantity: 850 + rand(-15..25) ,
                       ingredient_id: poulet.ids.sample)
       dosemeat.meal = mealday
       puts "    🔸  Dose created" if dosemeat.save
 
       sugar = Ingredient.where(name:"Sucre vanillé")
 
-      sugardose = Dose.create(quantity: 320 + rand(-25..20) ,
+      sugardose = Dose.create(quantity: 330 + rand(-10..15) ,
                       ingredient_id: sugar.ids.sample)
       sugardose.meal = mealday
       puts "    🔸  Dose created" if sugardose.save
+
+
+      fat = Ingredient.where(name:"Huile végétale (aliment moyen)")
+
+      fatdose = Dose.create(quantity: 10 + rand(-5..3) ,
+                            ingredient_id: fat.ids.sample)
+
+      fatdose.meal = mealday
+      puts "    🔸  Dose created" if fatdose.save
+
   end
-  count +=1
+  count +=1 # to change athlete picture
 end
 
 
