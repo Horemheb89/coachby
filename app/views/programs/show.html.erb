@@ -42,13 +42,17 @@
   <h3 class="underlined-subtitle">Week's Exercises</h3>
   <p>Select the session's date for more details</p>
 
-
+  <% number_training = 0 %>
 
   <%= week_calendar number_of_weeks: 1, events: @trainings do |date, trainings| %>
+    <div class = "date">
+        <span class = "datedays"> <%= date.strftime("%d/%m")%> </span>
+    </div>
+
       <% trainings.each do |training| %>
       <div class = "session-list">
         <ul>
-          <li> <%= link_to date, training_path(training) %> </li>
+          <li> <%= link_to "session #{number_training += 1}", training_path(training) %> </li>
         </ul>
       </div>
       <% end %>
