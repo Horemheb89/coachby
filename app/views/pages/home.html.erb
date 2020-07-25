@@ -56,6 +56,17 @@
 
       </div>
     </div>
-  </div>
 
+  </div>
+  <div class="button-exercises-container" >
+  <% if user_signed_in? %>
+      <%= link_to contracts_path, class: "btn-main" do %>
+        <p>YOUR ATHLETES</p>
+      <% end %>
+    <% else %>
+      <%= link_to "/users/sign_up", class: "btn-main" do %>
+        <p>SIGN UP</p>
+      <% end %>
+  <% end %>
+</div>
 </div>
