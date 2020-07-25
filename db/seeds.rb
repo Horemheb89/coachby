@@ -82,7 +82,7 @@ end
 coach_data = {
   email: "coach@coachby.com",
   last_name: "Mignard",
-  first_name: "Sixtine",
+  first_name: "Mike",
   password: "123456",
   is_coach: true
 }
