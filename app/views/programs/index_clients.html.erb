@@ -458,7 +458,7 @@
 
 <!-- Table -->
   <div class = "table-nutri">
-    <% @programs.each do |program| %>
+    <% [@programs.last].each do |program| %>  <!-- so only last programs is displayed -->
     <% sum_p = sum_c =sum_l = sum_c = sum_cal = 0 %>
       <table class = "nutri-table-meal">
         <thead>
