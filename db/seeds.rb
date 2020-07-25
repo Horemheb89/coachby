@@ -123,12 +123,10 @@ count = 0
 
    # on cree un 2er program
   program2 = Program.new(proteins_target: 180,
-    fats_target: 80,
+    fats_target: 75,
     carbs_target: 320,
     contract_id: contract.id)
   puts "Program2 created." if program2.save
-
-
 
 
 
