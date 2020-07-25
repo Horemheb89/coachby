@@ -136,6 +136,15 @@ count = 0
 
   30.times do
     d += 1
+
+    mealday = Meal.new(name: "dejeuner",
+                      start_time: (d))
+    mealday = Meal.new(name: "gouter",
+                      start_time: (d))
+    mealday = Meal.new(name: "diner",
+                      start_time: (d))
+
+
       mealday = Meal.new(name: "petit-dejeuner",
                       start_time: (d))
       mealday.program = program1
