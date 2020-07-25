@@ -164,7 +164,7 @@ count = 0
   # Seeding Meals du program 2
   d = Date.today - 29
 
-  30.times do
+  28.times do
     d += 1
       mealday = Meal.new(name: "petit-dejeuner",
                       start_time: (d))
