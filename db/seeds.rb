@@ -196,7 +196,7 @@ count = 0
 
       fat = Ingredient.where(name:"Huile végétale (aliment moyen)")
 
-      fatdose = Dose.create(quantity: 15 + rand(-5..3) ,
+      fatdose = Dose.create(quantity: 10 + rand(-5..3) ,
                             ingredient_id: fat.ids.sample)
 
       fatdose.meal = mealday
