@@ -16,7 +16,7 @@
     <div class="macro_card_program">
       <div class = "macro_program">
         <h2> <%= @program.proteins_target%>g / day</h2>
-        <p> <i class="fas fa-drumstick-bite"></i>  Proteinsr </p>
+        <p> <i class="fas fa-drumstick-bite"></i>  Proteins </p>
       </div>
       <div class = "macro_program">
         <h2> <%= @program.carbs_target%>g / day</h2>
@@ -30,7 +30,8 @@
 
 
   <div class="button-exercises-container">
-    <%= link_to program_meals_path(@program), class: "btn-main" do %>
+    <% date = Date.today %>
+    <%= link_to program_meals_path(@program, date: date), class: "btn-main" do %>
       <p>See Meals</p>
     <% end %>
   </div>

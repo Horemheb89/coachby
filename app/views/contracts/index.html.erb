@@ -1,7 +1,7 @@
 <!-- Banner Main -->
 <div class="banner-main">
   <div class="container">
-    <h1><span class="gray-text"><%= icon('fas', 'list') %> </span>Athletes</h1>
+    <h1><span class="gray-text"><%= icon('fas', 'address-book') %> </span>Athletes</h1>
     <p>Manage your <%= @contracts.count %> athlete<%= @contracts.count == 1 ? "" : "s" %>.</p>
   </div>
 </div>
@@ -14,8 +14,11 @@
         <%= link_to contract_path(contract) do %>
           <div class="card-contract">
             <div class="card-contract-info">
-              <% n = rand(1..5) %>
-              <%= image_tag "avatar_athlete_#{n}.jpg" %>
+              <% if contract.athlete.profile_photo %>
+                <%= cl_image_tag contract.athlete.profile_photo %>
+              <% else %>
+                <%= cl_image_tag("qp5xhltcjnrncmz1kryw") %>
+              <% end %>
               <p><%= contract.athlete.full_name %></p>
             </div>
             <div class="card-contract-btn">

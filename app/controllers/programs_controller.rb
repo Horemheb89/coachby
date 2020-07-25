@@ -31,6 +31,8 @@ class ProgramsController < ApplicationController
     @contract = Contract.find(params[:id])
     @programs = Program.where(contract: @contract).sort_by { |program| program.created_at }
     @latest_program = @programs[-1]
+
+
   end
 
   def index_clients

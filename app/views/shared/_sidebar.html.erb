@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<% if action_name != "home" && user_signed_in? %>
   <ul class="nav nav-pills flex-column">
 
     <!-- Set variables. -->
@@ -24,7 +24,7 @@
 
       <%= link_to contracts_path do %>
         <li class="nav-item <%= 'active' if params[:controller] == 'contracts' && params[:action] == 'show' %>" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Athletes">
-          <p class="nav-link"><%= icon('fas', 'list') %></p>
+          <p class="nav-link"><%= icon('fas', 'address-book') %></p>
         </li>
       <% end %>
 

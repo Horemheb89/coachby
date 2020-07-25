@@ -95,6 +95,8 @@ puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | pass
 # Seeding random Athletes for each Coach
 weight = [55,80,90,100,70,80]
 height = [180,155,160,170,170,175]
+photo_ids = ['zmzkge9yolvqgzkaynuf', 'f9bhlz9gzoxswphjn8an', 'roehhmchrnmn5qe7rrrx', 'cxbugbjk8ukzaaelpx7q']
+count = 0
 
 4.times do
   athlete = User.new(email: Faker::Internet.email,
@@ -104,21 +106,14 @@ height = [180,155,160,170,170,175]
                   first_name: Faker::Name.first_name,
                   weight: weight.sample,
                   height: height.sample,
-                  dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'))
+                  dob: Faker::Date.between(from: '1960-09-23', to: '2000-09-25'),
+                  profile_photo: photo_ids[count])
   print "\n⚪️  Athlete created - #{athlete.first_name}. " if athlete.save
 
-
-
   # Seeding Contracts for each Coach
-  contract = Contract.new(coach_id: coach.id, athlete_id:athlete.id)
+  contract = Contract.new(coach_id: coach.id, athlete_id: athlete.id)
   print "Contract created (#{athlete.first_name} and #{coach.first_name})." if contract.save
 
-
-
-  # Seeding Programs for each Contract
-  proteins = [320, 340, 280]
-  fats = [200, 220, 180]
-  carbs = [300, 320, 280]
 
   program1 = Program.new(proteins_target: 160,
     fats_target: 60,
@@ -133,6 +128,8 @@ height = [180,155,160,170,170,175]
     carbs_target: 320,
     contract_id: contract.id)
   puts "Program2 created." if program2.save
+
+
 
 
 
@@ -158,7 +155,7 @@ height = [180,155,160,170,170,175]
 
       sugar = Ingredient.where(name:"Sucre vanillé")
 
-      sugardose = Dose.create(quantity: 300 + rand(-25..20) ,
+      sugardose = Dose.create(quantity: 310 + rand(-25..20) ,
                       ingredient_id: sugar.ids.sample)
       sugardose.meal = mealday
       puts "    🔸  Dose created" if sugardose.save
@@ -178,18 +175,29 @@ height = [180,155,160,170,170,175]
 
       random = [20,-20,2,5,-10,10]
 
-      dosemeat = Dose.create(quantity: 900 + rand(-15..25) ,
+      dosemeat = Dose.create(quantity: 880 + rand(-15..25) ,
                       ingredient_id: poulet.ids.sample)
       dosemeat.meal = mealday
       puts "    🔸  Dose created" if dosemeat.save
 
       sugar = Ingredient.where(name:"Sucre vanillé")
 
-      sugardose = Dose.create(quantity: 320 + rand(-25..20) ,
+      sugardose = Dose.create(quantity: 330 + rand(-10..15) ,
                       ingredient_id: sugar.ids.sample)
       sugardose.meal = mealday
       puts "    🔸  Dose created" if sugardose.save
+
+
+      fat = Ingredient.where(name:"Huile végétale (aliment moyen)")
+
+      fatdose = Dose.create(quantity: 10 + rand(-5..3) ,
+                            ingredient_id: fat.ids.sample)
+
+      fatdose.meal = mealday
+      puts "    🔸  Dose created" if fatdose.save
+
   end
+  count +=1 # to change athlete picture
 end
 
 
