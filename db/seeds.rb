@@ -82,14 +82,13 @@ end
 coach_data = {
   email: "coach@coachby.com",
   last_name: "Mignard",
-  first_name: "Sixtine",
+  first_name: "Mike",
   password: "123456",
   is_coach: true
 }
 
 coach = User.new(coach_data)
 puts "\n🗣  Coach created - #{coach.first_name} | email: #{coach.email} | password: #{coach.password}" if coach.save
-
 
 
 # Seeding random Athletes for each Coach
@@ -124,12 +123,10 @@ count = 0
 
    # on cree un 2er program
   program2 = Program.new(proteins_target: 180,
-    fats_target: 80,
+    fats_target: 75,
     carbs_target: 320,
     contract_id: contract.id)
   puts "Program2 created." if program2.save
-
-
 
 
 
@@ -164,7 +161,7 @@ count = 0
   # Seeding Meals du program 2
   d = Date.today - 29
 
-  30.times do
+  28.times do
     d += 1
       mealday = Meal.new(name: "petit-dejeuner",
                       start_time: (d))
@@ -175,14 +172,14 @@ count = 0
 
       random = [20,-20,2,5,-10,10]
 
-      dosemeat = Dose.create(quantity: 880 + rand(-15..25) ,
+      dosemeat = Dose.create(quantity: 850 + rand(-15..25) ,
                       ingredient_id: poulet.ids.sample)
       dosemeat.meal = mealday
       puts "    🔸  Dose created" if dosemeat.save
 
       sugar = Ingredient.where(name:"Sucre vanillé")
 
-      sugardose = Dose.create(quantity: 330 + rand(-10..15) ,
+      sugardose = Dose.create(quantity: 320 + rand(-10..15) ,
                       ingredient_id: sugar.ids.sample)
       sugardose.meal = mealday
       puts "    🔸  Dose created" if sugardose.save
@@ -190,7 +187,7 @@ count = 0
 
       fat = Ingredient.where(name:"Huile végétale (aliment moyen)")
 
-      fatdose = Dose.create(quantity: 10 + rand(-5..3) ,
+      fatdose = Dose.create(quantity: 15 + rand(-5..3) ,
                             ingredient_id: fat.ids.sample)
 
       fatdose.meal = mealday
